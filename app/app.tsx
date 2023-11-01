@@ -28,6 +28,9 @@ import { ErrorBoundary } from "./screens/ErrorScreen/ErrorBoundary"
 import * as storage from "./utils/storage"
 import { customFontsToLoad } from "./theme"
 import Config from "./config"
+import { Provider } from 'mobx-react';
+import { AuthenticationStoreModel } from "./models/AuthenticationStore"
+
 
 export const NAVIGATION_PERSISTENCE_KEY = "NAVIGATION_STATE"
 
@@ -55,6 +58,8 @@ const config = {
 interface AppProps {
   hideSplashScreen: () => Promise<void>
 }
+
+const authenticationStore = AuthenticationStoreModel.create();
 
 /**
  * This is the root component of our app.
@@ -96,11 +101,13 @@ function App(props: AppProps) {
   return (
     <SafeAreaProvider initialMetrics={initialWindowMetrics}>
       <ErrorBoundary catchErrors={Config.catchErrors}>
+      <Provider authenticationStore={authenticationStore}>
         <AppNavigator
           linking={linking}
           initialState={initialNavigationState}
           onStateChange={onNavigationStateChange}
         />
+        </Provider>
       </ErrorBoundary>
     </SafeAreaProvider>
   )

@@ -1,9 +1,9 @@
 {
-  "name": "close2miSp",
-  "displayName": "close2miSp",
+  "name": "close2mi",
+  "displayName": "Close2mi",
   "expo": {
-    "name": "close2miSp",
-    "slug": "close2miSp",
+    "name": "close2mi",
+    "slug": "close2mi",
     "scheme": "close2misp",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -11,7 +11,7 @@
     "splash": {
       "image": "./assets/images/splash-logo-all.png",
       "resizeMode": "contain",
-      "backgroundColor": "#191015"
+      "backgroundColor": "#2895FE"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -30,7 +30,7 @@
       "splash": {
         "image": "./assets/images/splash-logo-android-universal.png",
         "resizeMode": "contain",
-        "backgroundColor": "#191015"
+        "backgroundColor": "#2895FE"
       }
     },
     "ios": {
@@ -41,7 +41,7 @@
         "image": "./assets/images/splash-logo-ios-mobile.png",
         "tabletImage": "./assets/images/splash-logo-ios-tablet.png",
         "resizeMode": "contain",
-        "backgroundColor": "#191015"
+        "backgroundColor": "#2895FE"
       }
     },
     "web": {

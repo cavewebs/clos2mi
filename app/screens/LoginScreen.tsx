@@ -16,7 +16,7 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [attemptsCount, setAttemptsCount] = useState(0)
   const {
-    authenticationStore: { authEmail, setAuthEmail, setAuthToken, validationError },
+    authenticationStore: { authEmail, setAuthEmail, setAuthToken, validationError, userType, setUserType },
   } = useStores()
 
   useEffect(() => {
@@ -24,6 +24,9 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
     // and pre-fill the form fields.
     setAuthEmail("ignite@infinite.red")
     setAuthPassword("ign1teIsAwes0m3")
+    console.log(userType)
+    userType === "su"? setUserType("su"): setUserType("sp")
+    console.log(userType)
 
     // Return a "cleanup" function that React will run when the component unmounts
     return () => {
@@ -37,6 +40,9 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
   function login() {
     setIsSubmitted(true)
     setAttemptsCount(attemptsCount + 1)
+    console.log(userType)
+    userType === "su"? setUserType("su"): setUserType("sp")
+    console.log(userType)
 
     if (validationError) return
 

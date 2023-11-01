@@ -5,6 +5,7 @@ import { TextStyle, ViewStyle } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { Icon } from "../components"
 import { translate } from "../i18n"
+import { useStores } from "../models" // @demo remove-current-line
 import { DemoCommunityScreen, DemoShowroomScreen, DemoDebugScreen } from "../screens"
 import { DemoPodcastListScreen } from "../screens/DemoPodcastListScreen"
 import { colors, spacing, typography } from "../theme"
@@ -30,8 +31,13 @@ export type DemoTabScreenProps<T extends keyof DemoTabParamList> = CompositeScre
 const Tab = createBottomTabNavigator<DemoTabParamList>()
 
 export function DemoNavigator() {
+  const {
+    authenticationStore: { userType },
+  } = useStores()
+
   const { bottom } = useSafeAreaInsets()
 
+  // eslint-disable-next-line no-return-assign
   return (
     <Tab.Navigator
       screenOptions={{
@@ -44,50 +50,102 @@ export function DemoNavigator() {
         tabBarItemStyle: $tabBarItem,
       }}
     >
-      <Tab.Screen
-        name="DemoShowroom"
-        component={DemoShowroomScreen}
-        options={{
-          tabBarLabel: translate("demoNavigator.componentsTab"),
-          tabBarIcon: ({ focused }) => (
-            <Icon icon="components" color={focused && colors.tint} size={30} />
-          ),
-        }}
-      />
-
-      <Tab.Screen
-        name="DemoCommunity"
-        component={DemoCommunityScreen}
-        options={{
-          tabBarLabel: translate("demoNavigator.communityTab"),
-          tabBarIcon: ({ focused }) => (
-            <Icon icon="community" color={focused && colors.tint} size={30} />
-          ),
-        }}
-      />
-
-      <Tab.Screen
-        name="DemoPodcastList"
-        component={DemoPodcastListScreen}
-        options={{
-          tabBarAccessibilityLabel: translate("demoNavigator.podcastListTab"),
-          tabBarLabel: translate("demoNavigator.podcastListTab"),
-          tabBarIcon: ({ focused }) => (
-            <Icon icon="podcast" color={focused && colors.tint} size={30} />
-          ),
-        }}
-      />
-
-      <Tab.Screen
-        name="DemoDebug"
-        component={DemoDebugScreen}
-        options={{
-          tabBarLabel: translate("demoNavigator.debugTab"),
-          tabBarIcon: ({ focused }) => (
-            <Icon icon="debug" color={focused && colors.tint} size={30} />
-          ),
-        }}
-      />
+      {
+        userType === "sp" ? ( 
+        <>
+        <Tab.Screen
+          name="DemoShowroom"
+          component={DemoShowroomScreen}
+          options={{
+            tabBarLabel: "",
+            tabBarIcon: ({ focused }) => (
+              <Icon icon="home" color={focused && colors.tint} size={30} />
+            ),
+          }}
+        />
+  
+        <Tab.Screen
+          name="DemoCommunity"
+          component={DemoCommunityScreen}
+          options={{
+            tabBarLabel: "",
+            tabBarIcon: ({ focused }) => (
+              <Icon icon="calendar" color={focused && colors.tint} size={30} />
+            ),
+          }}
+        />
+  
+        <Tab.Screen
+          name="DemoPodcastList"
+          component={DemoPodcastListScreen}
+          options={{
+            tabBarAccessibilityLabel: translate("demoNavigator.podcastListTab"),
+            tabBarLabel: "",
+            tabBarIcon: ({ focused }) => (
+              <Icon icon="briefcase" color={focused && colors.tint} size={30} />
+            ),
+          }}
+        />
+  
+        <Tab.Screen
+          name="DemoDebug"
+          component={DemoDebugScreen}
+          options={{
+            tabBarLabel: "",
+            tabBarIcon: ({ focused }) => (
+              <Icon icon="userImage" color={focused && colors.tint} size={30} />
+            ),
+          }}
+        />
+        </>) : (
+        <>
+          <Tab.Screen
+          name="DemoShowroom"
+          component={DemoShowroomScreen}
+          options={{
+            tabBarLabel: "",
+            tabBarIcon: ({ focused }) => (
+              <Icon icon="home" color={focused && colors.tint} size={30} />
+            ),
+          }}
+        />
+  
+        <Tab.Screen
+          name="DemoCommunity"
+          component={DemoCommunityScreen}
+          options={{
+            tabBarLabel: "",
+            tabBarIcon: ({ focused }) => (
+              <Icon icon="calendar" color={focused && colors.tint} size={30} />
+            ),
+          }}
+        />
+  
+        <Tab.Screen
+          name="DemoPodcastList"
+          component={DemoPodcastListScreen}
+          options={{
+            tabBarAccessibilityLabel: translate("demoNavigator.podcastListTab"),
+            tabBarLabel: "",
+            tabBarIcon: ({ focused }) => (
+              <Icon icon="scissor" color={focused && colors.tint} size={30} />
+            ),
+          }}
+        />
+  
+        <Tab.Screen
+          name="DemoDebug"
+          component={DemoDebugScreen}
+          options={{
+            tabBarLabel: "",
+            tabBarIcon: ({ focused }) => (
+              <Icon icon="userImage" color={focused && colors.tint} size={30} />
+            ),
+          }}
+        />
+        </>)
+      }
+     
     </Tab.Navigator>
   )
 }

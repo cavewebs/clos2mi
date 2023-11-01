@@ -20,6 +20,8 @@ import { useStores } from "../models" // @demo remove-current-line
 import { DemoNavigator, DemoTabParamList } from "./DemoNavigator" // @demo remove-current-line
 import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
 import { colors } from "app/theme"
+import UserSelectionScreen from "app/screens/UserSelectionScreen"
+import { AuthenticationStoreModel } from "app/models/AuthenticationStore"
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
@@ -36,11 +38,18 @@ import { colors } from "app/theme"
  */
 export type AppStackParamList = {
   Welcome: undefined
-  Login: undefined // @demo remove-current-line
+  Login: undefined // @demo remove-current-linea
   Demo: NavigatorScreenParams<DemoTabParamList> // @demo remove-current-line
+  UserSelection: undefined
   // 🔥 Your screens go here
   // IGNITE_GENERATOR_ANCHOR_APP_STACK_PARAM_LIST
 }
+
+const authenticationStore = AuthenticationStoreModel.create({
+  authToken: "", // Initial values
+  authEmail: "",
+  userType: "su",
+});
 
 /**
  * This is a list of all the route names that will exit the app if the back button
@@ -66,7 +75,7 @@ const AppStack = observer(function AppStack() {
   return (
     <Stack.Navigator
       screenOptions={{ headerShown: false, navigationBarColor: colors.background }}
-      initialRouteName={isAuthenticated ? "Welcome" : "Login"} // @demo remove-current-line
+      initialRouteName={isAuthenticated ? "Welcome" : "UserSelection"} // @demo remove-current-line
     >
       {/* @demo remove-block-start */}
       {isAuthenticated ? (
@@ -78,6 +87,11 @@ const AppStack = observer(function AppStack() {
         </>
       ) : (
         <>
+          <Stack.Screen name="UserSelection">
+            {(props) => (
+              <UserSelectionScreen {...props} authenticationStore={authenticationStore} />
+            )}
+          </Stack.Screen>
           <Stack.Screen name="Login" component={Screens.LoginScreen} />
         </>
       )}
