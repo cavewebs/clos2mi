@@ -20,8 +20,9 @@ import { useStores } from "../models" // @demo remove-current-line
 import { DemoNavigator, DemoTabParamList } from "./DemoNavigator" // @demo remove-current-line
 import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
 import { colors } from "app/theme"
-import UserSelectionScreen from "app/screens/UserSelectionScreen"
 import { AuthenticationStoreModel } from "app/models/AuthenticationStore"
+import { ServiceProviderNavigator } from "./ServiceProviderNavigator"
+import { ServiceUserNavigator } from "./ServiceUserNavigator"
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
@@ -40,16 +41,26 @@ export type AppStackParamList = {
   Welcome: undefined
   Login: undefined // @demo remove-current-linea
   Demo: NavigatorScreenParams<DemoTabParamList> // @demo remove-current-line
+  ServiceProvider: NavigatorScreenParams<DemoTabParamList> // @demo remove-current-line
+  ServiceUser: NavigatorScreenParams<DemoTabParamList> // @demo remove-current-line
   UserSelection: undefined
   // 🔥 Your screens go here
+  SplashOne: undefined
+  SplashTwo: undefined
+  SplashThree: undefined
+  LoginSignin: undefined
+  SelectUserType: undefined
+  Signup: undefined
+  Otp: undefined
+  Signin: undefined
   // IGNITE_GENERATOR_ANCHOR_APP_STACK_PARAM_LIST
 }
 
 const authenticationStore = AuthenticationStoreModel.create({
   authToken: "", // Initial values
   authEmail: "",
-  userType: "su",
-});
+  userType: "",
+})
 
 /**
  * This is a list of all the route names that will exit the app if the back button
@@ -75,7 +86,7 @@ const AppStack = observer(function AppStack() {
   return (
     <Stack.Navigator
       screenOptions={{ headerShown: false, navigationBarColor: colors.background }}
-      initialRouteName={isAuthenticated ? "Welcome" : "UserSelection"} // @demo remove-current-line
+      initialRouteName={isAuthenticated ? "Welcome" : "SelectUserType"} // @demo remove-current-line
     >
       {/* @demo remove-block-start */}
       {isAuthenticated ? (
@@ -84,19 +95,30 @@ const AppStack = observer(function AppStack() {
           <Stack.Screen name="Welcome" component={Screens.WelcomeScreen} />
           {/* @demo remove-block-start */}
           <Stack.Screen name="Demo" component={DemoNavigator} />
+          <Stack.Screen name="ServiceProvider" component={ServiceProviderNavigator} />
+          <Stack.Screen name="ServiceUser" component={ServiceUserNavigator} />
         </>
       ) : (
         <>
-          <Stack.Screen name="UserSelection">
+          {/* <Stack.Screen name="UserSelection">
             {(props) => (
               <UserSelectionScreen {...props} authenticationStore={authenticationStore} />
             )}
-          </Stack.Screen>
+          </Stack.Screen> */}
           <Stack.Screen name="Login" component={Screens.LoginScreen} />
+
+          {/* @demo remove-block-end */}
+          {/** 🔥 Your screens go here */}
+          <Stack.Screen name="SelectUserType" component={Screens.SelectUserTypeScreen} />
+          <Stack.Screen name="SplashOne" component={Screens.SplashOneScreen} />
+          <Stack.Screen name="SplashTwo" component={Screens.SplashTwoScreen} />
+          <Stack.Screen name="SplashThree" component={Screens.SplashThreeScreen} />
+          <Stack.Screen name="LoginSignin" component={Screens.LoginSigninScreen} />
+          <Stack.Screen name="Signup" component={Screens.SignupScreen} />
+          <Stack.Screen name="Otp" component={Screens.OtpScreen} />
+          <Stack.Screen name="Signin" component={Screens.SigninScreen} />
         </>
       )}
-      {/* @demo remove-block-end */}
-      {/** 🔥 Your screens go here */}
       {/* IGNITE_GENERATOR_ANCHOR_APP_STACK_SCREENS */}
     </Stack.Navigator>
   )

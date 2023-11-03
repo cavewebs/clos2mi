@@ -30,6 +30,9 @@ import { customFontsToLoad } from "./theme"
 import Config from "./config"
 import { Provider } from 'mobx-react';
 import { AuthenticationStoreModel } from "./models/AuthenticationStore"
+import { RootSiblingParent } from "react-native-root-siblings"
+import { GluestackUIProvider, Text, Box } from "@gluestack-ui/themed"
+import { config as glueStackConfig } from "@gluestack-ui/config" // Optional if you want to use default theme
 
 
 export const NAVIGATION_PERSISTENCE_KEY = "NAVIGATION_STATE"
@@ -99,17 +102,21 @@ function App(props: AppProps) {
 
   // otherwise, we're ready to render the app
   return (
-    <SafeAreaProvider initialMetrics={initialWindowMetrics}>
-      <ErrorBoundary catchErrors={Config.catchErrors}>
-      <Provider authenticationStore={authenticationStore}>
-        <AppNavigator
-          linking={linking}
-          initialState={initialNavigationState}
-          onStateChange={onNavigationStateChange}
-        />
-        </Provider>
-      </ErrorBoundary>
-    </SafeAreaProvider>
+    <RootSiblingParent>
+      <SafeAreaProvider initialMetrics={initialWindowMetrics}>
+        <GluestackUIProvider config={glueStackConfig}>
+          <ErrorBoundary catchErrors={Config.catchErrors}>
+            <Provider authenticationStore={authenticationStore}>
+              <AppNavigator
+                linking={linking}
+                initialState={initialNavigationState}
+                onStateChange={onNavigationStateChange}
+              />
+            </Provider>
+          </ErrorBoundary>
+        </GluestackUIProvider>
+      </SafeAreaProvider>
+    </RootSiblingParent>
   )
 }
 

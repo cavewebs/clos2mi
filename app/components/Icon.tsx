@@ -111,8 +111,9 @@ export const iconRegistry = {
   calendar: require("../../assets/icons/Calendar.png"),
   scissor: require("../../assets/icons/Scissor.png"),
   briefcase: require("../../assets/icons/Briefcase.png"),
-  userImage: require("../../assets/images/rnr-image-2.png")
-
+  userImage: require("../../assets/images/rnr-image-2.png"),
+  userAdd: require("../../assets/icons/userAdd.png"),
+  serviceProvider: require("../../assets/icons/serviceProvider.png"),
 }
 
 const $imageStyle: ImageStyle = {
