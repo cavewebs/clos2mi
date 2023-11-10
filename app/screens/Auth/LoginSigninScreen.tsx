@@ -1,26 +1,100 @@
 import React, { FC } from "react"
 import { observer } from "mobx-react-lite"
-import { ViewStyle } from "react-native"
+import { ImageBackground, View, ViewStyle, StyleSheet } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
-import { Screen, Text } from "app/components"
+import { AutoImage, Screen, Button, Text } from "app/components"
+import { screenContentContainer } from "app/styles/mainStyles"
+import { colors } from "app/theme"
+import SplashBackground from "assets/images/line-pattern.png"
+import Logo from "assets/images/app-icon-all.png"
+
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "app/models"
 
 interface LoginSigninScreenProps extends AppStackScreenProps<"LoginSignin"> {}
 
-export const LoginSigninScreen: FC<LoginSigninScreenProps> = observer(function LoginSigninScreen() {
+export const LoginSigninScreen: FC<LoginSigninScreenProps> = observer(function LoginSigninScreen(
+  _props,
+) {
+  const { navigation } = _props
   // Pull in one of our MST stores
   // const { someStore, anotherStore } = useStores()
 
   // Pull in navigation via hook
   // const navigation = useNavigation()
+  const register = () => {
+    navigation.navigate("Signup")
+  }
+  const login = () => {
+    navigation.navigate("Signin")
+  }
   return (
-    <Screen style={$root} preset="scroll">
-      <Text text="loginSignin" />
+    <Screen preset="fixed" contentContainerStyle={screenContentContainer}>
+      <ImageBackground source={SplashBackground} style={styles.background}>
+        <View style={styles.container}>
+          <View style={styles.topView}>
+            <AutoImage source={Logo} style={styles.logo} />
+          </View>
+          <View style={styles.bottomView}>
+            <View style={styles.button}>
+              <Button onPress={register} text="Create Account" preset="primary" />
+            </View>
+            <View style={styles.button}>
+              <Button onPress={login} text="Sign In" preset="primary" />
+            </View>
+          </View>
+        </View>
+      </ImageBackground>
     </Screen>
   )
 })
 
-const $root: ViewStyle = {
-  flex: 1,
-}
+const styles = StyleSheet.create({
+  background: {
+    flex: 1,
+    resizeMode: "cover",
+  },
+  bottomView: {
+    marginBottom: 20,
+  },
+  button: {
+    justifyContent: "center",
+    paddingHorizontal: 16,
+    paddingVertical: 15,
+  },
+  container: {
+    flex: 1,
+    flexDirection: "column",
+  },
+  logo: {
+    height: 120,
+    width: 120,
+  },
+  selectView: {
+    alignItems: "center",
+    backgroundColor: colors.background,
+    borderColor: colors.palette.neutral400,
+    borderRadius: 8,
+    borderWidth: 1,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 20,
+    paddingHorizontal: 16,
+    paddingVertical: 20,
+  },
+  selectViewIcon: {
+    alignItems: "center",
+    flexDirection: "row",
+  },
+  title: {
+    fontSize: 20,
+    marginBottom: 44,
+    textAlign: "center",
+  },
+  topView: {
+    alignContent: "center",
+    alignItems: "center",
+    flex: 1,
+    justifyContent: "center",
+  },
+})

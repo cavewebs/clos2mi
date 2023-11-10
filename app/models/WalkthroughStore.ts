@@ -3,16 +3,16 @@ import { Instance, SnapshotOut, types } from "mobx-state-tree"
 export const WalkthroughStoreModel = types
     .model("WalkthroughStore")
     .props({
-        seenWalkthrough: types.maybe(types.string),
+        seenWalkthrough: types.maybe(types.boolean),
     })
     .views((store) => ({
         get hasSeenWalkthrough() {
             return !!store.seenWalkthrough
         },
-        
+
     }))
     .actions((store) => ({
-        setSeenWalkthrough(value?: string) {
+        setSeenWalkthrough(value?: boolean) {
             store.seenWalkthrough = value
         },
         clearWalkthrough() {

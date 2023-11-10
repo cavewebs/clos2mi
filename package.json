@@ -84,7 +84,7 @@
     "@rnx-kit/metro-resolver-symlinks": "^0.1.26",
     "@types/i18n-js": "3.8.2",
     "@types/jest": "^29.2.1",
-    "@types/react": "~18.0.27",
+    "@types/react": "^18.2.37",
     "@types/react-test-renderer": "^18.0.0",
     "@typescript-eslint/eslint-plugin": "^5.59.0",
     "@typescript-eslint/parser": "^5.59.0",
