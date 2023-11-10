@@ -3,6 +3,7 @@ import { observer } from "mobx-react-lite"
 import { ViewStyle } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
 import { Screen, Text } from "app/components"
+import { screenContentContainer } from "app/styles/mainStyles"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "app/models"
 
@@ -15,8 +16,13 @@ export const SplashOneScreen: FC<SplashOneScreenProps> = observer(function Splas
   // Pull in navigation via hook
   // const navigation = useNavigation()
   return (
-    <Screen style={$root} preset="scroll">
-      <Text text="splashOne" />
+    <Screen
+      style={$root}
+      preset="scroll"
+      contentContainerStyle={screenContentContainer}
+      safeAreaEdges={["top", "bottom"]}
+    >
+      <Text preset="heading" text="splashOne" />
     </Screen>
   )
 })
