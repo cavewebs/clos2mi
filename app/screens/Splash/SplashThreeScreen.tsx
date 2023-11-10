@@ -1,26 +1,134 @@
 import React, { FC } from "react"
 import { observer } from "mobx-react-lite"
-import { ViewStyle } from "react-native"
+import { ImageBackground, View, StyleSheet } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
-import { Screen, Text } from "app/components"
+import { AutoImage, Button, Screen, Text } from "app/components"
+import { screenContentContainer } from "app/styles/mainStyles"
+import SplashBackground from "assets/images/line-pattern.png"
+import Logo from "assets/images/app-icon-all.png"
+import SplashImg3 from "assets/images/splash-3.png"
+import { colors } from "app/theme"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "app/models"
-
 interface SplashThreeScreenProps extends AppStackScreenProps<"SplashThree"> {}
 
-export const SplashThreeScreen: FC<SplashThreeScreenProps> = observer(function SplashThreeScreen() {
-  // Pull in one of our MST stores
-  // const { someStore, anotherStore } = useStores()
-
-  // Pull in navigation via hook
-  // const navigation = useNavigation()
+export const SplashThreeScreen: FC<SplashThreeScreenProps> = observer(function SplashThreeScreen(
+  _props,
+) {
+  const { navigation } = _props
+  const next = () => {
+    navigation.navigate("SelectUserType")
+  }
   return (
-    <Screen style={$root} preset="scroll">
-      <Text text="splashThree" />
+    <Screen preset="fixed" contentContainerStyle={screenContentContainer}>
+      <ImageBackground source={SplashBackground} style={styles.background}>
+        <View style={styles.container}>
+          <View style={styles.topView}>
+            <AutoImage source={Logo} style={styles.logo} />
+          </View>
+          <View style={styles.bottomView}>
+            <View style={styles.selectView}>
+              <AutoImage source={SplashImg3} style={styles.splashImg} />
+            </View>
+            <View style={styles.splashMsg}>
+              <Text
+                preset="heading"
+                size="xl"
+                style={{ color: colors.tint }}
+                text="Focus on what you love"
+              />
+              <Text text="It's, Cooler to be yourself" />
+            </View>
+            <View style={styles.button}>
+              <Button onPress={next} text="Continue" preset="primary" />
+            </View>
+            <View style={styles.sliderIcon}>
+              <View style={styles.inactiveSlide}></View>
+              <View style={styles.inactiveSlide}></View>
+              <View style={styles.activeSlide}></View>
+            </View>
+          </View>
+        </View>
+      </ImageBackground>
     </Screen>
   )
 })
 
-const $root: ViewStyle = {
-  flex: 1,
-}
+const styles = StyleSheet.create({
+  activeSlide: {
+    backgroundColor: colors.tint,
+    width: 25,
+    height: 12,
+    borderRadius: 100,
+    marginRight: 5,
+  },
+  background: {
+    flex: 1,
+    resizeMode: "cover",
+  },
+  bottomView: {
+    marginBottom: 10,
+  },
+  button: {
+    justifyContent: "center",
+    paddingHorizontal: 16,
+    paddingTop: 45,
+  },
+  container: {
+    flex: 1,
+    flexDirection: "column",
+  },
+  inactiveSlide: {
+    backgroundColor: colors.palette.neutral300,
+    width: 10,
+    height: 12,
+    borderRadius: 100,
+    marginHorizontal: 3,
+  },
+  logo: {
+    height: 75,
+    padding: 10,
+    width: 70,
+  },
+  selectView: {
+    marginBottom: 20,
+  },
+  selectViewIcon: {
+    alignItems: "center",
+    flexDirection: "row",
+  },
+  skip: {
+    width: 90,
+  },
+  sliderIcon: {
+    justifyContent: "center",
+    paddingHorizontal: 16,
+    paddingTop: 35,
+    flexDirection: "row",
+  },
+  splashImg: {
+    backgroundColor: colors.background,
+    borderColor: colors.palette.neutral400,
+    borderRadius: 20,
+    borderWidth: 1,
+    height: 345,
+    justifyContent: "space-between",
+    width: 345,
+  },
+  splashMsg: {
+    alignItems: "center",
+    gap: 15,
+    textAlign: "center",
+  },
+  title: {
+    fontSize: 20,
+    marginBottom: 44,
+    textAlign: "center",
+  },
+  topView: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "center",
+    margin: 20,
+  },
+})

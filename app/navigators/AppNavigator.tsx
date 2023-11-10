@@ -63,7 +63,7 @@ const authenticationStore = AuthenticationStoreModel.create({
   authEmail: "",
   userType: "",
 })
-const walkthroughStore = WalkthroughStoreModel.create({ seenWalkthrough: "" })
+const walkthroughStore = WalkthroughStoreModel.create({ seenWalkthrough: undefined })
 
 /**
  * This is a list of all the route names that will exit the app if the back button
@@ -106,28 +106,25 @@ const AppStack = observer(function AppStack() {
         </>
       ) : (
         <>
-          {/* <Stack.Screen name="UserSelection">
-          {/* <Stack.Screen name="UserSelection">
-            {(props) => (
-              <UserSelectionScreen {...props} authenticationStore={authenticationStore} />
-            )}
-            </Stack.Screen> */}
-
-          {/* @demo remove-block-end */}
-          {/** 🔥 Your screens go here */}
-          <Stack.Screen name="SelectUserType" component={Screens.SelectUserTypeScreen} />
-          <Stack.Screen name="SplashOne" component={Screens.SplashOneScreen} />
-          <Stack.Screen name="SplashTwo" component={Screens.SplashTwoScreen} />
-          <Stack.Screen name="SplashThree" component={Screens.SplashThreeScreen} />
-          <Stack.Screen name="LoginSignin" component={Screens.LoginSigninScreen} />
-          <Stack.Screen name="Signup" component={Screens.SignupScreen} />
-          <Stack.Screen name="Otp" component={Screens.OtpScreen} />
-          <Stack.Screen name="Signin" component={Screens.SigninScreen} />
-          <Stack.Screen name="ResetPassword" component={Screens.ResetPasswordScreen} />
-          <Stack.Screen name="Login" component={Screens.LoginScreen} />
+          {hasSeenWalkthrough ? (
+            <>
+              <Stack.Screen name="LoginSignin" component={Screens.LoginSigninScreen} />
+              <Stack.Screen name="Signup" component={Screens.SignupScreen} />
+              <Stack.Screen name="Otp" component={Screens.OtpScreen} />
+              <Stack.Screen name="Signin" component={Screens.SigninScreen} />
+              <Stack.Screen name="ResetPassword" component={Screens.ResetPasswordScreen} />
+              <Stack.Screen name="Login" component={Screens.LoginScreen} />
+            </>
+          ) : (
+            <>
+              <Stack.Screen name="SplashOne" component={Screens.SplashOneScreen} />
+              <Stack.Screen name="SplashTwo" component={Screens.SplashTwoScreen} />
+              <Stack.Screen name="SplashThree" component={Screens.SplashThreeScreen} />
+              <Stack.Screen name="SelectUserType" component={Screens.SelectUserTypeScreen} />
+            </>
+          )}
         </>
       )}
-      {/* @demo remove-block-end */}
       {/** 🔥 Your screens go here */}
       {/* IGNITE_GENERATOR_ANCHOR_APP_STACK_SCREENS */}
     </Stack.Navigator>

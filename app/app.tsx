@@ -28,12 +28,11 @@ import { ErrorBoundary } from "./screens/ErrorScreen/ErrorBoundary"
 import * as storage from "./utils/storage"
 import { customFontsToLoad } from "./theme"
 import Config from "./config"
-import { Provider } from 'mobx-react';
+import { Provider } from "mobx-react"
 import { AuthenticationStoreModel } from "./models/AuthenticationStore"
 import { RootSiblingParent } from "react-native-root-siblings"
 import { GluestackUIProvider, Text, Box } from "@gluestack-ui/themed"
 import { config as glueStackConfig } from "@gluestack-ui/config" // Optional if you want to use default theme
-
 
 export const NAVIGATION_PERSISTENCE_KEY = "NAVIGATION_STATE"
 
@@ -41,7 +40,7 @@ export const NAVIGATION_PERSISTENCE_KEY = "NAVIGATION_STATE"
 const prefix = Linking.createURL("/")
 const config = {
   screens: {
-    Login: {
+    LoginSignin: {
       path: "",
     },
     Welcome: "welcome",
@@ -62,7 +61,7 @@ interface AppProps {
   hideSplashScreen: () => Promise<void>
 }
 
-const authenticationStore = AuthenticationStoreModel.create();
+const authenticationStore = AuthenticationStoreModel.create()
 
 /**
  * This is the root component of our app.
