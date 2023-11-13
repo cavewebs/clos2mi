@@ -23,6 +23,7 @@ import { colors } from "app/theme"
 import { AuthenticationStoreModel } from "app/models/AuthenticationStore"
 import { ServiceProviderNavigator, ServiceProviderTabParamList } from "./ServiceProviderNavigator"
 import { ServiceUserNavigator, ServiceUserTabParamList } from "./ServiceUserNavigator"
+import { WalkthroughStoreModel } from "app/models/WalkthroughStore"
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
@@ -53,16 +54,6 @@ export type AppStackParamList = {
   Signup: undefined
   Otp: undefined
   Signin: undefined
-  Notifications: undefined
-  AddAddress: undefined
-  ServiceUserHome: undefined
-  ServiceUserBookings: undefined
-  ServiceUserCart: undefined
-  ServiceUserProfile: undefined
-  ServiceProviderProfile: undefined
-  ServiceProviderHome: undefined
-  ServiceProviderBookings: undefined
-  ServiceProviderServices: undefined
   // IGNITE_GENERATOR_ANCHOR_APP_STACK_PARAM_LIST
 }
 
@@ -71,6 +62,7 @@ const authenticationStore = AuthenticationStoreModel.create({
   authEmail: "",
   userType: "",
 })
+const walkthroughStore = WalkthroughStoreModel.create({ seenWalkthrough: undefined })
 
 /**
  * This is a list of all the route names that will exit the app if the back button
@@ -91,12 +83,15 @@ const AppStack = observer(function AppStack() {
   const {
     authenticationStore: { isAuthenticated, userType },
   } = useStores()
+  const {
+    walkthroughStore: { hasSeenWalkthrough },
+  } = useStores()
 
   // @demo remove-block-end
   return (
     <Stack.Navigator
       screenOptions={{ headerShown: false, navigationBarColor: colors.background }}
-      initialRouteName={isAuthenticated ? "Welcome" : "SelectUserType"} // @demo remove-current-line
+      initialRouteName={hasSeenWalkthrough ? "Welcome" : "SplashOne"} // @demo remove-current-line
     >
       {/* @demo remove-block-start */}
       {isAuthenticated ? (
@@ -113,38 +108,25 @@ const AppStack = observer(function AppStack() {
         </>
       ) : (
         <>
-          {/* <Stack.Screen name="UserSelection">
-            {(props) => (
-              <UserSelectionScreen {...props} authenticationStore={authenticationStore} />
-            )}
-          </Stack.Screen> */}
-          <Stack.Screen name="Login" component={Screens.LoginScreen} />
-
-          {/* @demo remove-block-end */}
-          {/** 🔥 Your screens go here */}
-          <Stack.Screen name="SelectUserType" component={Screens.SelectUserTypeScreen} />
-          <Stack.Screen name="SplashOne" component={Screens.SplashOneScreen} />
-          <Stack.Screen name="SplashTwo" component={Screens.SplashTwoScreen} />
-          <Stack.Screen name="SplashThree" component={Screens.SplashThreeScreen} />
-          <Stack.Screen name="LoginSignin" component={Screens.LoginSigninScreen} />
-          <Stack.Screen name="Signup" component={Screens.SignupScreen} />
-          <Stack.Screen name="Otp" component={Screens.OtpScreen} />
-          <Stack.Screen name="Signin" component={Screens.SigninScreen} />
+          {hasSeenWalkthrough ? (
+            <>
+              <Stack.Screen name="LoginSignin" component={Screens.LoginSigninScreen} />
+              <Stack.Screen name="Signup" component={Screens.SignupScreen} />
+              <Stack.Screen name="Otp" component={Screens.OtpScreen} />
+              <Stack.Screen name="Signin" component={Screens.SigninScreen} />
+              <Stack.Screen name="ResetPassword" component={Screens.ResetPasswordScreen} />
+              <Stack.Screen name="Login" component={Screens.LoginScreen} />
+            </>
+          ) : (
+            <>
+              <Stack.Screen name="SplashOne" component={Screens.SplashOneScreen} />
+              <Stack.Screen name="SplashTwo" component={Screens.SplashTwoScreen} />
+              <Stack.Screen name="SplashThree" component={Screens.SplashThreeScreen} />
+              <Stack.Screen name="SelectUserType" component={Screens.SelectUserTypeScreen} />
+            </>
+          )}
         </>
       )}
-      {/* Service User Screens */}
-      <Stack.Screen name="Notifications" component={Screens.NotificationsScreen} />
-      <Stack.Screen name="AddAddress" component={Screens.AddAddressScreen} />
-      <Stack.Screen name="ServiceUserHome" component={Screens.ServiceUserHomeScreen} />
-      <Stack.Screen name="ServiceUserBookings" component={Screens.ServiceUserBookingsScreen} />
-      <Stack.Screen name="ServiceUserCart" component={Screens.ServiceUserCartScreen} />
-      <Stack.Screen name="ServiceUserProfile" component={Screens.ServiceUserProfileScreen} />
-
-      {/* Service Provvider Screens */}
-      <Stack.Screen name="ServiceProviderProfile" component={Screens.ServiceProviderProfileScreen} />
-      <Stack.Screen name="ServiceProviderHome" component={Screens.ServiceProviderHomeScreen} />
-      <Stack.Screen name="ServiceProviderBookings" component={Screens.ServiceProviderBookingsScreen} />
-      <Stack.Screen name="ServiceProviderServices" component={Screens.ServiceProviderServicesScreen} />
       {/* IGNITE_GENERATOR_ANCHOR_APP_STACK_SCREENS */}
     </Stack.Navigator>
   )

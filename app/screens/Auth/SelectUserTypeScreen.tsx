@@ -24,7 +24,7 @@ export const SelectUserTypeScreen: FC<SelectUserTypeScreenProps> = observer(
     const { navigation } = _props
 
     // Pull in one of our MST stores
-    const { authenticationStore } = useStores()
+    const { authenticationStore, walkthroughStore } = useStores()
     const { userType } = authenticationStore
     const [isChecked, setIsChecked] = useState(false)
     const [noUserSelected, setNouserSelected] = useState(false)
@@ -43,7 +43,8 @@ export const SelectUserTypeScreen: FC<SelectUserTypeScreenProps> = observer(
         ToastT()
         return
       }
-      navigation.navigate("Login")
+      walkthroughStore.setSeenWalkthrough(true)
+      navigation.navigate("LoginSignin")
     }
 
     const toggleCheckbox = (user: string) => {
