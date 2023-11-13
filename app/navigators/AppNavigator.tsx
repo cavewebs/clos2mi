@@ -21,8 +21,8 @@ import { DemoNavigator, DemoTabParamList } from "./DemoNavigator" // @demo remov
 import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
 import { colors } from "app/theme"
 import { AuthenticationStoreModel } from "app/models/AuthenticationStore"
-import { ServiceProviderNavigator } from "./ServiceProviderNavigator"
-import { ServiceUserNavigator } from "./ServiceUserNavigator"
+import { ServiceProviderNavigator, ServiceProviderTabParamList } from "./ServiceProviderNavigator"
+import { ServiceUserNavigator, ServiceUserTabParamList } from "./ServiceUserNavigator"
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
@@ -41,8 +41,8 @@ export type AppStackParamList = {
   Welcome: undefined
   Login: undefined // @demo remove-current-linea
   Demo: NavigatorScreenParams<DemoTabParamList> // @demo remove-current-line
-  ServiceProvider: NavigatorScreenParams<DemoTabParamList> // @demo remove-current-line
-  ServiceUser: NavigatorScreenParams<DemoTabParamList> // @demo remove-current-line
+  ServiceProvider: NavigatorScreenParams<ServiceProviderTabParamList> // @demo remove-current-line
+  ServiceUser: NavigatorScreenParams<ServiceUserTabParamList> 
   UserSelection: undefined
   // 🔥 Your screens go here
   SplashOne: undefined
@@ -53,6 +53,16 @@ export type AppStackParamList = {
   Signup: undefined
   Otp: undefined
   Signin: undefined
+  Notifications: undefined
+  AddAddress: undefined
+  ServiceUserHome: undefined
+  ServiceUserBookings: undefined
+  ServiceUserCart: undefined
+  ServiceUserProfile: undefined
+  ServiceProviderProfile: undefined
+  ServiceProviderHome: undefined
+  ServiceProviderBookings: undefined
+  ServiceProviderServices: undefined
   // IGNITE_GENERATOR_ANCHOR_APP_STACK_PARAM_LIST
 }
 
@@ -79,7 +89,7 @@ const Stack = createNativeStackNavigator<AppStackParamList>()
 const AppStack = observer(function AppStack() {
   // @demo remove-block-start
   const {
-    authenticationStore: { isAuthenticated },
+    authenticationStore: { isAuthenticated, userType },
   } = useStores()
 
   // @demo remove-block-end
@@ -94,9 +104,12 @@ const AppStack = observer(function AppStack() {
           {/* @demo remove-block-end */}
           <Stack.Screen name="Welcome" component={Screens.WelcomeScreen} />
           {/* @demo remove-block-start */}
-          <Stack.Screen name="Demo" component={DemoNavigator} />
-          <Stack.Screen name="ServiceProvider" component={ServiceProviderNavigator} />
-          <Stack.Screen name="ServiceUser" component={ServiceUserNavigator} />
+          {/* <Stack.Screen name="Demo" component={DemoNavigator} /> */}
+          {userType === "sp" ? (
+            <Stack.Screen name="ServiceProvider" component={ServiceProviderNavigator} />
+          ) : (
+            <Stack.Screen name="ServiceUser" component={ServiceUserNavigator} />
+          )}
         </>
       ) : (
         <>
@@ -119,6 +132,19 @@ const AppStack = observer(function AppStack() {
           <Stack.Screen name="Signin" component={Screens.SigninScreen} />
         </>
       )}
+      {/* Service User Screens */}
+      <Stack.Screen name="Notifications" component={Screens.NotificationsScreen} />
+      <Stack.Screen name="AddAddress" component={Screens.AddAddressScreen} />
+      <Stack.Screen name="ServiceUserHome" component={Screens.ServiceUserHomeScreen} />
+      <Stack.Screen name="ServiceUserBookings" component={Screens.ServiceUserBookingsScreen} />
+      <Stack.Screen name="ServiceUserCart" component={Screens.ServiceUserCartScreen} />
+      <Stack.Screen name="ServiceUserProfile" component={Screens.ServiceUserProfileScreen} />
+
+      {/* Service Provvider Screens */}
+      <Stack.Screen name="ServiceProviderProfile" component={Screens.ServiceProviderProfileScreen} />
+      <Stack.Screen name="ServiceProviderHome" component={Screens.ServiceProviderHomeScreen} />
+      <Stack.Screen name="ServiceProviderBookings" component={Screens.ServiceProviderBookingsScreen} />
+      <Stack.Screen name="ServiceProviderServices" component={Screens.ServiceProviderServicesScreen} />
       {/* IGNITE_GENERATOR_ANCHOR_APP_STACK_SCREENS */}
     </Stack.Navigator>
   )

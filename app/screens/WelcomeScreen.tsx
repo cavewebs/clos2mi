@@ -23,11 +23,12 @@ export const WelcomeScreen: FC<WelcomeScreenProps> = observer(function WelcomeSc
   // @demo remove-block-start
   const { navigation } = _props
   const {
-    authenticationStore: { logout },
+    authenticationStore: { logout, userType },
   } = useStores()
 
   function goNext() {
-    navigation.navigate("Demo")
+    {userType === "sp" ? (navigation.navigate("ServiceProvider")):(navigation.navigate("Notifications")) }
+    
   }
 
   useHeader(
