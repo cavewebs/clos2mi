@@ -6,10 +6,11 @@ import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { Icon } from "../components"
 import { translate } from "../i18n"
 import { useStores } from "../models" // @demo remove-current-line
-import { DemoCommunityScreen, DemoShowroomScreen, DemoDebugScreen } from "../screens"
+import { DemoCommunityScreen, DemoShowroomScreen, DemoDebugScreen, NotificationsScreen} from "../screens"
 import { DemoPodcastListScreen } from "../screens/DemoPodcastListScreen"
 import { colors, spacing, typography } from "../theme"
 import { AppStackParamList, AppStackScreenProps } from "./AppNavigator"
+import { AddAddressScreen } from "app/screens/ServiceUser/AddAddressScreen"
 
 export type DemoTabParamList = {
   DemoCommunity: undefined
@@ -112,7 +113,7 @@ export function DemoNavigator() {
   
         <Tab.Screen
           name="DemoCommunity"
-          component={DemoCommunityScreen}
+          component={AddAddressScreen}
           options={{
             tabBarLabel: "",
             tabBarIcon: ({ focused }) => (
@@ -122,8 +123,8 @@ export function DemoNavigator() {
         />
   
         <Tab.Screen
-          name="DemoPodcastList"
-          component={DemoPodcastListScreen}
+          name="NotificationsScreen"
+          component={NotificationsScreen}
           options={{
             tabBarAccessibilityLabel: translate("demoNavigator.podcastListTab"),
             tabBarLabel: "",

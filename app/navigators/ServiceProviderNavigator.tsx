@@ -1,18 +1,102 @@
 import React from "react"
-import { createNativeStackNavigator } from "@react-navigation/native-stack"
-import {
-  WelcomeScreen
-} from "app/screens"
+import { BottomTabScreenProps, createBottomTabNavigator } from "@react-navigation/bottom-tabs"
+import { AppStackParamList, AppStackScreenProps } from "./AppNavigator"
+import { CompositeScreenProps } from "@react-navigation/native"
+import { useSafeAreaInsets } from "react-native-safe-area-context"
+import { colors, spacing, typography } from "app/theme"
+import { TextStyle, ViewStyle } from "react-native"
+import { Icon } from "app/components"
+import { ServiceProviderHomeScreen } from "app/screens/ServiceProvider/HomeScreen"
+import { ServiceProviderBookingsScreen } from "app/screens/ServiceProvider/BookingsScreen"
+import { ServiceProviderServicesScreen } from "app/screens/ServiceProvider/ServicesScreen"
+import { ServiceProviderProfileScreen } from "app/screens/ServiceProvider/ProfileScreen"
 
-export type ServiceProviderNavigatorParamList = {
-  Demo: undefined
+
+export type ServiceProviderTabParamList = {
+  Home: undefined
+  Bookings: undefined
+  Services: undefined
+  Profile: undefined
 }
 
-const Stack = createNativeStackNavigator<ServiceProviderNavigatorParamList>()
+export type ServiceProviderTabScreenProps<T extends keyof ServiceProviderTabParamList> =
+  CompositeScreenProps<
+    BottomTabScreenProps<ServiceProviderTabParamList, T>,
+    AppStackScreenProps<keyof AppStackParamList>
+  >
+
+const Tab = createBottomTabNavigator<ServiceProviderTabParamList>()
 export const ServiceProviderNavigator = () => {
+  const { bottom } = useSafeAreaInsets()
+
   return (
-    <Stack.Navigator screenOptions={{ cardStyle: { backgroundColor: "transparent" }, headerShown: false, }}>
-      <Stack.Screen name="Demo" component={WelcomeScreen} />
-    </Stack.Navigator>
+    <Tab.Navigator
+      screenOptions={{
+        headerShown: false,
+        tabBarHideOnKeyboard: true,
+        tabBarStyle: [$tabBar, { height: bottom + 50 }],
+        tabBarActiveTintColor: colors.text,
+        tabBarInactiveTintColor: colors.text,
+        tabBarLabelStyle: $tabBarLabel,
+        tabBarItemStyle: $tabBarItem,
+      }}
+    >
+      <Tab.Screen
+        name="Home"
+        component={ServiceProviderHomeScreen}
+        options={{
+          tabBarLabel:"",
+          tabBarIcon: ({ focused }) => (
+            <Icon icon="Home" color={focused && colors.tint} size={24} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Bookings"
+        component={ServiceProviderBookingsScreen}
+        options={{
+          tabBarLabel:"",
+          tabBarIcon: ({ focused }) => (
+            <Icon icon="Calendar" color={focused && colors.tint} size={24} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Services"
+        component={ServiceProviderServicesScreen}
+        options={{
+          tabBarLabel:"",
+          tabBarIcon: ({ focused }) => (
+            <Icon icon="Scissors" color={focused && colors.tint} size={24} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={ServiceProviderProfileScreen}
+        options={{
+          tabBarLabel:"",
+          tabBarIcon: ({ focused }) => (
+            <Icon icon="userImage" color={focused && colors.tint} size={24} />
+          ),
+        }}
+      />
+    </Tab.Navigator>
   )
+}
+
+const $tabBar: ViewStyle = {
+  backgroundColor: colors.background,
+  borderTopColor: colors.transparent,
+}
+
+const $tabBarItem: ViewStyle = {
+  paddingTop: spacing.md,
+}
+
+const $tabBarLabel: TextStyle = {
+  fontSize: 12,
+  fontFamily: typography.primary.medium,
+  lineHeight: 16,
+  flex: 1,
 }

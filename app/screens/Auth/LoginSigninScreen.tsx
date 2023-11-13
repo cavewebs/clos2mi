@@ -26,7 +26,7 @@ export const LoginSigninScreen: FC<LoginSigninScreenProps> = observer(function L
     navigation.navigate("Signup")
   }
   const login = () => {
-    navigation.navigate("Signin")
+    navigation.navigate("Notifications")
   }
   return (
     <Screen preset="fixed" contentContainerStyle={screenContentContainer}>

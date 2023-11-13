@@ -107,13 +107,16 @@ export const iconRegistry = {
   slack: require("../../assets/icons/slack.png"),
   view: require("../../assets/icons/view.png"),
   x: require("../../assets/icons/x.png"),
-  home: require("../../assets/icons/Home.png"),
-  calendar: require("../../assets/icons/Calendar.png"),
-  scissor: require("../../assets/icons/Scissor.png"),
   briefcase: require("../../assets/icons/Briefcase.png"),
-  userImage: require("../../assets/images/rnr-image-2.png"),
   userAdd: require("../../assets/icons/userAdd.png"),
   serviceProvider: require("../../assets/icons/serviceProvider.png"),
+  solarMapLinear: require("../../assets/icons/solarMapLinear.png"),
+  userImage: require("../../assets/icons/userImage.png"),
+  Home: require("../../assets/icons/Home.png"),
+  market: require("../../assets/icons/market.png"),
+  Calendar: require("../../assets/icons/Calendar.png"),
+  Scissors: require("../../assets/icons/Scissors.png"),
+  
 }
 
 const $imageStyle: ImageStyle = {
