@@ -1,9 +1,10 @@
+/* eslint-disable react-native/no-color-literals */
+/* eslint-disable react-native/sort-styles */
 import * as React from "react"
 import { View, StyleSheet, Modal } from "react-native"
 import { observer } from "mobx-react-lite"
 import { Text } from "app/components/Text"
 import { Button } from "./Button"
-import { useNavigation } from "@react-navigation/native"
 
 export interface ModalProps {
   /**
@@ -22,8 +23,6 @@ export interface ModalProps {
  * Describe your component here
  */
 export const Modals = observer(function Modals(props: ModalProps) {
-  const navigation = useNavigation()
-
   const {
     showModal,
     setShowModal,
@@ -93,7 +92,7 @@ const styles = StyleSheet.create({
     color: "#6B7280",
     marginBottom: 24,
   },
-  cancelButton: { borderRadius: 24, border: "#D0D5DD", backgroundColor: "#F9FAFB", width: "48%" },
+  cancelButton: { backgroundColor: "#F9FAFB", borderRadius: 24, borderColor: "#D0D5DD", width: "48%" },
   cancelButtonText: { fontSize: 14, fontWeight: "500", color: "#374151" },
   acceptButton: {
     borderRadius: 24,

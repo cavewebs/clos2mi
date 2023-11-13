@@ -1,10 +1,10 @@
+/* eslint-disable react-native/no-color-literals */
 import React, { FC } from "react"
 import { observer } from "mobx-react-lite"
 import { Image, StyleSheet, View } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
 import { Button, Icon, Modals, Screen, Text } from "app/components"
 import { useNavigation } from "@react-navigation/native"
-import { AddAddressScreen } from "./AddAddressScreen"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "app/models"
 
@@ -36,7 +36,7 @@ export const NotificationsScreen: FC<NotificationsScreenProps> = observer(
           Close2mi would like to send you Notifications to keep you up to date on your bookings
         </Text>
         </View>
-        <View style={styles.buttonContainer}>
+        <View>
           <Button style={styles.button} onPress={() => setShowModal(true)}>
             <Text style={styles.buttonText}>Turn on Notifications</Text>
           </Button>
@@ -60,58 +60,59 @@ export const NotificationsScreen: FC<NotificationsScreenProps> = observer(
 )
 
 const styles = StyleSheet.create({
+  // eslint-disable-next-line react-native/no-color-literals
+  button: {
+    alignItems: "center",
+    alignSelf: "center",
+    backgroundColor: "#2895FE",
+    borderColor: "#2895FE",
+    borderRadius: 27.2,
+    height: 48,
+    justifyContent: "center",
+    marginBottom: 10,
+    width: "95%"
+  },
+  buttonText: {
+    color: "#F5F5FF",
+    fontSize: 16,
+    fontWeight: "600",
+    textAlign: "center",
+  },
+  container: {
+    display: "flex",
+    height: "100%",
+    justifyContent: "space-evenly",
+    paddingHorizontal: 16,
+    paddingTop: 16,
+  },
+  icon: {
+    // Adjust icon styles
+  },
   iconContainer: {
     alignSelf: "flex-end",
     marginBottom: 8,
+  },
+  image: {
+    margin: 10,
   },
   imageContainer: {
     alignItems: "center",
     justifyContent: "center",
     marginTop: 10,
   },
-  icon: {
-    // Adjust icon styles
-  },
-  image: {
-    margin: 10,
-  },
+
   notificationBodyText: {
     fontSize: 14,
-    textAlign: "center",
-    marginHorizontal: 16,
     marginBottom: 16,
-  },
-  container: {
-    display: "flex",
-    paddingHorizontal: 16,
-    paddingTop: 16,
-    height: "100%",
-    justifyContent: "space-evenly",
+    marginHorizontal: 16,
+    textAlign: "center",
   },
   title: {
+    color: "#1F2937",
     fontSize: 24,
+    fontWeight: "900",
     lineHeight: 38,
     marginBottom: 8,
-    color: "#1F2937",
-    fontWeight: "900",
-    textAlign: "center",
-  },
-
-  button: {
-    borderRadius: 27.2,
-    backgroundColor: "#2895FE",
-    width: "95%",
-    alignSelf: "center",
-    alignItems: "center",
-    justifyContent: "center",
-    height: 48,
-    borderColor: "#2895FE",
-    marginBottom: 10
-  },
-  buttonText: {
-    fontSize: 16,
-    fontWeight: "600",
-    color: "#F5F5FF",
     textAlign: "center",
   },
 });

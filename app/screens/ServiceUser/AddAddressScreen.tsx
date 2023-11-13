@@ -1,3 +1,5 @@
+/* eslint-disable react-native/no-color-literals */
+/* eslint-disable react-native/sort-styles */
 import React, { FC } from "react";
 import { observer } from "mobx-react-lite";
 import {
@@ -28,6 +30,7 @@ export const AddAddressScreen: FC<AddAddressScreenProps> = observer(function Add
       <Header title="Add Address" titleStyle={styles.headerTitle} />
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        // eslint-disable-next-line react-native/no-inline-styles
         style={{ flex: 1 }}
       >
         <ScrollView>

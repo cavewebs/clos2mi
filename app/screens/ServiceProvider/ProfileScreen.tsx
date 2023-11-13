@@ -3,10 +3,11 @@ import { observer } from "mobx-react-lite"
 import { ViewStyle } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
 import { Screen, Text } from "app/components"
+import { screenContentContainer } from "app/styles/mainStyles"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "app/models"
 
-interface ProfileScreenProps extends AppStackScreenProps<"Profile"> {}
+interface ProfileScreenProps extends AppStackScreenProps<"ServiceProviderProfile"> {}
 
 export const ServiceProviderProfileScreen: FC<ProfileScreenProps> = observer(function ProfileScreen() {
   // Pull in one of our MST stores
@@ -15,7 +16,7 @@ export const ServiceProviderProfileScreen: FC<ProfileScreenProps> = observer(fun
   // Pull in navigation via hook
   // const navigation = useNavigation()
   return (
-    <Screen style={$root} preset="scroll">
+    <Screen style={$root} preset="scroll" contentContainerStyle={screenContentContainer} >
       <Text text="profile" />
     </Screen>
   )
