@@ -1,3 +1,5 @@
+/* eslint-disable react-native/sort-styles */
+/* eslint-disable react-native/no-color-literals */
 import React, { FC, useEffect, useMemo, useRef, useState } from "react"
 import { observer } from "mobx-react-lite"
 import { View, ViewStyle, StyleSheet, TextInput } from "react-native"
@@ -9,8 +11,20 @@ import { screenContentContainer } from "app/styles/mainStyles"
 import SplashImg1 from "assets/images/splash-1.png"
 import { colors } from "app/theme"
 import { useStores } from "app/models"
-import { Checkbox } from "@gluestack-ui/themed"
-
+import {
+  Icon as GSIcon,
+  Checkbox,
+  Select,
+  ChevronDownIcon,
+  SelectTrigger,
+  SelectDragIndicatorWrapper,
+  SelectDragIndicator,
+  SelectBackdrop,
+  SelectIcon,
+  SelectInput,
+  SelectContent,
+  SelectPortal,
+} from "@gluestack-ui/themed"
 interface SigninScreenProps extends AppStackScreenProps<"Signin"> {}
 
 export const SigninScreen: FC<SigninScreenProps> = observer(function SigninScreen() {
@@ -88,6 +102,35 @@ export const SigninScreen: FC<SigninScreenProps> = observer(function SigninScree
       },
     [isAuthPasswordHidden],
   )
+  const phoneNumberCodes = [
+    { code: "+44", country: "UK", flag: "https://restcountries.com/data/can.svg" },
+  ]
+
+  const CountryFlag = useMemo(
+    () =>
+      function CountryFlag(props: TextFieldAccessoryProps) {
+        return (
+          <Select defaultValue="+44" w="$24" placeholder="code">
+            <SelectTrigger>
+              <SelectInput />
+              <SelectIcon as={ChevronDownIcon} mr="$3" />
+            </SelectTrigger>
+            <SelectPortal>
+              <SelectBackdrop />
+              <SelectContent>
+                <SelectDragIndicatorWrapper>
+                  <SelectDragIndicator />
+                </SelectDragIndicatorWrapper>
+                {phoneNumberCodes.map((item, index) => (
+                  <Select.Item label={`${item.flag}`} value={`${item.code}`} key={`${item.code}`} />
+                ))}
+              </SelectContent>
+            </SelectPortal>
+          </Select>
+        )
+      },
+    [isAuthPasswordHidden],
+  )
 
   return (
     <Screen preset="scroll" contentContainerStyle={screenContentContainer}>
@@ -96,15 +139,13 @@ export const SigninScreen: FC<SigninScreenProps> = observer(function SigninScree
           <View>
             <AutoImage source={SplashImg1} style={styles.splashImg} />
           </View>
-          <View>
-            <Text preset="subheading" text="Sign In" />
-            <Text text="Welcome Back" style={{ color: colors.palette.neutral600 }} />
-            <Text style={styles.inactiveSlide} text="Customer" />
-            <Text style={styles.activeSlide} text="Service Provider" />
+          <View style={{ alignItems: "center" }}>
+            <Text preset="subheading" size="xl" text="Sign In" />
+            <Text text="Welcome Back" size="lg" style={{ color: colors.palette.neutral800 }} />
           </View>
         </View>
         <View style={styles.bottomView}>
-          <TextField label={"Phone number"} keyboardType="phone-pad" />
+          <TextField LeftAccessory={CountryFlag} label={"Phone number"} keyboardType="phone-pad" />
           <TextField
             ref={authPasswordInput}
             value={authPassword}
@@ -118,8 +159,9 @@ export const SigninScreen: FC<SigninScreenProps> = observer(function SigninScree
             // onSubmitEditing={login}
             RightAccessory={PasswordRightAccessory}
           />
-          <Checkbox value="retain" aria-label="Keep me signed in" />
-          <View></View>
+          <View>
+            <Checkbox value="retain" aria-label="Keep me signed in" />
+          </View>
         </View>
       </View>
     </Screen>
@@ -129,6 +171,8 @@ export const SigninScreen: FC<SigninScreenProps> = observer(function SigninScree
 const styles = StyleSheet.create({
   bottomView: {
     marginBottom: 10,
+    flex: 1,
+    marginTop: 16,
   },
   button: {
     justifyContent: "center",
@@ -139,25 +183,38 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
   },
-  activeSlide: {
-    backgroundColor: colors.palette.neutral300,
-    borderRadius: 100,
-    marginHorizontal: 3,
-    height: 32,
-    padding: 8,
-    justifyContent: "center",
-    alignItems: "center",
-    gap: 8,
-    boxShadow: "0px 1px 2px 0px rgba(10, 44, 111, 0.06), 0px 1px 3px 0px rgba(16, 24, 40, 0.10)", 
-  },
-  inactiveSlide: {
-    backgroundColor: colors.palette.neutral300,
-    width: 120,
-    height: 40,
-    borderRadius: 100,
-    marginHorizontal: 3,
-  },
-
+  // activeSlide: {
+  //   backgroundColor: colors.palette.neutral300,
+  //   borderRadius: 100,
+  //   marginHorizontal: 3,
+  //   height: 32,
+  //   padding: 8,
+  //   justifyContent: "center",
+  //   alignItems: "center",
+  //   gap: 8,
+  //   boxShadow: "0px 1px 2px 0px rgba(10, 44, 111, 0.06), 0px 1px 3px 0px rgba(16, 24, 40, 0.10)",
+  // },
+  // inactiveSlide: {
+  //   backgroundColor: colors.palette.neutral100,
+  //   borderRadius: 6,
+  //   height: 32,
+  //   paddingVertical: 8,
+  //   paddingHorizontal: 12,
+  //   // For iOS
+  //   shadowColor: "rgba(10, 44, 111, 0.06)",
+  //   shadowOffset: { width: 0, height: 1 },
+  //   shadowOpacity: 1,
+  //   shadowRadius: 2,
+  //   // For Android
+  //   elevation: 3,
+  // },
+  // slideWrapper: {
+  //   flexDirection: "row",
+  //   height: 40,
+  //   backgroundColor: colors.palette.neutral200,
+  //   padding: 4,
+  //   paddingLeft: 0,
+  // },
   splashImg: {
     backgroundColor: colors.background,
     borderColor: colors.palette.neutral400,
@@ -167,14 +224,15 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     width: 345,
     overflow: "hidden",
+    marginBottom: 32,
   },
   title: {
     fontSize: 20,
     marginBottom: 44,
     textAlign: "center",
   },
+
   topView: {
-    flex: 1,
     alignItems: "center",
     margin: 20,
   },
