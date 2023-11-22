@@ -17,7 +17,6 @@ import { useColorScheme } from "react-native"
 import * as Screens from "app/screens"
 import Config from "../config"
 import { useStores } from "../models" // @demo remove-current-line
-import { DemoTabParamList } from "./DemoNavigator" // @demo remove-current-line
 import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
 import { colors } from "app/theme"
 import { AuthenticationStoreModel } from "app/models/AuthenticationStore"
@@ -40,8 +39,8 @@ import { WalkthroughStoreModel } from "app/models/WalkthroughStore"
  */
 export type AppStackParamList = {
   Login: undefined // @demo remove-current-linea
-  ServiceProvider: NavigatorScreenParams<ServiceProviderTabParamList> 
-  ServiceUser: NavigatorScreenParams<ServiceUserTabParamList> 
+  ServiceProvider: NavigatorScreenParams<ServiceProviderTabParamList>
+  ServiceUser: NavigatorScreenParams<ServiceUserTabParamList>
   UserSelection: undefined
   // 🔥 Your screens go here
   SplashOne: undefined
@@ -56,26 +55,25 @@ export type AppStackParamList = {
 
   // ServiceUser Screens
   PrivacyPolicy: undefined
-  ServiceUserBookings:undefined
-  ServiceUserCart:undefined
-  ServiceUserHome:undefined
-  ServiceUserProfile:undefined
-  AddAddress:undefined
-  Notifications:undefined
-
+  ServiceUserBookings: undefined
+  ServiceUserCart: undefined
+  ServiceUserHome: undefined
+  ServiceUserProfile: undefined
+  AddAddress: undefined
+  Notifications: undefined
 
   // ServiceProvider Screens
-  ServiceProviderBookings:undefined
-  ServiceProviderProfile:undefined
-  ServiceProviderHome:undefined
-  ServiceProviderServices:undefined
+  ServiceProviderBookings: undefined
+  ServiceProviderProfile: undefined
+  ServiceProviderHome: undefined
+  ServiceProviderServices: undefined
 
   // IGNITE_GENERATOR_ANCHOR_APP_STACK_PARAM_LIST
 }
 
 const authenticationStore = AuthenticationStoreModel.create({
   authToken: "", // Initial values
-  authEmail: "",
+  authPhone: "",
   userType: "",
 })
 const walkthroughStore = WalkthroughStoreModel.create({ seenWalkthrough: undefined })
@@ -107,15 +105,59 @@ const AppStack = observer(function AppStack() {
   return (
     <Stack.Navigator
       screenOptions={{ headerShown: false, navigationBarColor: colors.background }}
-      initialRouteName={hasSeenWalkthrough ? "Welcome" : "SplashOne"} // @demo remove-current-line
+      initialRouteName={hasSeenWalkthrough ? "LoginSignin" : "SplashOne"} // @demo remove-current-line
     >
       {/* @demo remove-block-start */}
       {isAuthenticated ? (
         <>
-          {userType === "sp" ? (
-            <Stack.Screen name="ServiceProvider" component={ServiceProviderNavigator} />
+          {userType === "su" ? (
+            <>
+              {/* ServiceUser Screens  */}
+              <Stack.Screen
+                name="ServiceProvider"
+                //  component={ServiceProviderNavigator} />
+                component={Screens.ServiceProviderHomeScreen}
+              />
+              <Stack.Screen name="PrivacyPolicy" component={Screens.PrivacyPolicyScreen} />
+              <Stack.Screen name="ServiceUserHome" component={Screens.ServiceUserHomeScreen} />
+              <Stack.Screen
+                name="ServiceUserBookings"
+                component={Screens.ServiceUserBookingsScreen}
+              />
+              <Stack.Screen name="ServiceUserCart" component={Screens.ServiceUserCartScreen} />
+              <Stack.Screen
+                name="ServiceUserProfile"
+                component={Screens.ServiceUserProfileScreen}
+              />
+              <Stack.Screen name="AddAddress" component={Screens.AddAddressScreen} />
+              <Stack.Screen name="Notifications" component={Screens.NotificationsScreen} />
+            </>
           ) : (
-            <Stack.Screen name="ServiceUser" component={ServiceUserNavigator} />
+            <>
+              {/* Service Provider Screens */}
+              <Stack.Screen
+                name="ServiceProviderHome"
+                component={Screens.ServiceProviderHomeScreen}
+              />
+              <Stack.Screen
+                name="ServiceProviderBookings"
+                component={Screens.ServiceProviderBookingsScreen}
+              />
+              <Stack.Screen
+                name="ServiceProviderServices"
+                component={Screens.ServiceProviderServicesScreen}
+              />
+              <Stack.Screen
+                name="ServiceProviderProfile"
+                component={Screens.ServiceProviderProfileScreen}
+              />
+
+              <Stack.Screen
+                name="ServiceUser"
+                // component={ServiceUserNavigator} />
+                component={Screens.NotificationsScreen}
+              />
+            </>
           )}
         </>
       ) : (
@@ -139,25 +181,8 @@ const AppStack = observer(function AppStack() {
           )}
         </>
       )}
-      {/* ServiceUser Screens  */}
-      <Stack.Screen name="PrivacyPolicy" component={Screens.PrivacyPolicyScreen} />
-      <Stack.Screen name="ServiceUserHome" component={Screens.ServiceUserHomeScreen} />
-      <Stack.Screen name="ServiceUserBookings" component={Screens.ServiceUserBookingsScreen} />
-      <Stack.Screen name="ServiceUserCart" component={Screens.ServiceUserCartScreen} />
-      <Stack.Screen name="ServiceUserProfile" component={Screens.ServiceUserProfileScreen} />
-      <Stack.Screen name="AddAddress" component={Screens.AddAddressScreen} />
-      <Stack.Screen name="Notifications" component={Screens.NotificationsScreen} />
-      <Stack.Screen name="ServiceUser" component={ServiceUserNavigator} />
 
-
-      {/* Service Provider Screens */}
-      <Stack.Screen name="ServiceProviderHome" component={Screens.ServiceProviderHomeScreen} />
-      <Stack.Screen name="ServiceProviderBookings" component={Screens.ServiceProviderBookingsScreen} />
-      <Stack.Screen name="ServiceProviderServices" component={Screens.ServiceProviderServicesScreen} />
-      <Stack.Screen name="ServiceProviderProfile" component={Screens.ServiceProviderProfileScreen} />
-
-
-			{/* IGNITE_GENERATOR_ANCHOR_APP_STACK_SCREENS */}
+      {/* IGNITE_GENERATOR_ANCHOR_APP_STACK_SCREENS */}
     </Stack.Navigator>
   )
 })
