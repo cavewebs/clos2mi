@@ -89,6 +89,7 @@ export const iconRegistry = {
   bell: require("../../assets/icons/bell.png"),
   caretLeft: require("../../assets/icons/caretLeft.png"),
   caretRight: require("../../assets/icons/caretRight.png"),
+  caretDown: require("../../assets/icons/caretDown.png"),
   check: require("../../assets/icons/check.png"),
   clap: require("../../assets/icons/clap.png"),
   community: require("../../assets/icons/community.png"),
@@ -116,7 +117,6 @@ export const iconRegistry = {
   market: require("../../assets/icons/market.png"),
   Calendar: require("../../assets/icons/Calendar.png"),
   Scissors: require("../../assets/icons/Scissors.png"),
-  
 }
 
 const $imageStyle: ImageStyle = {
