@@ -7,9 +7,9 @@ import { screenContentContainer } from "app/styles/mainStyles"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "app/models"
 
-interface PrivacyPolicyScreenProps extends AppStackScreenProps<"PrivacyPolicy"> {}
+interface SavedCardsScreenProps extends AppStackScreenProps<"SavedCards"> {}
 
-export const PrivacyPolicyScreen: FC<PrivacyPolicyScreenProps> = observer(function PrivacyPolicyScreen() {
+export const SavedCardsScreen: FC<SavedCardsScreenProps> = observer(function SavedCardsScreen() {
   // Pull in one of our MST stores
   // const { someStore, anotherStore } = useStores()
 
@@ -17,7 +17,7 @@ export const PrivacyPolicyScreen: FC<PrivacyPolicyScreenProps> = observer(functi
   // const navigation = useNavigation()
   return (
     <Screen style={$root} preset="scroll" contentContainerStyle={screenContentContainer} safeAreaEdges={["top", "bottom"]} >
-      <Text preset="heading" text="privacyPolicy" />
+      <Text preset="heading" text="savedCards" />
     </Screen>
   )
 })

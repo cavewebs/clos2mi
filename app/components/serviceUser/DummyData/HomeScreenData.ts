@@ -1,0 +1,159 @@
+const damiImage = require("../../../../assets/images/Dami.png")
+const rachealImage = require("../../../../assets/images/racheal.png")
+const adeolaImage = require("../../../../assets/images/Adeola.png")
+const nailPaint = require("../../../../assets/images/nailsPaint.png")
+const next = require("../../../../assets/images/theNext.png")
+const damiApparel = require("../../../../assets/images/damiApparel.png")
+const beautyMakeover = require("../../../../assets/images/beautyMakeover.png")
+
+export const services = [
+  { text: "Hair", icon: "hair" },
+  { text: "Nails", icon: "highFive" },
+  { text: "Beard", icon: "beard" },
+  { text: "Eye", icon: "eyelashes" },
+  { text: "Makeup", icon: "makeup" },
+]
+
+export const recentSearch = [
+  { id: "1", rating: "4.8", name: "Dami Sarah", views: "5123", image: damiImage },
+  { id: "12", rating: "4.5", name: "Rachael George", views: "1234", image: rachealImage },
+  { id: "13", rating: "3.2", name: "Adeola Badmus", views: "2345", image: adeolaImage },
+]
+
+export const bookingData = [
+  {
+    image: nailPaint,
+    textTopLeft: "Nails> Nail Paint",
+    midTextLeft: "Dami’s Beauty Shop",
+    bottomIconLeft: "hourglass",
+    bottomTextLeft: "30 minutes",
+    bottomIconRight: "clock",
+    bottomTextRight: "4:00 PM",
+  },
+]
+
+export const bookingSearchResultData = [
+  {
+    image: nailPaint,
+    textTopLeft: "Nails> Nail Paint",
+    midLeftIcon: "location",
+    midTextLeft: "24 Montgomery Road, New York",
+    midTextRight: "Open",
+    rating: "4.5",
+    bottomIconLeft: "starFill",
+    bottomTextLeft: "(5123)",
+    bottomIconRight: "clock",
+    bottomTextRight: "8:00AM - 8:00PM",
+  },
+  {
+    image: nailPaint,
+    textTopLeft: "Nails> Nail Paint",
+    midLeftIcon: "location",
+    midTextLeft: "24 Montgomery Road, New York",
+    midTextRight: "Closed",
+    rating: "4.7",
+    bottomIconLeft: "starFill",
+    bottomTextLeft: "(23)",
+    bottomIconRight: "clock",
+    bottomTextRight: "8:00AM - 8:00PM",
+  },
+  {
+    image: nailPaint,
+    textTopLeft: "Nails> Nail Paint",
+    midLeftIcon: "location",
+    midTextLeft: "24 Montgomery Road, New York",
+    midTextRight: "Open",
+    rating: "4.9",
+    bottomIconLeft: "starFill",
+    bottomTextLeft: "(123)",
+    bottomIconRight: "clock",
+    bottomTextRight: "8:00AM - 8:00PM",
+  },
+  {
+    image: nailPaint,
+    textTopLeft: "Nails> Nail Paint",
+    midLeftIcon: "location",
+    midTextLeft: "24 Montgomery Road, New York",
+    midTextRight: "Closed",
+    rating: "4.0",
+    bottomIconLeft: "starFill",
+    bottomTextLeft: "(512)",
+    bottomIconRight: "clock",
+    bottomTextRight: "8:00AM - 8:00PM",
+  },
+  {
+    image: nailPaint,
+    textTopLeft: "Nails> Nail Paint",
+    midLeftIcon: "location",
+    midTextLeft: "24 Montgomery Road, New York",
+    midTextRight: "Closed",
+    rating: "4.0",
+    bottomIconLeft: "starFill",
+    bottomTextLeft: "(512)",
+    bottomIconRight: "clock",
+    bottomTextRight: "8:00AM - 8:00PM",
+  },
+]
+
+export const serviceProvider = [
+  {
+    image: next,
+    location: "25 Montgomery Road, Yaba",
+    views: "5134",
+    rating: "4.8",
+    name: "The Next Barbing Salon",
+  },
+  {
+    image: damiApparel,
+    location: "25 Benson Ikorodu, Lagos",
+    views: "673",
+    rating: "4.2",
+    name: "Dami's Apparels",
+  },
+  {
+    image: beautyMakeover,
+    location: "25 Awolowo Road, Ikeja",
+    views: "884",
+    rating: "4.5",
+    name: "Gleaming Beauty makeovers",
+  },
+]
+
+export const recentSearchCache = [
+  {
+    text: "Hair Service",
+  },
+  {
+    text: "Beard Service",
+  },
+  {
+    text: "Nail Service",
+  },
+  {
+    text: "Wax",
+  },
+]
+
+export const popularSearch = [
+  {
+    text: "Hair",
+  },
+  {
+    text: "Nails",
+  },
+  {
+    text: "Beards",
+  },
+  {
+    text: "Eye",
+  },
+  {
+    text: "Eye Lashes",
+  },
+  {
+    text: "Makeup",
+  },
+]
+
+export const inspiredTabs = ["Male", "Female"]
+

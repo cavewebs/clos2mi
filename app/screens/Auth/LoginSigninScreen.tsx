@@ -1,8 +1,8 @@
 import React, { FC } from "react"
 import { observer } from "mobx-react-lite"
-import { ImageBackground, View, ViewStyle, StyleSheet } from "react-native"
+import { ImageBackground, View, StyleSheet } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
-import { AutoImage, Screen, Button, Text } from "app/components"
+import { AutoImage, Screen, Button, Text, Modals } from "app/components"
 import { screenContentContainer } from "app/styles/mainStyles"
 import { colors } from "app/theme"
 import SplashBackground from "assets/images/line-pattern.png"
@@ -19,6 +19,7 @@ export const LoginSigninScreen: FC<LoginSigninScreenProps> = observer(function L
   const { navigation } = _props
   // Pull in one of our MST stores
   // const { someStore, anotherStore } = useStores()
+  const [showModal, setShowModal] = React.useState(false)
 
   // Pull in navigation via hook
   // const navigation = useNavigation()
@@ -44,6 +45,15 @@ export const LoginSigninScreen: FC<LoginSigninScreenProps> = observer(function L
             </View>
           </View>
         </View>
+        <Modals
+          showModal={showModal}
+          setShowModal={setShowModal}
+          modalTitle={"Allow Location"}
+          modalBody={"We need your permission to access your location"}
+          navigate={() => navigation.navigate("Notifications")}
+          modalCancelButtonText={"Don't Allow"}
+          modalAcceptButtonText={"Allow"}
+        />
       </ImageBackground>
     </Screen>
   )

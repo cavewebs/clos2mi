@@ -134,7 +134,7 @@ export const TextField = forwardRef(function TextField(props: TextFieldProps, re
   const $containerStyles = [$containerStyleOverride]
 
   const $labelStyles = [$labelStyle, LabelTextProps?.style]
-
+  
   const $inputWrapperStyles = [
     $inputWrapperStyle,
     status === "error" && { borderColor: colors.error },

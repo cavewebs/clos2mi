@@ -24,36 +24,40 @@ export const NotificationsScreen: FC<NotificationsScreenProps> = observer(
     return (
       <Screen preset="fixed">
         <View style={styles.container}>
-        <View style={styles.iconContainer}>
-          <Icon icon="x" style={styles.icon} />
+          <View style={styles.iconContainer}>
+            <Icon icon="x" style={styles.icon} />
+          </View>
+          <View style={styles.imageContainer}>
+            <Image source={NotificationImage} style={styles.image} />
+          </View>
+          <View>
+            <Text style={styles.title}>Enable Notifications</Text>
+            <Text style={styles.notificationBodyText}>
+              Close2mi would like to send you Notifications to keep you up to date on your bookings
+            </Text>
+          </View>
+          <View>
+            <Button
+              text="Turn on Notifications"
+              textStyle={styles.buttonText}
+              pressedStyle={styles.pressedButton}
+              pressedTextStyle={styles.pressedButtonText}
+              style={styles.button}
+              onPress={() => setShowModal(true)}
+            />
+          </View>
+          <Modals
+            showModal={showModal}
+            setShowModal={setShowModal}
+            modalTitle={"Notifications"}
+            modalBody={
+              "Close2mi would like to send you notifications to keep you up to date on your bookings"
+            }
+            navigate={() => navigation.navigate("AddAddress")}
+            modalCancelButtonText={"Don't Allow"}
+            modalAcceptButtonText={"Allow"}
+          />
         </View>
-        <View style={styles.imageContainer}>
-          <Image source={NotificationImage} style={styles.image} />
-        </View>
-        <View>
-        <Text style={styles.title}>Enable Notifications</Text>
-        <Text style={styles.notificationBodyText}>
-          Close2mi would like to send you Notifications to keep you up to date on your bookings
-        </Text>
-        </View>
-        <View>
-          <Button style={styles.button} onPress={() => setShowModal(true)}>
-            <Text style={styles.buttonText}>Turn on Notifications</Text>
-          </Button>
-        </View>
-        <Modals
-          showModal={showModal}
-          setShowModal={setShowModal}
-          modalTitle={"Notifications"}
-          modalBody={
-            "Close2mi would like to send you notifications to keep you up to date on your bookings"
-          }
-          navigate={() => navigation.navigate("AddAddress")}
-          modalCancelButtonText={"Don't Allow"}
-          modalAcceptButtonText={"Allow"}
-        />
-        </View>
-        
       </Screen>
     )
   },
@@ -70,7 +74,7 @@ const styles = StyleSheet.create({
     height: 48,
     justifyContent: "center",
     marginBottom: 10,
-    width: "95%"
+    width: "95%",
   },
   buttonText: {
     color: "#F5F5FF",
@@ -107,6 +111,12 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
     textAlign: "center",
   },
+  pressedButton: {
+    backgroundColor: "#F5F5FF",
+  },
+  pressedButtonText: {
+    color: "#2895FE",
+  },
   title: {
     color: "#1F2937",
     fontSize: 24,
@@ -115,6 +125,6 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     textAlign: "center",
   },
-});
-
-
+ 
+ 
+})

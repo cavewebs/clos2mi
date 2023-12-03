@@ -5,6 +5,7 @@ import { View, StyleSheet, Modal } from "react-native"
 import { observer } from "mobx-react-lite"
 import { Text } from "app/components/Text"
 import { Button } from "./Button"
+import { colors } from "app/theme"
 
 export interface ModalProps {
   /**
@@ -51,14 +52,18 @@ export const Modals = observer(function Modals(props: ModalProps) {
               <Text style={styles.cancelButtonText}>{modalCancelButtonText}</Text>
             </Button>
             <Button
+            text={modalAcceptButtonText}
               style={styles.acceptButton}
+              textStyle={styles.buttonText}
               onPress={() => {
                 navigate && navigate();
                 setShowModal(false)
               }}
-            >
-              <Text style={styles.acceptButtonText}>{modalAcceptButtonText}</Text>
-            </Button>
+              pressedStyle={styles.pressedButton}
+            pressedTextStyle={styles.pressedButtonText}
+            />
+             
+            
           </View>
         </View>
       </View>
@@ -73,7 +78,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
   },
   container: {
-    backgroundColor: "#F9FAFB",
+    backgroundColor: colors.palette.primary50,
     padding: 20,
     borderTopLeftRadius: 24,
     borderTopRightRadius: 24,
@@ -92,19 +97,31 @@ const styles = StyleSheet.create({
     color: "#6B7280",
     marginBottom: 24,
   },
-  cancelButton: { backgroundColor: "#F9FAFB", borderRadius: 24, borderColor: "#D0D5DD", width: "48%" },
+  cancelButton: { backgroundColor: colors.palette.primary50, borderRadius: 24, borderColor: "#D0D5DD", width: "48%" },
   cancelButtonText: { fontSize: 14, fontWeight: "500", color: "#374151" },
   acceptButton: {
     borderRadius: 24,
-    backgroundColor: "#2895FE",
-    borderColor: "#2895FE",
+    backgroundColor: colors.palette.primary600,
+    borderColor: colors.palette.primary600,
     width: "48%",
   },
-  acceptButtonText: { fontSize: 14, fontWeight: "500", color: "#F9FAFB" },
+  acceptButtonText: { fontSize: 14, fontWeight: "500", color: colors.palette.primary50 },
   buttonContainer: {
     display: "flex",
     flexDirection: "row",
     gap: 8,
     justifyContent: "space-between",
+  },
+  pressedButton: {
+    backgroundColor: "#F5F5FF",
+  },
+  pressedButtonText: {
+    color: colors.palette.primary600,
+  },
+  buttonText: {
+    fontSize: 16,
+    fontWeight: "600",
+    color: "#F5F5FF",
+    textAlign: "center",
   },
 })

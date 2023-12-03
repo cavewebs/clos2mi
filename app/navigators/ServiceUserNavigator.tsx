@@ -1,16 +1,16 @@
 import React from "react"
-import { WelcomeScreen } from "app/screens"
 import { BottomTabScreenProps, createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { AppStackParamList, AppStackScreenProps } from "./AppNavigator"
 import { CompositeScreenProps } from "@react-navigation/native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { colors, spacing, typography } from "app/theme"
 import { TextStyle, ViewStyle } from "react-native"
-import { ServiceUserHomeScreen } from "app/screens/ServiceUser/HomeScreen"
+// import { ServiceUserHomeScreen } from "app/screens/ServiceUser/HomeScreen"
 import { Icon } from "app/components"
 import { ServiceUserBookingsScreen } from "app/screens/ServiceUser/BookingsScreen"
 import { ServiceUserCartScreen } from "app/screens/ServiceUser/CartScreen"
 import { ServiceUserProfileScreen } from "app/screens/ServiceUser/ProfileScreen"
+import { ServiceUserHomeScreen,   } from "app/screens"
 
 export type ServiceUserTabParamList = {
   Home: undefined
