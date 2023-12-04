@@ -19,10 +19,8 @@ import Config from "../config"
 import { useStores } from "../models" // @demo remove-current-line
 import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
 import { colors } from "app/theme"
-import { AuthenticationStoreModel } from "app/models/AuthenticationStore"
 import { ServiceProviderNavigator, ServiceProviderTabParamList } from "./ServiceProviderNavigator"
 import { ServiceUserNavigator, ServiceUserTabParamList } from "./ServiceUserNavigator"
-import { WalkthroughStoreModel } from "app/models/WalkthroughStore"
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
@@ -59,7 +57,6 @@ export type AppStackParamList = {
   ServiceUserCart: undefined
   ServiceUserHome: undefined
   ServiceUserProfile: undefined
-  AddAddress: undefined
   Notifications: undefined
   Search: undefined
   SearchResult: undefined
@@ -85,18 +82,40 @@ export type AppStackParamList = {
   ServiceProviderHome: undefined
   ServiceProviderServices: undefined
 
+  ServiceSettings: undefined
+  ProviderSubscription: undefined
 
+  ViewServices: undefined
+  BookView: undefined
+  ServiceDetail: undefined
+  Availability: undefined
+  PendingBookings: undefined
+  TermsAndConditions: undefined
+  Reviews: undefined
+  Earnings: undefined
+  TransactionDetails: undefined
+  Reports: undefined
+  AvailabilityCalendar: undefined
+  ProviderSupport: undefined
+  AddAddress: undefined
+  ProviderNotification: undefined
+  AccountDetails: undefined
+  BankAccountDetails: undefined
   PreviousWork: undefined
-	AllNotifications: undefined
-	// IGNITE_GENERATOR_ANCHOR_APP_STACK_PARAM_LIST
+  OfferServices: undefined
+  MainDetail: undefined
+  MainProfile: undefined
+
+  AllNotifications: undefined
+  // IGNITE_GENERATOR_ANCHOR_APP_STACK_PARAM_LIST
 }
 
-const authenticationStore = AuthenticationStoreModel.create({
-  authToken: "", // Initial values
-  authPhone: "",
-  userType: "",
-})
-const walkthroughStore = WalkthroughStoreModel.create({ seenWalkthrough: undefined })
+// const authenticationStore = AuthenticationStoreModel.create({
+//   authToken: "", // Initial values
+//   authPhone: "",
+//   userType: "",
+// })
+// const walkthroughStore = WalkthroughStoreModel.create({ seenWalkthrough: undefined })
 
 /**
  * This is a list of all the route names that will exit the app if the back button
@@ -139,13 +158,11 @@ const AppStack = observer(function AppStack() {
               <Stack.Screen name="ServiceUserBookings" component={Screens.ServiceUserBookingsScreen} />
               <Stack.Screen name="ServiceUserCart" component={Screens.ServiceUserCartScreen} />
               <Stack.Screen name="ServiceUserProfile" component={Screens.ServiceUserProfileScreen} />
-              <Stack.Screen name="Notifications" component={Screens.NotificationsScreen} />
               <Stack.Screen name="Search" component={Screens.SearchScreen} />
               <Stack.Screen name="SearchResult" component={Screens.SearchResultScreen} />
               <Stack.Screen name="InspiredByClose2Mi" component={Screens.InspiredByClose2MiScreen} />
               <Stack.Screen name="PopularInYourArea" component={Screens.PopularInYourAreaScreen} />
               <Stack.Screen name="EditDetails" component={Screens.EditDetailsScreen} />
-              <Stack.Screen name="ChangePassword" component={Screens.ChangePasswordScreen} />
               <Stack.Screen name="SavedAddress" component={Screens.SavedAddressScreen} />
               <Stack.Screen name="AddNewAddress" component={Screens.AddNewAddressScreen} />
               <Stack.Screen name="ViewBookings" component={Screens.ViewBookingsScreen} />
@@ -161,6 +178,8 @@ const AppStack = observer(function AppStack() {
           ) : (
             <>
               {/* Service Provider Screens */}
+
+
               <Stack.Screen
                 name="ServiceProviderHome"
                 component={Screens.ServiceProviderHomeScreen}
@@ -169,6 +188,7 @@ const AppStack = observer(function AppStack() {
                 name="ServiceProviderBookings"
                 component={Screens.ServiceProviderBookingsScreen}
               />
+              <Stack.Screen name="PendingBookings" component={Screens.PendingBookingsScreen} />
               <Stack.Screen
                 name="ServiceProviderServices"
                 component={Screens.ServiceProviderServicesScreen}
@@ -178,13 +198,28 @@ const AppStack = observer(function AppStack() {
                 component={Screens.ServiceProviderProfileScreen}
               />
 
+              <Stack.Screen name="ServiceSettings" component={Screens.ServiceSettingsScreen} />
+              <Stack.Screen name="Earnings" component={Screens.EarningsScreen} />
               <Stack.Screen
-                name="ServiceUser"
-                // component={ServiceUserNavigator} />
-                component={Screens.NotificationsScreen}
+                name="AvailabilityCalendar"
+                component={Screens.AvailabilityCalendarScreen}
               />
+
+              <Stack.Screen
+                name="ProviderSubscription"
+                component={Screens.ProviderSubscriptionScreen}
+              />
+
+              <Stack.Screen name="ViewServices" component={Screens.ViewServicesScreen} />
+              <Stack.Screen name="BookView" component={Screens.BookViewScreen} />
+              <Stack.Screen name="ServiceDetail" component={Screens.ServiceDetailScreen} />
+              <Stack.Screen name="Availability" component={Screens.AvailabilityScreen} />
+              <Stack.Screen name="Reports" component={Screens.ReportsScreen} />
+              <Stack.Screen name="ProviderSupport" component={Screens.ProviderSupportScreen} />
             </>
           )}
+          <Stack.Screen name="Notifications" component={Screens.NotificationsScreen} />
+          <Stack.Screen name="Address" component={Screens.AddAddressScreen} />
         </>
       ) : (
         <>
@@ -207,6 +242,13 @@ const AppStack = observer(function AppStack() {
         </>
       )}
 
+      <Stack.Screen name="ChangePassword" component={Screens.ChangePasswordScreen} />
+      <Stack.Screen name="AccountDetails" component={Screens.AccountDetailsScreen} />
+      <Stack.Screen name="BankAccountDetails" component={Screens.BankAccountDetailsScreen} />
+      <Stack.Screen name="PreviousWork" component={Screens.PreviousWorkScreen} />
+      <Stack.Screen name="OfferServices" component={Screens.OfferServicesScreen} />
+      <Stack.Screen name="MainDetail" component={Screens.MainDetailScreen} />
+      <Stack.Screen name="MainProfile" component={Screens.MainProfileScreen} />
       {/* Service Provider Screens */}
       <Stack.Screen name="ServiceProviderHome" component={Screens.ServiceProviderHomeScreen} />
       <Stack.Screen name="ServiceProviderBookings" component={Screens.ServiceProviderBookingsScreen} />
@@ -215,9 +257,8 @@ const AppStack = observer(function AppStack() {
 
 
 
-      <Stack.Screen name="PreviousWork" component={Screens.PreviousWorkScreen} />
-			<Stack.Screen name="AllNotifications" component={Screens.AllNotificationsScreen} />
-			{/* IGNITE_GENERATOR_ANCHOR_APP_STACK_SCREENS */}
+      <Stack.Screen name="AllNotifications" component={Screens.AllNotificationsScreen} />
+      {/* IGNITE_GENERATOR_ANCHOR_APP_STACK_SCREENS */}
     </Stack.Navigator>
   )
 })

@@ -36,6 +36,7 @@ import {
   SelectPortal,
 } from "@gluestack-ui/themed"
 import FlagSelector from "app/components/Custom/FlagSelector"
+import { useNavigation } from "@react-navigation/native"
 
 interface SigninScreenProps extends AppStackScreenProps<"Signin"> {}
 
@@ -99,7 +100,6 @@ export const SigninScreen: FC<SigninScreenProps> = observer(function SigninScree
     // We'll mock this with a fake token.
     setAuthToken(String(Date.now()))
     navigation.navigate("Demo", { screen: "DemoShowroom", params: {} })
-
   }
 
   const PasswordRightAccessory = useMemo(

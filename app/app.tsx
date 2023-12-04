@@ -1,4 +1,3 @@
-/* eslint-disable import/first */
 /**
  * Welcome to the main entry point of the app. In this file, we'll
  * be kicking off our app.

@@ -91,7 +91,7 @@ export const AddAddressScreen: FC<AddAddressScreenProps> = observer(function Add
       </KeyboardAvoidingView>
     </Screen>
   )
-})
+});
 
 const $root: ViewStyle = {
   flex: 1,

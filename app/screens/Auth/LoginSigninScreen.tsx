@@ -30,7 +30,7 @@ export const LoginSigninScreen: FC<LoginSigninScreenProps> = observer(function L
     navigation.navigate("Signin")
   }
   return (
-    <Screen preset="fixed" contentContainerStyle={screenContentContainer}>
+    <Screen preset="auto" contentContainerStyle={screenContentContainer}>
       <ImageBackground source={SplashBackground} style={styles.background}>
         <View style={styles.container}>
           <View style={styles.topView}>

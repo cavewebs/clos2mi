@@ -12,7 +12,7 @@ Currently includes:
 - React Navigation
 - MobX State Tree
 - TypeScript
-- And more!
+- And more!`  `
 
 ## Quick Start
 

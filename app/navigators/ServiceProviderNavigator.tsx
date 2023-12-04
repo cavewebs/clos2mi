@@ -6,11 +6,13 @@ import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { colors, spacing, typography } from "app/theme"
 import { TextStyle, ViewStyle } from "react-native"
 import { Icon } from "app/components"
-import { ServiceProviderHomeScreen } from "app/screens/ServiceProvider/HomeScreen"
-import { ServiceProviderBookingsScreen } from "app/screens/ServiceProvider/BookingsScreen"
-import { ServiceProviderServicesScreen } from "app/screens/ServiceProvider/ServicesScreen"
-import { ServiceProviderProfileScreen } from "app/screens/ServiceProvider/ProfileScreen"
-
+import {
+  ServiceProviderHomeScreen,
+  ServiceProviderServicesScreen,
+  ServiceProviderBookingsScreen,
+  ServiceProviderProfileScreen,
+  BookViewScreen,
+} from "app/screens"
 
 export type ServiceProviderTabParamList = {
   Home: undefined
@@ -45,7 +47,7 @@ export const ServiceProviderNavigator = () => {
         name="Home"
         component={ServiceProviderHomeScreen}
         options={{
-          tabBarLabel:"",
+          tabBarLabel: "Home",
           tabBarIcon: ({ focused }) => (
             <Icon icon="Home" color={focused && colors.tint} size={24} />
           ),
@@ -55,7 +57,7 @@ export const ServiceProviderNavigator = () => {
         name="Bookings"
         component={ServiceProviderBookingsScreen}
         options={{
-          tabBarLabel:"",
+          tabBarLabel: "Bookings",
           tabBarIcon: ({ focused }) => (
             <Icon icon="Calendar" color={focused && colors.tint} size={24} />
           ),
@@ -65,7 +67,7 @@ export const ServiceProviderNavigator = () => {
         name="Services"
         component={ServiceProviderServicesScreen}
         options={{
-          tabBarLabel:"",
+          tabBarLabel: "Services",
           tabBarIcon: ({ focused }) => (
             <Icon icon="Scissors" color={focused && colors.tint} size={24} />
           ),
@@ -75,7 +77,7 @@ export const ServiceProviderNavigator = () => {
         name="Profile"
         component={ServiceProviderProfileScreen}
         options={{
-          tabBarLabel:"",
+          tabBarLabel: "Profile",
           tabBarIcon: ({ focused }) => (
             <Icon icon="userImage" color={focused && colors.tint} size={24} />
           ),
