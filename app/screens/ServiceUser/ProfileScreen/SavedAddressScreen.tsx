@@ -1,31 +1,39 @@
 /* eslint-disable react-native/no-color-literals */
-import React, { FC } from "react"
+import React, { FC, useState } from "react"
 import { observer } from "mobx-react-lite"
-import { StyleSheet, View, ViewStyle, TouchableOpacity } from "react-native"
+import { StyleSheet, View, ViewStyle, TouchableOpacity, Pressable } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
-import { Icon, OtherHeader, Screen, Search, Text } from "app/components"
+import { CustomCheckBox, Icon, OtherHeader, Screen, Search, Text } from "app/components"
 import { screenContentContainer } from "app/styles/mainStyles"
 import { colors } from "app/theme"
-import Checkbox from "expo-checkbox"
 import { address } from "app/components/serviceUser/DummyData/ProfileScreensData"
-// import { useNavigation } from "@react-navigation/native"
+import { number } from "mobx-state-tree/dist/internal"
+import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "app/models"
 
-interface SavedAddressScreenProps extends AppStackScreenProps<"SavedAddress"> {}
+interface SavedAddressScreenProps extends AppStackScreenProps<"SavedAddress"> { }
 
 export const SavedAddressScreen: FC<SavedAddressScreenProps> = observer(
   function SavedAddressScreen() {
+    const [isChecked, setChecked] = useState(false);
+    const [defaultAddress, setDefaultAddress] = useState(0);
+
+    const handleCheckboxChange = (newValue: boolean, id) => {
+      // const handleCheckboxChange = (newValue: boolean) => {
+      setDefaultAddress(id)
+      setChecked(newValue);
+    };
     // Pull in one of our MST stores
     // const { someStore, anotherStore } = useStores()
 
     // Pull in navigation via hook
-    // const navigation = useNavigation()
+    const navigation = useNavigation()
     return (
       <Screen
         style={$root}
         preset="scroll"
         contentContainerStyle={screenContentContainer}
-        safeAreaEdges={["top", "bottom"]}
+        safeAreaEdges={["bottom"]}
       >
         <OtherHeader pageTitle="Saved Addresses" />
         <Search />
@@ -34,21 +42,27 @@ export const SavedAddressScreen: FC<SavedAddressScreenProps> = observer(
             <View style={styles.addressContainer}>
               <View style={styles.leftContainer}>
                 <Icon icon="location" size={16} />
-                <Text text={data.address} size="sm" weight="light" />
+                <Text text={data.address} size="xs" weight="light" />
               </View>
               <View style={styles.textContainer}>
                 <Text text={data.Tag} style={styles.rightText} size="sm" weight="light" />
               </View>
             </View>
             <View style={styles.leftContainer}>
-              <Text text="Mark as default address" size="lg" weight="light" />
-              <Checkbox />
+              <CustomCheckBox
+                label="Mark as default address"
+                // value={isChecked}
+                value={defaultAddress === index}
+                onChange={() => handleCheckboxChange(isChecked, index)}
+                // onChange={handleCheckboxChange}
+                id={index as unknown as string}
+              />
             </View>
           </View>
         ))}
 
-        <TouchableOpacity style={styles.leftContainer}>
-          <Text text="Add New Address" size="lg" weight="light" style={styles.rightText} />
+        <TouchableOpacity style={[styles.leftContainer, styles.newAddress]} onPress={() => navigation.navigate("AddNewAddress")}>
+          <Text text="Add New Address" size="lg" style={styles.rightText} />
           <Icon icon="add" size={24} />
         </TouchableOpacity>
       </Screen>
@@ -73,6 +87,9 @@ const styles = StyleSheet.create({
     marginTop: 10,
     paddingHorizontal: 10,
     paddingVertical: 25,
+  },
+  newAddress: {
+    marginTop: 30,
   },
   container: {
     marginBottom: 15,

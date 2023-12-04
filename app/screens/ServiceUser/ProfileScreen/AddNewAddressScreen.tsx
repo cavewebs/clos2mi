@@ -1,14 +1,14 @@
 /* eslint-disable react-native/no-color-literals */
-import React, { FC } from "react"
+import React, { FC, useState } from "react"
 import { observer } from "mobx-react-lite"
 import { ViewStyle, KeyboardAvoidingView, Platform, ScrollView, Image, View, StyleSheet } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
-import { Button, OtherHeader, Screen, Search, Text, TextField } from "app/components"
+import { Button, CustomCheckBox, OtherHeader, Screen, Search, Text, TextField } from "app/components"
 import { screenContentContainer } from "app/styles/mainStyles"
 import { TextFieldData, addressType } from "app/components/serviceUser/DummyData/AddAddressConstants"
 import Checkbox from "expo-checkbox"
 import { colors } from "app/theme"
-// import { useNavigation } from "@react-navigation/native"
+import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "app/models"
 
 const dummyMap = require("../../../../assets/images/dummyMap.png");
@@ -17,13 +17,18 @@ const dummyMap = require("../../../../assets/images/dummyMap.png");
 interface AddNewAddressScreenProps extends AppStackScreenProps<"AddNewAddress"> {}
 
 export const AddNewAddressScreen: FC<AddNewAddressScreenProps> = observer(function AddNewAddressScreen() {
+  const [isChecked, setChecked] = useState(false);
+
+  const handleCheckboxChange = (newValue: boolean) => {
+    setChecked(newValue);
+  };
   // Pull in one of our MST stores
   // const { someStore, anotherStore } = useStores()
 
   // Pull in navigation via hook
-  // const navigation = useNavigation()
+  const navigation = useNavigation()
   return (
-    <Screen style={$root} preset="scroll" contentContainerStyle={screenContentContainer} safeAreaEdges={["top", "bottom"]} >
+    <Screen preset="scroll" contentContainerStyle={screenContentContainer} safeAreaEdges={[ "bottom"]} >
       <OtherHeader pageTitle="Add New Address" />
       <Search />
       <KeyboardAvoidingView
@@ -59,9 +64,12 @@ export const AddNewAddressScreen: FC<AddNewAddressScreenProps> = observer(functi
               keyboardType={data.type}
             />
           ))}
-             <View style={styles.leftContainer}>
-              <Text text="Mark as default address" size="lg" weight="light" />
-              <Checkbox />
+             <View style={[styles.leftContainer, {marginTop: 20}]}>
+             <CustomCheckBox
+                label="Mark as default address"
+                value={isChecked}
+                onChange={handleCheckboxChange}
+              />
             </View>
           <Button
             text="Confirm"
@@ -69,7 +77,7 @@ export const AddNewAddressScreen: FC<AddNewAddressScreenProps> = observer(functi
             textStyle={styles.buttonText}
             pressedStyle={styles.pressedButton}
             pressedTextStyle={styles.pressedButtonText}
-          
+            onPress={()=>navigation.navigate("SavedAddress")}
           />
         </ScrollView>
       </KeyboardAvoidingView>
@@ -77,9 +85,6 @@ export const AddNewAddressScreen: FC<AddNewAddressScreenProps> = observer(functi
   )
 })
 
-const $root: ViewStyle = {
-  flex: 1,
-}
 
 const styles = StyleSheet.create({
   button: {
@@ -122,6 +127,7 @@ const styles = StyleSheet.create({
   mapTextStyle: {
     color: colors.palette.primary600,
     marginBottom: 16,
+    marginTop: 24
   },
   pressedButton: {
     backgroundColor: "#F5F5FF",

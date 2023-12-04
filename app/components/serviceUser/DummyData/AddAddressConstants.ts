@@ -9,6 +9,6 @@ export const TextFieldData = [
     {id: 2, placeholder: "Address line 2", type:"default"},
     {id: 3, placeholder: "Apt/Suite/Others", type:"default"},
     {id: 4, placeholder: "City", type:"default"},
-    {id: 5, placeholder: "Country", type:"default"},
+    {id: 5, placeholder: "County", type:"default"},
     {id: 6, placeholder: "Post Code", type:"default"},
 ]

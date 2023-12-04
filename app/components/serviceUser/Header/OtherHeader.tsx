@@ -5,6 +5,7 @@ import { observer } from "mobx-react-lite"
 import { Text } from "app/components/Text"
 import { Icon } from "app/components/Icon"
 import { useNavigation } from "@react-navigation/native"
+import { Header } from "app/components"
 
 
 export interface OtherHeaderProps {
@@ -24,14 +25,13 @@ export const OtherHeader = observer(function OtherHeader(props: OtherHeaderProps
   const navigation = useNavigation()
 
   return (
-    <View style={$styles}>
-      <View style={styles.containerStyle}>
-        <TouchableOpacity style={styles.iconStyle} onPress={() => navigation.goBack()} >
-          <Icon icon="arrowBack" size={24} />
-        </TouchableOpacity>
-        <Text text={pageTitle} style={styles.text} weight="bold" size="xl" />
-      </View>
-    </View>
+    <Header
+      title={pageTitle}
+      leftIcon="back"
+      onLeftPress={() => navigation.goBack()}
+      style={{ height: 60 }}
+      titleStyle={styles.text}
+    />
   )
 })
 

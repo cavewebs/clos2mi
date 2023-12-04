@@ -1,7 +1,22 @@
 import React, { FC } from "react"
 import { observer } from "mobx-react-lite"
 import { View, ViewStyle, StyleSheet, ScrollView } from "react-native"
+import { View, ViewStyle, StyleSheet, ScrollView } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
+import {
+  BookingCard,
+  MainHeader,
+  RecentSearchCard,
+  Screen,
+  Search,
+  SectionHeader,
+  ServiceProviderCard,
+  Services,
+} from "app/components"
+// import { screenContentContainer } from "app/styles/mainStyles"
+import { colors, spacing } from "app/theme"
+import { bookingData, recentSearch, serviceProvider, services } from "app/components/serviceUser/DummyData/HomeScreenData"
+import { useNavigation } from "@react-navigation/native"
 import {
   BookingCard,
   MainHeader,
@@ -27,13 +42,13 @@ export const ServiceUserHomeScreen: FC<HomeScreenProps> = observer(function Home
   // Pull in navigation via hook
   const navigation = useNavigation()
   const changeAddress = () => {
-    navigation.navigate("PrivacyPolicy", null)
+    navigation.navigate("SavedAddress")
   }
   const showMap = () => {
-    navigation.navigate("AddNewAddress", null)
+    navigation.navigate("AddNewAddress")
   }
   const showNotifications = () => {
-    navigation.navigate("Notifications", null)
+    navigation.navigate("AllNotifications")
   }
   return (
     <Screen style={$root} preset="scroll" safeAreaEdges={["top"]} >
@@ -111,6 +126,7 @@ export const ServiceUserHomeScreen: FC<HomeScreenProps> = observer(function Home
 const $root: ViewStyle = {
   paddingHorizontal: spacing.lg,
   flex: 1,
+  marginTop: 10
 }
 
 const styles = StyleSheet.create({

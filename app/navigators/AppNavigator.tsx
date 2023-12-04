@@ -87,7 +87,8 @@ export type AppStackParamList = {
 
 
   PreviousWork: undefined
-  // IGNITE_GENERATOR_ANCHOR_APP_STACK_PARAM_LIST
+	AllNotifications: undefined
+	// IGNITE_GENERATOR_ANCHOR_APP_STACK_PARAM_LIST
 }
 
 const authenticationStore = AuthenticationStoreModel.create({
@@ -194,7 +195,6 @@ const AppStack = observer(function AppStack() {
               <Stack.Screen name="Otp" component={Screens.OtpScreen} />
               <Stack.Screen name="Signin" component={Screens.SigninScreen} />
               <Stack.Screen name="ResetPassword" component={Screens.ResetPasswordScreen} />
-              <Stack.Screen name="Login" component={Screens.LoginScreen} />
             </>
           ) : (
             <>
@@ -216,7 +216,8 @@ const AppStack = observer(function AppStack() {
 
 
       <Stack.Screen name="PreviousWork" component={Screens.PreviousWorkScreen} />
-      {/* IGNITE_GENERATOR_ANCHOR_APP_STACK_SCREENS */}
+			<Stack.Screen name="AllNotifications" component={Screens.AllNotificationsScreen} />
+			{/* IGNITE_GENERATOR_ANCHOR_APP_STACK_SCREENS */}
     </Stack.Navigator>
   )
 })
