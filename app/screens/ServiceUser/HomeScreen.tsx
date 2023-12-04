@@ -1,7 +1,6 @@
 import React, { FC } from "react"
 import { observer } from "mobx-react-lite"
 import { View, ViewStyle, StyleSheet, ScrollView } from "react-native"
-import { View, ViewStyle, StyleSheet, ScrollView } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
 import {
   BookingCard,
@@ -17,21 +16,6 @@ import {
 import { colors, spacing } from "app/theme"
 import { bookingData, recentSearch, serviceProvider, services } from "app/components/serviceUser/DummyData/HomeScreenData"
 import { useNavigation } from "@react-navigation/native"
-import {
-  BookingCard,
-  MainHeader,
-  RecentSearchCard,
-  Screen,
-  Search,
-  SectionHeader,
-  ServiceProviderCard,
-  Services,
-} from "app/components"
-// import { screenContentContainer } from "app/styles/mainStyles"
-import { colors, spacing } from "app/theme"
-import { bookingData, recentSearch, serviceProvider, services } from "app/components/serviceUser/DummyData/HomeScreenData"
-import { useNavigation } from "@react-navigation/native"
-// import { useStores } from "app/models"
 
 interface HomeScreenProps extends AppStackScreenProps<"ServiceUserHome"> { }
 

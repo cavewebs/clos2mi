@@ -23,7 +23,7 @@ export const Services = observer(function Services(props: ServicesProps) {
   const $styles = [$container, style]
 
   return (
-    <TouchableOpacity    onPress={() => {
+    <TouchableOpacity onPress={() => {
       navigate && navigate();
     }}>
       <View style={$styles}>
@@ -35,17 +35,16 @@ export const Services = observer(function Services(props: ServicesProps) {
 })
 
 const $container: ViewStyle = {
-  display: "flex",
   flexDirection: "column",
   justifyContent: "center",
   gap: 10,
-  width: 103,
   height: 106.5,
   backgroundColor: colors.palette.primary600,
   borderRadius: 14,
   paddingVertical: 12,
   paddingLeft: 12,
-  flexGrow: 1,
+  flex: 1,
+  paddingRight: 40,
 }
 
 const $text: TextStyle = {

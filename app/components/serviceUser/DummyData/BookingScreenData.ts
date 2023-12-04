@@ -32,5 +32,6 @@ export const UpcomingBookingData = [
   ]
 
   export const works = [
+    next, damiApparel, beautyMakeover,
     next, damiApparel, beautyMakeover
   ]

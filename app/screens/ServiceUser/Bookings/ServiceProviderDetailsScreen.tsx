@@ -3,10 +3,11 @@ import { observer } from "mobx-react-lite"
 import { ViewStyle, View, StyleSheet, Image } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
 import {
+  HeaderWithBackButton,
   HorizontalTabs,
   Icon,
   OtherHeader,
-  PopularSeraches,
+  PopularSearches,
   Reviews,
   Screen,
   SectionHeader,
@@ -17,11 +18,12 @@ import {
 import { screenContentContainer } from "app/styles/mainStyles"
 import { inspiredTabs, popularSearch, services } from "app/components/serviceUser/DummyData/HomeScreenData"
 import { works } from "app/components/serviceUser/DummyData/BookingScreenData"
+import { colors } from "app/theme"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "app/models"
 
 const image = require("../../../../assets/images/theNext.png")
-interface ServiceProviderDetailsScreenProps extends AppStackScreenProps<"ServiceProviderDetails"> {}
+interface ServiceProviderDetailsScreenProps extends AppStackScreenProps<"ServiceProviderDetails"> { }
 
 export const ServiceProviderDetailsScreen: FC<ServiceProviderDetailsScreenProps> = observer(
   function ServiceProviderDetailsScreen() {
@@ -34,10 +36,10 @@ export const ServiceProviderDetailsScreen: FC<ServiceProviderDetailsScreenProps>
       <Screen
         style={$root}
         preset="scroll"
-        // contentContainerStyle={screenContentContainer}
-        // safeAreaEdges={["top", "bottom"]}
+        contentContainerStyle={screenContentContainer}
+        safeAreaEdges={["bottom"]}
       >
-        <OtherHeader pageTitle="Provider Details" />
+        <HeaderWithBackButton title="Provider Details" />
         <ServiceProviderCard
           image={image}
           location="25 Montgomery Road, Yaba"
@@ -47,13 +49,14 @@ export const ServiceProviderDetailsScreen: FC<ServiceProviderDetailsScreenProps>
         />
         <View style={styles.headContainer}>
           <Text text="The Next Barbing Salon" size="lg" weight="semiBold" />
-          <View>
-            <Icon icon="callPhone" size={16} />
+          <View style={{ width: 40, height: 40, backgroundColor: colors.palette.neutral200, borderRadius: 100, alignContent: "center", justifyContent: "center", alignItems: "center" }}>
+            <Icon icon="callPhone" size={20} style={{ alignContent: "center", justifyContent: "center", alignItems: "center" }} />
           </View>
         </View>
+        <Text text="The best saloon to get a professional haircut with the best prices and facilities in Camden" style={styles.providerDescription} />
         <HorizontalTabs tabs={inspiredTabs} />
         <View>
-          <SectionHeader leftText="Services Offered" rightText="See All" />
+          <SectionHeader leftText="Services Offered" leftTextStyle={{ fontSize: 20 }} rightText="See All" />
           <View style={styles.serviceContainer}>
             {services.map((service) => (
               <Services key={service.text} icon={service.icon} text={service.text} />
@@ -61,32 +64,26 @@ export const ServiceProviderDetailsScreen: FC<ServiceProviderDetailsScreenProps>
           </View>
         </View>
         <View>
-          <SectionHeader leftText="Offers Services" />
+          <SectionHeader leftText="Offers Services For" />
           <View style={styles.popularSearchContainer}>
-        {
-          popularSearch.map((popular, index)=>(
-            <PopularSeraches text={popular.text} key={index}/>
-          ))
-        }
-         </View>
+                <PopularSearches text={"Male"} key={"male"} textFontWeight="semiBold" textStyle={styles.servicesLabelText} />
+                <PopularSearches text={"Female"} textFontWeight="semiBold" key={"female"}  textStyle={styles.servicesLabelText} />
+          </View>
         </View>
         <View>
           <SectionHeader leftText="Service Location" />
           <View style={styles.popularSearchContainer}>
-        {
-          popularSearch.map((popular, index)=>(
-            <PopularSeraches text={popular.text} key={index}/>
-          ))
-        }
-         </View>
+          <PopularSearches text={"Salon"} key={"Salon"} textFontWeight="semiBold" textStyle={styles.servicesLabelText} />
+                <PopularSearches text={"Home service"} textFontWeight="semiBold" key={"HomeService"}  textStyle={styles.servicesLabelText} />
+          </View>
         </View>
         <View>
           <SectionHeader leftText="Previous Work" rightText="See All" />
           <View style={styles.popularSearchContainer}>
-           {works.map((work, index)=>(
-            <Image key={index} source={work}/>
-           ))}
-           
+            {works.map((work, index) => (
+              <Image key={index} source={work} style={{width: 100, height: 100, marginHorizontal: 5}} />
+            ))}
+
           </View>
         </View>
 
@@ -106,22 +103,26 @@ const $root: ViewStyle = {
   flex: 1,
 }
 const styles = StyleSheet.create({
-  headContainer:{
+  headContainer: {
     alignItems: "center",
     display: "flex",
     flexDirection: "row",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
+    marginTop: 30
   },
+  servicesLabelText: {  color: "#2895FE", fontSize: 16},
   popularSearchContainer: {
     display: "flex",
     flexDirection: "row",
     flexWrap: "wrap",
     gap: 10
   },
+  providerDescription: {
+    marginVertical: 10
+  },
   serviceContainer: {
-    display: "flex",
     flexDirection: "row",
     flexWrap: "wrap",
-    gap: 8,
+    gap: 15,
   },
 })

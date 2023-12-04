@@ -157,3 +157,41 @@ export const popularSearch = [
 
 export const inspiredTabs = ["Male", "Female"]
 
+export const notificationsList = [
+  {
+    id: "121233234",
+    user: "Anita Joseph",
+    message: "cancelled your",
+    timestamp: "Today, 4:23PM",
+    service: "Appointment",
+  },
+  {
+    id: "1212332334",
+    user: "Kuluschenski Mkata",
+    message: "accepted your",
+    timestamp: "Friday, 12:23PM",
+    service: "Home Service Appointment",
+  },
+  {
+    id: "1212332344",
+    user: "Benson Rayad Leno",
+    message: "rescheduled your",
+    timestamp: "1 month ago, 7:23AM",
+    service: "Appointment",
+  },
+  {
+    id: "1212332345",
+    user: "Obioma Obirim",
+    message: "cancelled your",
+    timestamp: "6 weeks ago, 5:43PM",
+    service: "Appointment",
+  },
+  {
+    id: "1212332348",
+    user: "Musalewmi Gutchaeremo",
+    message: "accepted your",
+    timestamp: "4 months ago, 2:23AM",
+    service: "Appointment",
+  },
+]
+

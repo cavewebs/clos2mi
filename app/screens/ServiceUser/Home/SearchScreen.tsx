@@ -2,14 +2,14 @@ import React, { FC } from "react"
 import { observer } from "mobx-react-lite"
 import { StyleSheet, View, ViewStyle } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
-import { Icon, OtherHeader, PopularSeraches, Screen, Search, SectionHeader, ServiceProviderCard, Text } from "app/components"
+import { Icon, OtherHeader, PopularSearches, Screen, Search, SectionHeader, ServiceProviderCard, Text } from "app/components"
 // import { screenContentContainer } from "app/styles/mainStyles"
 import { popularSearch, recentSearchCache, serviceProvider } from "app/components/serviceUser/DummyData/HomeScreenData"
 import { spacing } from "app/theme"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "app/models"
 
-interface SearchScreenProps extends AppStackScreenProps<"Search"> {}
+interface SearchScreenProps extends AppStackScreenProps<"Search"> { }
 
 export const SearchScreen: FC<SearchScreenProps> = observer(function SearchScreen() {
   // Pull in one of our MST stores
@@ -21,8 +21,8 @@ export const SearchScreen: FC<SearchScreenProps> = observer(function SearchScree
     <Screen
       style={$root}
       preset="scroll"
-      // contentContainerStyle={screenContentContainer}
-      // safeAreaEdges={["top", "bottom"]}
+    // contentContainerStyle={screenContentContainer}
+    // safeAreaEdges={["top", "bottom"]}
     >
       <OtherHeader pageTitle="Search" />
       <Search />
@@ -38,13 +38,13 @@ export const SearchScreen: FC<SearchScreenProps> = observer(function SearchScree
       <View>
         <SectionHeader leftText="Popular Searches" />
         <View style={styles.popularSearchContainer}>
-        {
-          popularSearch.map((popular, index)=>(
-            <PopularSeraches text={popular.text} key={index}/>
-          ))
-        }
-         </View>
-        
+          {
+            popularSearch.map((popular, index) => (
+              <PopularSearches text={popular.text} key={index} />
+            ))
+          }
+        </View>
+
       </View>
       <View style={styles.serviceProviderContainer}>
         <SectionHeader leftText="Suggestions for you" />
@@ -84,12 +84,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
   },
-  serviceProviderContainer:{
+  serviceProviderContainer: {
     marginBottom: 40
   },
   // eslint-disable-next-line react-native/no-color-literals
   text: {
     color: "#6B7280",
   },
- 
+
 })

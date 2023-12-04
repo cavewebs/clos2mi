@@ -66,12 +66,10 @@ const $container: ViewStyle = {
 
 const styles = StyleSheet.create({
   containerStyle: {
-    display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
   },
   imageBackground: {
-    display: "flex",
     flex: 1,
     height: 261,
     justifyContent: "flex-end",
@@ -83,19 +81,19 @@ const styles = StyleSheet.create({
   overlay: {
     backgroundColor: "rgba(0, 0, 0, 0.5)",
     borderRadius: 12,
-    height: 60,
     justifyContent: "space-between",
     marginBottom: 12,
     marginHorizontal: 8,
     padding: 8,
   },
   rating: {
-    display: "flex",
     flexDirection: "row",
-    flexShrink: 1,
+    // flexShrink: 1,
     gap: 2,
+    alignI: "center"
   },
   text: {
     color: colors.palette.neutral100,
+    marginBottom: 8
   },
 })

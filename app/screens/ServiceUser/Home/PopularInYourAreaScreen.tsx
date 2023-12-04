@@ -2,14 +2,14 @@ import React, { FC } from "react"
 import { observer } from "mobx-react-lite"
 import { ViewStyle, View, StyleSheet } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
-import { BookingCard, HorizontalTabs, OtherHeader, PopularSeraches, Screen, Search, SectionHeader } from "app/components"
+import { BookingCard, HorizontalTabs, OtherHeader, PopularSearches, Screen, Search, SectionHeader } from "app/components"
 // import { screenContentContainer } from "app/styles/mainStyles"
 import { bookingSearchResultData, inspiredTabs, popularSearch } from "app/components/serviceUser/DummyData/HomeScreenData"
 import { spacing } from "app/theme"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "app/models"
 
-interface PopularInYourAreaScreenProps extends AppStackScreenProps<"PopularInYourArea"> {}
+interface PopularInYourAreaScreenProps extends AppStackScreenProps<"PopularInYourArea"> { }
 
 export const PopularInYourAreaScreen: FC<PopularInYourAreaScreenProps> = observer(function PopularInYourAreaScreen() {
   // Pull in one of our MST stores
@@ -21,35 +21,35 @@ export const PopularInYourAreaScreen: FC<PopularInYourAreaScreenProps> = observe
     <Screen style={$root} preset="scroll" >
       <OtherHeader pageTitle="Popular in your area" />
       <Search />
-      <HorizontalTabs tabs={inspiredTabs}/>
+      <HorizontalTabs tabs={inspiredTabs} />
 
       <View style={styles.popularSearchContainer}>
         {
-          popularSearch.map((popular, index)=>(
-            <PopularSeraches text={popular.text} key={index}/>
+          popularSearch.map((popular, index) => (
+            <PopularSearches text={popular.text} key={index} />
           ))
         }
-         </View>
+      </View>
 
       <View>
-        <SectionHeader leftText="1000+ results"/>
+        <SectionHeader leftText="1000+ results" />
         <View style={styles.bookingContainer}>
-            {bookingSearchResultData.map((results, index) => (
-              <BookingCard
-                image={results.image}
-                key={index}
-                textTopLeft={results.textTopLeft}
-                midIconLeft={results.midLeftIcon}
-                midTextLeft={results.midTextLeft}
-                midTextRight={results.midTextRight}
-                rating={results.rating}
-                bottomIconLeft={results.bottomIconLeft}
-                bottomTextLeft={results.bottomTextLeft}
-                bottomIconRight={results.bottomIconRight}
-                bottomTextRight={results.bottomTextRight}
-              />
-            ))}
-          </View>
+          {bookingSearchResultData.map((results, index) => (
+            <BookingCard
+              image={results.image}
+              key={index}
+              textTopLeft={results.textTopLeft}
+              midIconLeft={results.midLeftIcon}
+              midTextLeft={results.midTextLeft}
+              midTextRight={results.midTextRight}
+              rating={results.rating}
+              bottomIconLeft={results.bottomIconLeft}
+              bottomTextLeft={results.bottomTextLeft}
+              bottomIconRight={results.bottomIconRight}
+              bottomTextRight={results.bottomTextRight}
+            />
+          ))}
+        </View>
       </View>
     </Screen>
   )
@@ -62,7 +62,7 @@ const $root: ViewStyle = {
 }
 
 const styles = StyleSheet.create({
-  bookingContainer:{
+  bookingContainer: {
     marginBottom: 40
   },
   popularSearchContainer: {

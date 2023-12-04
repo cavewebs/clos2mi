@@ -1,4 +1,4 @@
 Observations
 
-OtherHeader should use the Header Component
+OtherHeader should use the Header Component and be named more descriptive 
 iconBackArrow already exists as back

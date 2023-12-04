@@ -3,6 +3,5 @@ import { ViewStyle } from "react-native";
 
 export const screenContentContainer: ViewStyle = {
     paddingVertical: spacing.xs,
-    paddingHorizontal: spacing.lg,
-    flex: 1,
+    paddingHorizontal: spacing.md,
 }
