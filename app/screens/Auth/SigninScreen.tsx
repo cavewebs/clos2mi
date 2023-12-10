@@ -68,7 +68,7 @@ export const SigninScreen: FC<SigninScreenProps> = observer(function SigninScree
     // Here is where you could fetch credentials from keychain or storage
     // and pre-fill the form fields.
     setAuthPhone("07324412345")
-    setAuthPassword("ign1teIsAwes0m3")
+    setAuthPassword("TestPswd@123")
     console.log(userType)
     userType === "su" ? setUserType("su") : setUserType("sp")
     console.log(userType)
@@ -99,7 +99,11 @@ export const SigninScreen: FC<SigninScreenProps> = observer(function SigninScree
 
     // We'll mock this with a fake token.
     setAuthToken(String(Date.now()))
-    navigation.navigate("Demo", { screen: "DemoShowroom", params: {} })
+    userType === "su" ? (navigation.navigate("ServiceUser", { screen: "Home", params: {} }) ): (navigation.navigate("ServiceProvider", { screen: "Home", params: {} }))
+  }
+
+  const navigateTo = (url:string) => {
+    navigation.navigate(url);
   }
 
   const PasswordRightAccessory = useMemo(
@@ -120,8 +124,8 @@ export const SigninScreen: FC<SigninScreenProps> = observer(function SigninScree
 
   return (
     <Screen
-      preset="scroll"
-      contentContainerStyle={screenContentContainer}
+      preset="auto"
+      contentContainerStyle={styles.loginContainer}
       safeAreaEdges={["bottom"]}
     >
       <View style={styles.container}>
@@ -157,7 +161,7 @@ export const SigninScreen: FC<SigninScreenProps> = observer(function SigninScree
             autoCorrect={false}
             secureTextEntry={isAuthPasswordHidden}
             label="Password"
-            onSubmitEditing={login}
+            onSubmitEditing={()=>login()}
             RightAccessory={PasswordRightAccessory}
           />
           <View style={styles.keepSignedIn}>
@@ -177,19 +181,19 @@ export const SigninScreen: FC<SigninScreenProps> = observer(function SigninScree
             />
           </View>
           <View style={styles.signInButton}>
-            <Button preset="primary" text="Sign in" onPress={login} />
+            <Button preset="primary" text="Sign in" onPress={()=>login()} />
           </View>
           <View style={styles.forgotPasswordTexts}>
             <Text text="Forgot Password?" />
-            <Button style={styles.textButton} text="Reset" />
+            <Button style={styles.textButton} text="Reset" onPress={()=>navigateTo("ForgotPassword")} />
           </View>
           <View style={styles.forgotPasswordTexts}>
             <Text text="Do not have an account?" />
-            <Button style={styles.textButton} text="Sign Up" />
+            <Button style={styles.textButton} text="Sign Up" onPress={()=>navigateTo("Signup")} />
           </View>
           <View style={styles.switchUserType}>
             <Text
-              text={userType === "SP" ? "Not a Service Provider? " : "Not a Customer?"}
+              text={userType === "sp" ? "Not a Service Provider? " : "Not a Customer?"}
               style={{
                 color: colors.tint,
               }}
@@ -197,7 +201,8 @@ export const SigninScreen: FC<SigninScreenProps> = observer(function SigninScree
             <Button
               style={styles.textButton}
               textStyle={{ fontSize: 14 }}
-              text={userType === "SP" ? "Switch to Customer? " : "Switch to Service Provider"}
+              text={userType === "sp" ? "Switch to Customer? " : "Switch to Service Provider"}
+              onPress={()=>navigateTo("SwitchUserType")}
             />
           </View>
         </View>
@@ -211,6 +216,10 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     flex: 1,
     marginTop: 16,
+  },
+  loginContainer: {
+    flex: 1,
+    padding: spacing.md,
   },
   keepSignedIn: { marginVertical: 15, gap: 5, color: colors.tint },
   textButton: { width: "auto", backgroundColor: "transparent", height: "auto" },

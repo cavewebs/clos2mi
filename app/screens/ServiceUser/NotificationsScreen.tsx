@@ -5,27 +5,47 @@ import { Image, StyleSheet, View } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
 import { Button, Icon, Modals, Screen, Text } from "app/components"
 import { useNavigation } from "@react-navigation/native"
+import { useStores } from "app/models"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "app/models"
 
 const NotificationImage = require("../../../assets/images/notification-bro.png")
 
-interface NotificationsScreenProps extends AppStackScreenProps<"Notifications"> {}
+interface NotificationsScreenProps extends AppStackScreenProps<"Notifications"> { }
 
 export const NotificationsScreen: FC<NotificationsScreenProps> = observer(
   function NotificationsScreen() {
     // Pull in one of our MST stores
     // const { someStore, anotherStore } = useStores()
+    const {
+      authenticationStore: {
+        userType,
+      },
+    } = useStores()
+
+    const { onboardingStore: { hasCompletedOnboarding, setHasCompletedOnboarding }, } = useStores()
 
     const [showModal, setShowModal] = React.useState(false)
 
     // Pull in navigation via hook
     const navigation = useNavigation()
+    const decodeNextRoute = () => {
+      setShowModal(false)
+      setTimeout(function () {
+        if (hasCompletedOnboarding) {
+          navigation.goBack()
+        } else {
+          setHasCompletedOnboarding(true)
+          userType == "sp" ? navigation.navigate("ServiceProvider") : navigation.navigate("ServiceUser")
+        }
+      }, 1000);
+
+    }
     return (
       <Screen preset="fixed">
         <View style={styles.container}>
           <View style={styles.iconContainer}>
-            <Icon icon="x" style={styles.icon} />
+            <Icon icon="x" style={styles.icon} onPress={() => decodeNextRoute()} />
           </View>
           <View style={styles.imageContainer}>
             <Image source={NotificationImage} style={styles.image} />
@@ -53,7 +73,7 @@ export const NotificationsScreen: FC<NotificationsScreenProps> = observer(
             modalBody={
               "Close2mi would like to send you notifications to keep you up to date on your bookings"
             }
-            navigate={() => navigation.navigate("AddAddress")}
+            navigate={() => decodeNextRoute()}
             modalCancelButtonText={"Don't Allow"}
             modalAcceptButtonText={"Allow"}
           />
@@ -125,6 +145,6 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     textAlign: "center",
   },
- 
- 
+
+
 })

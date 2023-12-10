@@ -35,8 +35,28 @@ import { ServiceUserNavigator, ServiceUserTabParamList } from "./ServiceUserNavi
  *   https://reactnavigation.org/docs/typescript#type-checking-the-navigator
  *   https://reactnavigation.org/docs/typescript/#organizing-types
  */
+export type ServiceDetailsParamList = {
+  data: {
+    serviceName: string
+    icon: string
+    serviceOfferings: [{
+      categoryName: string
+      icon: string, offerName: string, price: number, duration: number
+    }]
+  }
+}
+export type ServiceDetailParamList = {
+  data: {
+    categoryName: string
+    icon: string, offerName: string, price: number, duration: number
+  }
+}
+export type OnboardingParamList = {
+  data: {
+    nextPage?: string
+  }
+}
 export type AppStackParamList = {
-  Login: undefined // @demo remove-current-linea
   ServiceProvider: NavigatorScreenParams<ServiceProviderTabParamList>
   ServiceUser: NavigatorScreenParams<ServiceUserTabParamList>
   UserSelection: undefined
@@ -58,7 +78,7 @@ export type AppStackParamList = {
   ServiceUserCart: undefined
   ServiceUserHome: undefined
   ServiceUserProfile: undefined
-  Notifications: undefined
+  Notifications: NavigatorScreenParams<OnboardingParamList>
   Search: undefined
   SearchResult: undefined
   InspiredByClose2Mi: undefined
@@ -68,8 +88,8 @@ export type AppStackParamList = {
   AddNewAddress: undefined
   ViewBookings: undefined
   ServiceProviderDetails: undefined
-  Services: undefined
-  BookService: undefined
+  Services: NavigatorScreenParams<ServiceDetailsParamList>
+  BookService: NavigatorScreenParams<ServiceDetailsParamList>
   SavedCards: undefined
   TermAndConditions: undefined
   Report: undefined
@@ -96,7 +116,7 @@ export type AppStackParamList = {
   AvailabilityCalendar: undefined
   ProviderSupport: undefined
   ChangePassword: undefined
-  AddAddress: undefined
+  AddAddress: NavigatorScreenParams<OnboardingParamList>
   ProviderNotification: undefined
   AccountDetails: undefined
   BankAccountDetails: undefined
@@ -104,10 +124,23 @@ export type AppStackParamList = {
   OfferServices: undefined
   MainDetail: undefined
   MainProfile: undefined
-  EnableNotifications: undefined
+  OfferedServicesCategory: undefined
+  ConfirmPayment: undefined
+  AddNewCard: undefined
+  Success: undefined
+  ActionStatus: undefined
   SubmitNotification: undefined
   ViewPendingBookings: undefined
   ViewCurrentBookings: undefined
+  // PendingBookings: undefined
+  SwitchUserType: undefined
+  ForgotPassword: undefined
+  MapSearch: undefined
+  EnableLocation: NavigatorScreenParams<OnboardingParamList>
+  EnableNotifications: NavigatorScreenParams<OnboardingParamList>
+  OnboardingAddAddress: NavigatorScreenParams<OnboardingParamList>
+  OnboardingOtp: NavigatorScreenParams<OnboardingParamList>
+  OnboardingSetupProfile: NavigatorScreenParams<OnboardingParamList>
   // IGNITE_GENERATOR_ANCHOR_APP_STACK_PARAM_LIST
 }
 
@@ -141,6 +174,10 @@ const AppStack = observer(function AppStack() {
     walkthroughStore: { hasSeenWalkthrough },
   } = useStores()
 
+  const {
+    onboardingStore: { hasCompletedOnboarding },
+  } = useStores()
+
   // @demo remove-block-end
   return (
     <Stack.Navigator
@@ -152,89 +189,119 @@ const AppStack = observer(function AppStack() {
         <>
           {userType === "su" ? (
             <>
-              {/* ServiceUser Screens  */}
-              <Stack.Screen name="ServiceUser" component={ServiceUserNavigator} />
-              <Stack.Screen name="AddAddress" component={Screens.AddAddressScreen} />
-              <Stack.Screen name="ServiceUserHome" component={Screens.ServiceUserHomeScreen} />
-              <Stack.Screen
-                name="ServiceUserBookings"
-                component={Screens.ServiceUserBookingsScreen}
-              />
-              <Stack.Screen name="ServiceUserCart" component={Screens.ServiceUserCartScreen} />
-              <Stack.Screen
-                name="ServiceUserProfile"
-                component={Screens.ServiceUserProfileScreen}
-              />
-              <Stack.Screen name="Search" component={Screens.SearchScreen} />
-              <Stack.Screen name="SearchResult" component={Screens.SearchResultScreen} />
-              <Stack.Screen
-                name="InspiredByClose2Mi"
-                component={Screens.InspiredByClose2MiScreen}
-              />
-              <Stack.Screen name="PopularInYourArea" component={Screens.PopularInYourAreaScreen} />
-              <Stack.Screen name="EditDetails" component={Screens.EditDetailsScreen} />
-              <Stack.Screen name="SavedAddress" component={Screens.SavedAddressScreen} />
-              <Stack.Screen name="AddNewAddress" component={Screens.AddNewAddressScreen} />
-              <Stack.Screen name="ViewBookings" component={Screens.ViewBookingsScreen} />
-              <Stack.Screen
-                name="ServiceProviderDetails"
-                component={Screens.ServiceProviderDetailsScreen}
-              />
-              <Stack.Screen name="Services" component={Screens.ServicesScreen} />
-              <Stack.Screen name="BookService" component={Screens.BookServiceScreen} />
-              <Stack.Screen name="SavedCards" component={Screens.SavedCardsScreen} />
-              <Stack.Screen name="PrivacyPolicy" component={Screens.PrivacyPolicyScreen} />
-              <Stack.Screen name="TermAndConditions" component={Screens.TermAndConditionsScreen} />
-              <Stack.Screen name="Report" component={Screens.ReportScreen} />
-              <Stack.Screen name="Support" component={Screens.SupportScreen} />
+              {!!hasCompletedOnboarding ? (
+                <>
+                  {/* ServiceUser Screens  */}
+                  {/* <Stack.Screen name="Report" component={Screens.ReportScreen} /> */}
+                  <Stack.Screen name="ServiceUser" component={ServiceUserNavigator} />
+                  <Stack.Screen name="ServiceUserHome" component={Screens.ServiceUserHomeScreen} />
+                  <Stack.Screen
+                    name="ServiceUserBookings"
+                    component={Screens.ServiceUserBookingsScreen}
+                  />
+                  <Stack.Screen name="ServiceUserCart" component={Screens.ServiceUserCartScreen} />
+                  <Stack.Screen
+                    name="ServiceUserProfile"
+                    component={Screens.ServiceUserProfileScreen}
+                  />
+                  <Stack.Screen name="Search" component={Screens.SearchScreen} />
+                  <Stack.Screen name="SearchResult" component={Screens.SearchResultScreen} />
+                  <Stack.Screen
+                    name="InspiredByClose2Mi"
+                    component={Screens.InspiredByClose2MiScreen}
+                  />
+                  <Stack.Screen name="PopularInYourArea" component={Screens.PopularInYourAreaScreen} />
+                  <Stack.Screen name="EditDetails" component={Screens.EditDetailsScreen} />
+                  <Stack.Screen name="ViewBookings" component={Screens.ViewBookingsScreen} />
+                  <Stack.Screen
+                    name="ServiceProviderDetails"
+                    component={Screens.ServiceProviderDetailsScreen}
+                  />
+                  <Stack.Screen name="Services" component={Screens.ServicesScreen} />
+                  <Stack.Screen name="BookService" component={Screens.BookServiceScreen} />
+                  <Stack.Screen name="SavedCards" component={Screens.SavedCardsScreen} />
+                  <Stack.Screen name="Report" component={Screens.ReportScreen} />
+                  <Stack.Screen name="MapSearch" component={Screens.MapSearchScreen} />
+                </>
+              ) : (
+                <>
+                  <Stack.Screen name="EnableLocation" component={Screens.EnableLocationScreen} />
+                  <Stack.Screen name="OnboardingAddAddress" component={Screens.AddAddressScreen} />
+                  <Stack.Screen name="EnableNotifications" component={Screens.NotificationsScreen} />
+                  <Stack.Screen name="OnboardingOtp" component={Screens.OtpScreen} />
+
+                </>
+              )}
+
             </>
           ) : (
             <>
-              {/* Service Provider Screens */}
 
-              <Stack.Screen name="ServiceUser" component={ServiceProviderNavigator} />
+              {hasCompletedOnboarding ? (
+                <>
+                  {/* Service Provider Screens */}
+                  <Stack.Screen name="ServiceProvider" component={ServiceProviderNavigator} />
+                  <Stack.Screen name="AccountDetails" component={Screens.AccountDetailsScreen} />
+                  <Stack.Screen name="ServiceProviderHome" component={Screens.ServiceProviderHomeScreen} />
+                  <Stack.Screen name="ServiceProviderBookings" component={Screens.ServiceProviderBookingsScreen} />
+                  <Stack.Screen name="ViewPendingBookings" component={Screens.PendingBookingsScreen} />
+                  {/* <Stack.Screen name="PendingBookings" component={Screens.PendingBookingsScreen} /> */}
+                  <Stack.Screen
+                    name="ServiceProviderServices"
+                    component={Screens.ServiceProviderServicesScreen}
+                  />
+                  <Stack.Screen
+                    name="ServiceProviderProfile"
+                    component={Screens.ServiceProviderProfileScreen}
+                  />
 
-              <Stack.Screen
-                name="ServiceProviderHome"
-                component={Screens.ServiceProviderHomeScreen}
-              />
-              <Stack.Screen
-                name="ServiceProviderBookings"
-                component={Screens.ServiceProviderBookingsScreen}
-              />
-              {/* <Stack.Screen name="PendingBookings" component={Screens.PendingBookingsScreen} /> */}
-              <Stack.Screen
-                name="ServiceProviderServices"
-                component={Screens.ServiceProviderServicesScreen}
-              />
-              <Stack.Screen
-                name="ServiceProviderProfile"
-                component={Screens.ServiceProviderProfileScreen}
-              />
+                  {/* <Stack.Screen name="ServiceSettings" component={Screens.ServiceSettingsScreen} /> */}
+                  <Stack.Screen name="Earnings" component={Screens.EarningsScreen} />
+                  <Stack.Screen
+                    name="AvailabilityCalendar"
+                    component={Screens.AvailabilityCalendarScreen}
+                  />
 
-              {/* <Stack.Screen name="ServiceSettings" component={Screens.ServiceSettingsScreen} /> */}
-              <Stack.Screen name="Earnings" component={Screens.EarningsScreen} />
-              <Stack.Screen
-                name="AvailabilityCalendar"
-                component={Screens.AvailabilityCalendarScreen}
-              />
+                  <Stack.Screen
+                    name="ProviderSubscription"
+                    component={Screens.ProviderSubscriptionScreen}
+                  />
 
-              <Stack.Screen
-                name="ProviderSubscription"
-                component={Screens.ProviderSubscriptionScreen}
-              />
+                  <Stack.Screen name="ViewServices" component={Screens.ViewServicesScreen} />
+                  <Stack.Screen name="BookView" component={Screens.BookViewScreen} />
+                  <Stack.Screen name="ServiceDetail" component={Screens.ServiceDetailScreen} />
+                  <Stack.Screen name="Availability" component={Screens.AvailabilityScreen} />
+                  <Stack.Screen name="Reports" component={Screens.ReportsScreen} />
+                  <Stack.Screen name="ProviderSupport" component={Screens.ProviderSupportScreen} />
 
-              <Stack.Screen name="ViewServices" component={Screens.ViewServicesScreen} />
-              <Stack.Screen name="BookView" component={Screens.BookViewScreen} />
-              <Stack.Screen name="ServiceDetail" component={Screens.ServiceDetailScreen} />
-              <Stack.Screen name="Availability" component={Screens.AvailabilityScreen} />
-              <Stack.Screen name="Reports" component={Screens.ReportsScreen} />
-              <Stack.Screen name="ProviderSupport" component={Screens.ProviderSupportScreen} />
+                  <Stack.Screen name="BankAccountDetails" component={Screens.BankAccountDetailsScreen} />
+                  <Stack.Screen name="PreviousWork" component={Screens.PreviousWorkScreen} />
+                  <Stack.Screen name="OfferServices" component={Screens.OfferServicesScreen} />
+                  <Stack.Screen name="MainDetail" component={Screens.MainDetailScreen} />
+                  <Stack.Screen name="MainProfile" component={Screens.MainProfileScreen} />
+                </>
+              ) : (
+                <>
+                  <Stack.Screen name="EnableLocation" component={Screens.EnableLocationScreen} />
+                  <Stack.Screen name="OnboardingAddAddress" component={Screens.AddAddressScreen} />
+                  <Stack.Screen name="EnableNotifications" component={Screens.NotificationsScreen} />
+                  <Stack.Screen name="OnboardingOtp" component={Screens.OtpScreen} />
+
+                </>
+              )}
             </>
           )}
+          <Stack.Screen name="ChangePassword" component={Screens.ChangePasswordScreen} />
+          <Stack.Screen name="SavedAddress" component={Screens.SavedAddressScreen} />
+          <Stack.Screen name="PrivacyPolicy" component={Screens.PrivacyPolicyScreen} />
+          <Stack.Screen name="TermAndConditions" component={Screens.TermAndConditionsScreen} />
+          <Stack.Screen name="Support" component={Screens.SupportScreen} />
           <Stack.Screen name="Notifications" component={Screens.NotificationsScreen} />
-          <Stack.Screen name="AllNotifications" component={Screens.AllNotificationsScreen} />
-          <Stack.Screen name="Address" component={Screens.AddAddressScreen} />
+          <Stack.Screen name="AddNewAddress" component={Screens.AddNewAddressScreen} />
+          <Stack.Screen name="AddAddress" component={Screens.AddAddressScreen} />
+
+          <Stack.Screen name="Otp" component={Screens.OtpScreen} />
+          {/* <Stack.Screen name="OnboardingOtp" component={Screens.OtpScreen} /> */}
         </>
       ) : (
         <>
@@ -242,10 +309,10 @@ const AppStack = observer(function AppStack() {
             <>
               <Stack.Screen name="LoginSignin" component={Screens.LoginSigninScreen} />
               <Stack.Screen name="Signup" component={Screens.SignupScreen} />
-              <Stack.Screen name="Otp" component={Screens.OtpScreen} />
               <Stack.Screen name="Signin" component={Screens.SigninScreen} />
               <Stack.Screen name="ResetPassword" component={Screens.ResetPasswordScreen} />
-            </>
+              <Stack.Screen name="SwitchUserType" component={Screens.SwitchUserTypeScreen} />
+        </>
           ) : (
             <>
               <Stack.Screen name="SplashOne" component={Screens.SplashOneScreen} />
@@ -257,36 +324,26 @@ const AppStack = observer(function AppStack() {
         </>
       )}
 
-      <Stack.Screen name="ChangePassword" component={Screens.ChangePasswordScreen} />
-      <Stack.Screen name="AccountDetails" component={Screens.AccountDetailsScreen} />
-      <Stack.Screen name="BankAccountDetails" component={Screens.BankAccountDetailsScreen} />
-      <Stack.Screen name="PreviousWork" component={Screens.PreviousWorkScreen} />
-      <Stack.Screen name="OfferServices" component={Screens.OfferServicesScreen} />
-      <Stack.Screen name="MainDetail" component={Screens.MainDetailScreen} />
-      <Stack.Screen name="MainProfile" component={Screens.MainProfileScreen} />
-      {/* Service Provider Screens */}
-      <Stack.Screen name="ServiceProviderHome" component={Screens.ServiceProviderHomeScreen} />
-      <Stack.Screen
-        name="ServiceProviderBookings"
-        component={Screens.ServiceProviderBookingsScreen}
-      />
-      <Stack.Screen
-        name="ServiceProviderServices"
-        component={Screens.ServiceProviderServicesScreen}
-      />
-      <Stack.Screen
-        name="ServiceProviderProfile"
-        component={Screens.ServiceProviderProfileScreen}
-      />
 
       <Stack.Screen name="AllNotifications" component={Screens.AllNotificationsScreen} />
+      <Stack.Screen name="OfferedServicesCategory" component={Screens.OfferedServicesCategoryScreen} />
+      <Stack.Screen name="ConfirmPayment" component={Screens.ConfirmPaymentScreen}
+      //TODO: find a way to show modal over modal options={{ presentation: 'modal' }}
+      />
+      <Stack.Screen name="ActionStatus" component={Screens.ActionStatusScreen} options={{
+        presentation: 'modal'
+      }} />
+      <Stack.Screen name="AddNewCard" component={Screens.AddNewCardScreen} />
+      <Stack.Screen name="ForgotPassword" component={Screens.ResetPasswordScreen} />
+      {/* <Stack.Screen name="OnboardingOtp" component={Screens.OtpScreen} /> */}
+
       {/* IGNITE_GENERATOR_ANCHOR_APP_STACK_SCREENS */}
     </Stack.Navigator>
   )
 })
 
 export interface NavigationProps
-  extends Partial<React.ComponentProps<typeof NavigationContainer>> {}
+  extends Partial<React.ComponentProps<typeof NavigationContainer>> { }
 
 export const AppNavigator = observer(function AppNavigator(props: NavigationProps) {
   const colorScheme = useColorScheme()

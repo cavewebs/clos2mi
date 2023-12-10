@@ -1,14 +1,13 @@
 import React, { FC } from "react"
 import { observer } from "mobx-react-lite"
-import { ViewStyle, View, StyleSheet, Image } from "react-native"
+import { ViewStyle, View, StyleSheet, Image, Linking } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
 import {
   HeaderWithBackButton,
   HorizontalTabs,
   Icon,
-  OtherHeader,
   PopularSearches,
-  Reviews,
+  Ratings,
   Screen,
   SectionHeader,
   ServiceProviderCard,
@@ -19,7 +18,7 @@ import { screenContentContainer } from "app/styles/mainStyles"
 import { inspiredTabs, popularSearch, services } from "app/components/serviceUser/DummyData/HomeScreenData"
 import { works } from "app/components/serviceUser/DummyData/BookingScreenData"
 import { colors } from "app/theme"
-// import { useNavigation } from "@react-navigation/native"
+import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "app/models"
 
 const image = require("../../../../assets/images/theNext.png")
@@ -29,12 +28,12 @@ export const ServiceProviderDetailsScreen: FC<ServiceProviderDetailsScreenProps>
   function ServiceProviderDetailsScreen() {
     // Pull in one of our MST stores
     // const { someStore, anotherStore } = useStores()
-
-    // Pull in navigation via hook
-    // const navigation = useNavigation()
+    const makePhoneCall = (phoneNumber) => {
+      Linking.openURL(`tel:${phoneNumber}`);
+    };
+    const navigation = useNavigation()
     return (
       <Screen
-        style={$root}
         preset="scroll"
         contentContainerStyle={screenContentContainer}
         safeAreaEdges={["bottom"]}
@@ -50,38 +49,38 @@ export const ServiceProviderDetailsScreen: FC<ServiceProviderDetailsScreenProps>
         <View style={styles.headContainer}>
           <Text text="The Next Barbing Salon" size="lg" weight="semiBold" />
           <View style={{ width: 40, height: 40, backgroundColor: colors.palette.neutral200, borderRadius: 100, alignContent: "center", justifyContent: "center", alignItems: "center" }}>
-            <Icon icon="callPhone" size={20} style={{ alignContent: "center", justifyContent: "center", alignItems: "center" }} />
+            <Icon icon="callPhone" size={20} style={{ alignContent: "center", justifyContent: "center", alignItems: "center" }} onPress={() => makePhoneCall("0712345678")} />
           </View>
         </View>
         <Text text="The best saloon to get a professional haircut with the best prices and facilities in Camden" style={styles.providerDescription} />
         <HorizontalTabs tabs={inspiredTabs} />
         <View>
-          <SectionHeader leftText="Services Offered" leftTextStyle={{ fontSize: 20 }} rightText="See All" />
+          <SectionHeader leftText="Services Offered" leftTextStyle={{ fontSize: 20 }} rightText="See All" onLeftTextPress={() => navigation.navigate("OfferedServicesCategory")} />
           <View style={styles.serviceContainer}>
             {services.map((service) => (
-              <Services key={service.text} icon={service.icon} text={service.text} />
+              <Services key={service.serviceName} icon={service.icon} text={service.serviceName} onPress={() => { navigation.navigate("Services", { params: service }) }} />
             ))}
           </View>
         </View>
         <View>
-          <SectionHeader leftText="Offers Services For" />
+          <SectionHeader leftText="Offers Service For" />
           <View style={styles.popularSearchContainer}>
-                <PopularSearches text={"Male"} key={"male"} textFontWeight="semiBold" textStyle={styles.servicesLabelText} />
-                <PopularSearches text={"Female"} textFontWeight="semiBold" key={"female"}  textStyle={styles.servicesLabelText} />
+            <PopularSearches text={"Male"} key={"male"} textFontWeight="semiBold" textStyle={styles.servicesLabelText} />
+            <PopularSearches text={"Female"} textFontWeight="semiBold" key={"female"} textStyle={styles.servicesLabelText} />
           </View>
         </View>
         <View>
           <SectionHeader leftText="Service Location" />
           <View style={styles.popularSearchContainer}>
-          <PopularSearches text={"Salon"} key={"Salon"} textFontWeight="semiBold" textStyle={styles.servicesLabelText} />
-                <PopularSearches text={"Home service"} textFontWeight="semiBold" key={"HomeService"}  textStyle={styles.servicesLabelText} />
+            <PopularSearches text={"Salon"} key={"Salon"} textFontWeight="semiBold" textStyle={styles.servicesLabelText} />
+            <PopularSearches text={"Home service"} textFontWeight="semiBold" key={"HomeService"} textStyle={styles.servicesLabelText} />
           </View>
         </View>
         <View>
-          <SectionHeader leftText="Previous Work" rightText="See All" />
-          <View style={styles.popularSearchContainer}>
+          <SectionHeader leftText="Previous Work" rightText="See All" onLeftTextPress={() => navigation.navigate("PreviousWork")} />
+          <View style={styles.previousWorkContainer}>
             {works.map((work, index) => (
-              <Image key={index} source={work} style={{width: 100, height: 100, marginHorizontal: 5}} />
+              <Image key={index} source={work} style={{ width: "30%", height: 100, }} />
             ))}
 
           </View>
@@ -92,27 +91,29 @@ export const ServiceProviderDetailsScreen: FC<ServiceProviderDetailsScreenProps>
 
         </View>
         <View>
-          <Reviews />
+          <Ratings />
         </View>
       </Screen>
     )
   },
 )
 
-const $root: ViewStyle = {
-  flex: 1,
-}
+
 const styles = StyleSheet.create({
   headContainer: {
     alignItems: "center",
-    display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
     marginTop: 30
   },
-  servicesLabelText: {  color: "#2895FE", fontSize: 16},
+  previousWorkContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: 10,
+    justifyContent: "space-between"
+  },
+  servicesLabelText: { color: "#2895FE", fontSize: 16 },
   popularSearchContainer: {
-    display: "flex",
     flexDirection: "row",
     flexWrap: "wrap",
     gap: 10

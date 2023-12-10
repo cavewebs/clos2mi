@@ -113,14 +113,14 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.close2mi.app.sp"
+    namespace 'com.close2mi.app'
     defaultConfig {
-        applicationId "com.close2mi.app.sp"
+        applicationId 'com.close2mi.app'
         minSdkVersion rootProject.ext.minSdkVersion
          multiDexEnabled true
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
     }
 
     splits {

@@ -21,7 +21,7 @@ export const NotificationsScreen: FC<NotificationsScreenProps> = observer(functi
       style={$root}
       preset="scroll"
       contentContainerStyle={screenContentContainer}
-      safeAreaEdges={["top", "bottom"]}
+      safeAreaEdges={[ "bottom"]}
     >
       {/* use what Header if you like or the Text if it suits better */}
       {/* <Text preset="heading" text="notifications" /> */}

@@ -29,7 +29,7 @@ export const ServiceUserHomeScreen: FC<HomeScreenProps> = observer(function Home
     navigation.navigate("SavedAddress")
   }
   const showMap = () => {
-    navigation.navigate("AddNewAddress")
+    navigation.navigate("Search")
   }
   const showNotifications = () => {
     navigation.navigate("AllNotifications")
@@ -48,7 +48,7 @@ export const ServiceUserHomeScreen: FC<HomeScreenProps> = observer(function Home
       <Search />
       <View>
         <SectionHeader leftText="Based on your recent search" />
-        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{width: "100%"}}>
           <View style={styles.serviceContainer}>
             {recentSearch.map((recentSearch, index) => (
               <RecentSearchCard
@@ -80,17 +80,17 @@ export const ServiceUserHomeScreen: FC<HomeScreenProps> = observer(function Home
         ))}
       </View>
       <View>
-        <SectionHeader leftText="Inspired by Close2mi" rightText="See All" navigate={() => navigation.navigate("InspiredByClose2Mi")} />
+        <SectionHeader leftText="Inspired by Close2mi" rightText="See All" onLeftTextPress={() => navigation.navigate("InspiredByClose2Mi")} />
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           <View style={styles.serviceContainer}>
             {services.map((service) => (
-              <Services key={service.text} icon={service.icon} text={service.text} navigate={() => navigation.navigate("Services")} />
+              <Services key={service.serviceName} style={{minWidth: 90}} icon={service.icon} text={service.serviceName} onLeftTextPress={() => navigation.navigate("Services")} onPress={() => { navigation.navigate("Services", { params: service }) }} />
             ))}
           </View>
         </ScrollView>
       </View>
       <View style={styles.serviceProvider}>
-        <SectionHeader leftText="Popular in your Area" rightText="See All" navigate={() => navigation.navigate("PopularInYourArea")} />
+        <SectionHeader leftText="Popular in your Area" rightText="See All" onLeftTextPress={() => navigation.navigate("PopularInYourArea")} />
         {serviceProvider.map((providers, index) => (
           <ServiceProviderCard
             key={index}
@@ -160,6 +160,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     gap: 8,
     overflow: "scroll",
+    width: "100%"
   },
   serviceProvider: {
     marginBottom: 40,

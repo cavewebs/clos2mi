@@ -12,19 +12,20 @@ export interface ServicesProps {
   style?: StyleProp<ViewStyle>
   icon?: IconTypes
   text?: string
-  navigate?: () => void;
+  onPress?: () => void;
 }
+
 
 /**
  * Describe your component here
  */
 export const Services = observer(function Services(props: ServicesProps) {
-  const { style, icon, text, navigate } = props
+  const { style, icon, text, onPress, } = props
   const $styles = [$container, style]
 
   return (
     <TouchableOpacity onPress={() => {
-      navigate && navigate();
+      onPress && onPress();
     }}>
       <View style={$styles}>
         <Text style={$text} text={text} size="md" weight="semiBold" />
@@ -44,7 +45,10 @@ const $container: ViewStyle = {
   paddingVertical: 12,
   paddingLeft: 12,
   flex: 1,
-  paddingRight: 40,
+  paddingRight: "auto",
+  // paddingLeft: "auto"
+  minWidth: "30%",
+  // width: "auto"
 }
 
 const $text: TextStyle = {

@@ -3,7 +3,7 @@ import React, { FC, useState } from "react"
 import { observer } from "mobx-react-lite"
 import { ViewStyle, KeyboardAvoidingView, Platform, ScrollView, Image, View, StyleSheet } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
-import { Button, CustomCheckBox, OtherHeader, Screen, Search, Text, TextField } from "app/components"
+import { Button, CustomCheckBox, HeaderWithBackButton, OtherHeader, Screen, Search, Text, TextField } from "app/components"
 import { screenContentContainer } from "app/styles/mainStyles"
 import { TextFieldData, addressType } from "app/components/serviceUser/DummyData/AddAddressConstants"
 import Checkbox from "expo-checkbox"
@@ -14,7 +14,7 @@ import { useNavigation } from "@react-navigation/native"
 const dummyMap = require("../../../../assets/images/dummyMap.png");
 
 
-interface AddNewAddressScreenProps extends AppStackScreenProps<"AddNewAddress"> {}
+interface AddNewAddressScreenProps extends AppStackScreenProps<"AddNewAddress"> { }
 
 export const AddNewAddressScreen: FC<AddNewAddressScreenProps> = observer(function AddNewAddressScreen() {
   const [isChecked, setChecked] = useState(false);
@@ -28,13 +28,14 @@ export const AddNewAddressScreen: FC<AddNewAddressScreenProps> = observer(functi
   // Pull in navigation via hook
   const navigation = useNavigation()
   return (
-    <Screen preset="scroll" contentContainerStyle={screenContentContainer} safeAreaEdges={[ "bottom"]} >
-      <OtherHeader pageTitle="Add New Address" />
+    <Screen preset="scroll" contentContainerStyle={screenContentContainer} safeAreaEdges={["bottom"]}
+    >
+       <HeaderWithBackButton title="Add New Address" />
       <Search />
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         // eslint-disable-next-line react-native/no-inline-styles
-        style={{ flex: 1 , marginTop: 10}}
+        style={{ flex: 1, marginTop: 10 }}
       >
         <ScrollView>
           <Text
@@ -49,7 +50,7 @@ export const AddNewAddressScreen: FC<AddNewAddressScreenProps> = observer(functi
           <View style={styles.selectWrapper}>
             {addressType.map((type) => (
               <View key={type.id} style={styles.selectWrapper}>
-                <Text text={type.type}/>
+                <Text text={type.type} />
                 <Checkbox />
               </View>
             ))}
@@ -64,20 +65,20 @@ export const AddNewAddressScreen: FC<AddNewAddressScreenProps> = observer(functi
               keyboardType={data.type}
             />
           ))}
-             <View style={[styles.leftContainer, {marginTop: 20}]}>
-             <CustomCheckBox
-                label="Mark as default address"
-                value={isChecked}
-                onChange={handleCheckboxChange}
-              />
-            </View>
+          <View style={[styles.leftContainer, { marginTop: 20 }]}>
+            <CustomCheckBox
+              label="Mark as default address"
+              value={isChecked}
+              onChange={handleCheckboxChange}
+            />
+          </View>
           <Button
             text="Confirm"
             style={styles.button}
             textStyle={styles.buttonText}
             pressedStyle={styles.pressedButton}
             pressedTextStyle={styles.pressedButtonText}
-            onPress={()=>navigation.navigate("SavedAddress")}
+            onPress={() => navigation.navigate("SavedAddress")}
           />
         </ScrollView>
       </KeyboardAvoidingView>

@@ -15,7 +15,7 @@ export interface ModalProps {
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>
   modalTitle: string
   modalBody: string
-  modalCancelButtonText: string
+  modalCancelButtonText?: string
   modalAcceptButtonText: string
   navigate?: () => void;
 }
@@ -48,11 +48,13 @@ export const Modals = observer(function Modals(props: ModalProps) {
           <Text style={styles.body}>{modalBody}</Text>
 
           <View style={styles.buttonContainer}>
-            <Button style={styles.cancelButton} onPress={() => setShowModal(false)}>
-              <Text style={styles.cancelButtonText}>{modalCancelButtonText}</Text>
-            </Button>
+            {modalCancelButtonText && (
+              <Button style={styles.cancelButton} onPress={() => setShowModal(false)}>
+                <Text style={styles.cancelButtonText}>{modalCancelButtonText}</Text>
+              </Button>
+            )}
             <Button
-            text={modalAcceptButtonText}
+              text={modalAcceptButtonText}
               style={styles.acceptButton}
               textStyle={styles.buttonText}
               onPress={() => {
@@ -60,10 +62,10 @@ export const Modals = observer(function Modals(props: ModalProps) {
                 setShowModal(false)
               }}
               pressedStyle={styles.pressedButton}
-            pressedTextStyle={styles.pressedButtonText}
+              pressedTextStyle={styles.pressedButtonText}
             />
-             
-            
+
+
           </View>
         </View>
       </View>

@@ -3,11 +3,10 @@ import { observer } from "mobx-react-lite"
 import { ImageBackground, View, StyleSheet } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
 import { AutoImage, Button, Screen, Text } from "app/components"
-import { screenContentContainer } from "app/styles/mainStyles"
 import SplashBackground from "assets/images/line-pattern.png"
 import Logo from "assets/images/app-icon-all.png"
 import SplashImg2 from "assets/images/splash-2.png"
-import { colors } from "app/theme"
+import { colors, spacing } from "app/theme"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "app/models"
 interface SplashTwoScreenProps extends AppStackScreenProps<"SplashTwo"> {}
@@ -26,7 +25,7 @@ export const SplashTwoScreen: FC<SplashTwoScreenProps> = observer(function Splas
     navigation.navigate("SplashThree")
   }
   return (
-    <Screen preset="fixed" contentContainerStyle={screenContentContainer}>
+    <Screen preset="fixed" contentContainerStyle={styles.splashContainer}>
       <ImageBackground source={SplashBackground} style={styles.background}>
         <View style={styles.container}>
           <View style={styles.topView}>
@@ -71,9 +70,14 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     marginRight: 5,
   },
+  splashContainer: {
+    flex: 1,
+    paddingVertical: spacing.md,
+  },
   background: {
     flex: 1,
     resizeMode: "cover",
+    paddingHorizontal: spacing.md
   },
   bottomView: {
     marginBottom: 10,
@@ -89,10 +93,10 @@ const styles = StyleSheet.create({
   },
   inactiveSlide: {
     backgroundColor: colors.palette.neutral300,
-    borderRadius: 100,
-    height: 12,
-    marginHorizontal: 3,
     width: 10,
+    height: 12,
+    borderRadius: 100,
+    marginHorizontal: 3,
   },
   logo: {
     height: 75,
@@ -110,19 +114,19 @@ const styles = StyleSheet.create({
     width: 90,
   },
   sliderIcon: {
-    flexDirection: "row",
     justifyContent: "center",
     paddingHorizontal: 16,
     paddingTop: 35,
+    flexDirection: "row",
   },
   splashImg: {
     backgroundColor: colors.background,
     borderColor: colors.palette.neutral400,
     borderRadius: 20,
     borderWidth: 1,
-    height: 300,
+    height: 345,
     justifyContent: "space-between",
-    width: 345,
+    width: "auto",
   },
   splashMsg: {
     alignItems: "center",

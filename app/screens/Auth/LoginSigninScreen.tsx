@@ -4,7 +4,7 @@ import { ImageBackground, View, StyleSheet } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
 import { AutoImage, Screen, Button, Text, Modals } from "app/components"
 import { screenContentContainer } from "app/styles/mainStyles"
-import { colors } from "app/theme"
+import { colors, spacing } from "app/theme"
 import SplashBackground from "assets/images/line-pattern.png"
 import Logo from "assets/images/app-icon-all.png"
 
@@ -30,7 +30,7 @@ export const LoginSigninScreen: FC<LoginSigninScreenProps> = observer(function L
     navigation.navigate("Signin")
   }
   return (
-    <Screen preset="auto" contentContainerStyle={screenContentContainer}>
+    <Screen preset="fixed" contentContainerStyle={styles.splashContainer}>
       <ImageBackground source={SplashBackground} style={styles.background}>
         <View style={styles.container}>
           <View style={styles.topView}>
@@ -66,6 +66,10 @@ const styles = StyleSheet.create({
   },
   bottomView: {
     marginBottom: 20,
+  },
+  splashContainer: {
+    flex: 1,
+    paddingVertical: spacing.md,
   },
   button: {
     justifyContent: "center",

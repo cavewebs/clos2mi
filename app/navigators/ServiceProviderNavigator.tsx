@@ -69,7 +69,7 @@ export const ServiceProviderNavigator = () => {
         options={{
           tabBarLabel: "Services",
           tabBarIcon: ({ focused }) => (
-            <Icon icon="Scissors" color={focused && colors.tint} size={24} />
+            <Icon icon="scissors" color={focused && colors.tint} size={24} />
           ),
         }}
       />

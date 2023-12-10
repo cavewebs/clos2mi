@@ -2,10 +2,11 @@ import React, { FC } from "react"
 import { observer } from "mobx-react-lite"
 import { ViewStyle, View, StyleSheet } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
-import { BookingCard, HorizontalTabs, OtherHeader, PopularSearches, Screen, Search, SectionHeader } from "app/components"
+import { BookingCard, HeaderWithBackButton, HorizontalTabs, OtherHeader, PopularSearches, Screen, Search, SectionHeader } from "app/components"
 // import { screenContentContainer } from "app/styles/mainStyles"
 import { bookingSearchResultData, inspiredTabs, popularSearch } from "app/components/serviceUser/DummyData/HomeScreenData"
 import { spacing } from "app/theme"
+import { screenContentContainer } from "app/styles/mainStyles"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "app/models"
 
@@ -18,8 +19,8 @@ export const PopularInYourAreaScreen: FC<PopularInYourAreaScreenProps> = observe
   // Pull in navigation via hook
   // const navigation = useNavigation()
   return (
-    <Screen style={$root} preset="scroll" >
-      <OtherHeader pageTitle="Popular in your area" />
+    <Screen preset="auto" contentContainerStyle={screenContentContainer} >
+       <HeaderWithBackButton title="Popular in your area" />
       <Search />
       <HorizontalTabs tabs={inspiredTabs} />
 
@@ -54,12 +55,6 @@ export const PopularInYourAreaScreen: FC<PopularInYourAreaScreenProps> = observe
     </Screen>
   )
 })
-
-const $root: ViewStyle = {
-  paddingVertical: spacing.xl,
-  paddingHorizontal: spacing.lg,
-  flex: 1,
-}
 
 const styles = StyleSheet.create({
   bookingContainer: {

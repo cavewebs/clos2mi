@@ -27,15 +27,15 @@ const UserSelectionScreen: React.FC<UserSelectionScreenProps> = ({
       <Screen
         preset="auto"
         contentContainerStyle={screenContentContainer}
-        safeAreaEdges={["top", "bottom"]}
+        safeAreaEdges={["bottom"]}
       >
         <View style={styles.container}>
-          <Text preset style={styles.title}>
+          <Text preset="bold" style={styles.title}>
             Select Account Type
           </Text>
           <Button
-            RightAccessory={(props) => <Icon icon="checkbox" />}
-            LeftAccessory={(props) => <Icon icon="home" />}
+            RightAccessory={(props) => <Icon icon="check" />}
+            LeftAccessory={(props) => <Icon icon="Home" />}
             style={styles.button}
             onPress={() => handleUserSelection("su")}
           >
@@ -45,7 +45,7 @@ const UserSelectionScreen: React.FC<UserSelectionScreenProps> = ({
             <Text>Service Provider</Text>
           </Button>
         </View>
-      </Screen>
+      </Screen >
     </>
   )
 }

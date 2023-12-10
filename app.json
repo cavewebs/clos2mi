@@ -4,7 +4,7 @@
   "expo": {
     "name": "close2mi",
     "slug": "close2mi",
-    "scheme": "close2misp",
+    "scheme": "close2mi",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/app-icon-all.png",
@@ -22,7 +22,7 @@
     ],
     "android": {
       "icon": "./assets/images/app-icon-android-legacy.png",
-      "package": "com.close2mi.app.sp",
+      "package": "com.close2mi.app",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/app-icon-android-adaptive-foreground.png",
         "backgroundImage": "./assets/images/app-icon-android-adaptive-background.png"
@@ -36,7 +36,7 @@
     "ios": {
       "icon": "./assets/images/app-icon-ios.png",
       "supportsTablet": true,
-      "bundleIdentifier": "com.close2mi.app.sp",
+      "bundleIdentifier": "com.close2mi.app",
       "splash": {
         "image": "./assets/images/splash-logo-ios-mobile.png",
         "tabletImage": "./assets/images/splash-logo-ios-tablet.png",
@@ -54,6 +54,11 @@
     },
     "plugins": [
       "expo-localization"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "4a589c37-3bda-4126-9a8f-b783146b38c6"
+      }
+    }
   }
 }

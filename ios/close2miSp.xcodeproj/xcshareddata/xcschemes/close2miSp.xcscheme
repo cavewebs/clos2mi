@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "close2miSp.app"
-               BlueprintName = "close2miSp"
-               ReferencedContainer = "container:close2miSp.xcodeproj">
+               BuildableName = "close2mi.app"
+               BlueprintName = "close2mi"
+               ReferencedContainer = "container:close2mi.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "close2miSpTests.xctest"
-               BlueprintName = "close2miSpTests"
-               ReferencedContainer = "container:close2miSp.xcodeproj">
+               BuildableName = "close2miTests.xctest"
+               BlueprintName = "close2miTests"
+               ReferencedContainer = "container:close2mi.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "close2miSp.app"
-            BlueprintName = "close2miSp"
-            ReferencedContainer = "container:close2miSp.xcodeproj">
+            BuildableName = "close2mi.app"
+            BlueprintName = "close2mi"
+            ReferencedContainer = "container:close2mi.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "close2miSp.app"
-            BlueprintName = "close2miSp"
-            ReferencedContainer = "container:close2miSp.xcodeproj">
+            BuildableName = "close2mi.app"
+            BlueprintName = "close2mi"
+            ReferencedContainer = "container:close2mi.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

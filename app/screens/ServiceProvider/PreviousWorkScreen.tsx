@@ -8,7 +8,7 @@ import { useNavigation } from "@react-navigation/native"
 import { colors } from "app/theme"
 // import { useStores } from "app/models"
 
-interface PreviousWorkScreenProps extends AppStackScreenProps<"PreviousWork"> {}
+interface PreviousWorkScreenProps extends AppStackScreenProps<"PreviousWork"> { }
 
 export const PreviousWorkScreen: FC<PreviousWorkScreenProps> = observer(
   function PreviousWorkScreen() {
@@ -24,7 +24,7 @@ export const PreviousWorkScreen: FC<PreviousWorkScreenProps> = observer(
       <Screen
         preset="scroll"
         contentContainerStyle={screenContentContainer}
-        safeAreaEdges={["top", "bottom"]}
+        safeAreaEdges={["bottom"]}
       >
         <View style={styles.headerStyle}>
           <View style={{ flex: 1 }}>
@@ -58,7 +58,7 @@ export const PreviousWorkScreen: FC<PreviousWorkScreenProps> = observer(
         </View>
 
         <PreviousWork isSelected={isSelected} previousWork />
-      </Screen>
+      </Screen >
     )
   },
 )

@@ -19,7 +19,7 @@ import { bookingsData } from "app/DummyData/BookingsData"
 import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "app/models"
 
-interface BookingsScreenProps extends AppStackScreenProps<"ServiceProviderBookings"> {}
+interface BookingsScreenProps extends AppStackScreenProps<"ServiceProviderBookings"> { }
 
 export const ServiceProviderBookingsScreen: FC<BookingsScreenProps> = observer(
   function BookingsScreen() {
@@ -40,9 +40,10 @@ export const ServiceProviderBookingsScreen: FC<BookingsScreenProps> = observer(
         setDataToShow(bookingsData.filter((data) => data.status === homeTab[index]))
       }
     }
+    const searchBookings = () => {
+      setDataToShow(bookingsData.filter((data) => data.name.includes(searchItem)))
+    }
 
-    // Pull in navigation via hook
-    // const navigation = useNavigation()
     return (
       <Screen
         preset="scroll"
@@ -62,17 +63,23 @@ export const ServiceProviderBookingsScreen: FC<BookingsScreenProps> = observer(
           <TextField
             value={searchItem}
             onChangeText={(value) => setSearchItem(value)}
-            RightAccessory={() => <Icon icon="searchIcon" />}
+            RightAccessory={() => <Icon icon="searchIcon" style={{ marginHorizontal: 5 }} onPress={() => searchBookings()} />}
+            onBlur={() => searchBookings()}
             placeholder="Search"
             inputWrapperStyle={styles.inputWrapperStyle}
           />
-          <SectionText
-            subheading="Pending Bookings"
-            text="View All"
-            onPress={() => navigation.navigate("ViewPendingBookings")}
-          />
-          <Booking data={bookingsData.filter((data) => data.status === "Upcoming")} />
-
+          <>
+            {!searchItem && (
+              <>
+                <SectionText
+                  subheading="Pending Bookings"
+                  text="View All"
+                  onPress={() => navigation.navigate("ViewPendingBookings")}
+                />
+                <Booking data={bookingsData.filter((data) => data.status === "Upcoming")} />
+              </>
+            )}
+          </>
           <SectionText
             subheading="Bookings"
             text="View All"

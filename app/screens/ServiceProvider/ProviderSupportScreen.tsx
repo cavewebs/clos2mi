@@ -16,7 +16,7 @@ import { colors } from "app/theme"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "app/models"
 
-interface ProviderSupportScreenProps extends AppStackScreenProps<"ProviderSupport"> {}
+interface ProviderSupportScreenProps extends AppStackScreenProps<"ProviderSupport"> { }
 
 export const ProviderSupportScreen: FC<ProviderSupportScreenProps> = observer(
   function ProviderSupportScreen() {
@@ -31,7 +31,7 @@ export const ProviderSupportScreen: FC<ProviderSupportScreenProps> = observer(
       <Screen
         preset="scroll"
         contentContainerStyle={screenContentContainer}
-        safeAreaEdges={["top", "bottom"]}
+        safeAreaEdges={["bottom"]}
       >
         <View>
           <BackArrowHeader header="Support" />
@@ -59,7 +59,7 @@ export const ProviderSupportScreen: FC<ProviderSupportScreenProps> = observer(
           </View>
           <Button preset="primary" text="Submit" style={{ marginBottom: 30 }} />
         </View>
-      </Screen>
+      </Screen >
     )
   },
 )

@@ -1,9 +1,11 @@
 import * as React from "react"
-import { StyleProp, TextStyle, View, ViewStyle, StyleSheet } from "react-native"
+import { StyleProp, TextStyle, View, ViewStyle, Image, StyleSheet } from "react-native"
 import { observer } from "mobx-react-lite"
 import { colors, typography } from "app/theme"
-import { Text, AutoImage, Icon, ProgressBar } from "app/components"
-import Mosco from "assets/images/mosco.png"
+import { Text, Icon, ProgressBar } from "app/components"
+import Moscoas from "../../assets/images/accept-mark.png"
+
+const Mosco = require("assets/images/reviewer.png")
 
 interface Review {
   isReview?: boolean
@@ -50,7 +52,9 @@ export const Ratings = observer(function Ratings(props: RatingsProps) {
             </View>
             <Text text="Velios gave my father a haircut.He was thorough with his evaluation, kind and informative" />
             <View style={styles.bookingIconText}>
-              <AutoImage source={Mosco} />
+              <View style={styles.userImg} >
+                <Image source={Mosco} style={styles.userImg} />
+              </View>
               <Text preset="bold" text="Moses Sauez" />
             </View>
           </View>
@@ -61,6 +65,7 @@ export const Ratings = observer(function Ratings(props: RatingsProps) {
 })
 
 const styles = StyleSheet.create({
+  userImg: { width: 34, height: 34, borderRadius: 100, marginVertical: 5 },
   spaceItems: {
     flexDirection: "row",
     alignItems: "center",

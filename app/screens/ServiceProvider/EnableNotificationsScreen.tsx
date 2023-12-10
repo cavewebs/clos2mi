@@ -9,7 +9,7 @@ import enableNotification from "assets/images/notbro.png"
 import { colors } from "app/theme"
 // import { useStores } from "app/models"
 
-interface EnableNotificationsScreenProps extends AppStackScreenProps<"EnableNotifications"> {}
+interface EnableNotificationsScreenProps extends AppStackScreenProps<"EnableNotifications"> { }
 
 export const EnableNotificationsScreen: FC<EnableNotificationsScreenProps> = observer(
   function EnableNotificationsScreen() {
@@ -23,7 +23,7 @@ export const EnableNotificationsScreen: FC<EnableNotificationsScreenProps> = obs
       <Screen
         preset="scroll"
         contentContainerStyle={screenContentContainer}
-        safeAreaEdges={["top", "bottom"]}
+        safeAreaEdges={["bottom"]}
       >
         <View style={styles.imageWrapper}>
           <AutoImage source={enableNotification} style={{ width: 240, height: 233.5 }} />
@@ -39,7 +39,7 @@ export const EnableNotificationsScreen: FC<EnableNotificationsScreenProps> = obs
         />
 
         <Button preset="primary" text="Turn on Notifications" />
-      </Screen>
+      </Screen >
     )
   },
 )

@@ -23,5 +23,5 @@ export const HeaderWithBackButton = observer(function HeaderWithBackButton(props
    const navigation = useNavigation()
 
 
-  return <Header title={title} leftIcon={leftIcon || "back"} onLeftPress={() => navigation.goBack()} style={style} />
+  return <Header title={title} leftIcon={leftIcon || "back"}  onLeftPress={() => navigation.goBack()} style={style} />
 })

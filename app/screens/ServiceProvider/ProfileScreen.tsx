@@ -8,9 +8,9 @@ import { screenContentContainer } from "app/styles/mainStyles"
 import { Icon, IconTypes } from "../../components/Icon"
 
 import { useNavigation } from "@react-navigation/native"
-// import { useStores } from "app/models"
+import { useStores } from "app/models"
 
-interface ProfileScreenProps extends AppStackScreenProps<"ServiceProviderProfile"> {}
+interface ProfileScreenProps extends AppStackScreenProps<"ServiceProviderProfile"> { }
 
 interface Profile {
   icon: IconTypes
@@ -21,21 +21,21 @@ interface Profile {
 const operationsData: Profile[] = [
   { icon: "addService", title: "Add Services", url: "ViewServices" },
   { icon: "personSupport", title: "Availability", url: "Availability" },
-  { icon: "wallet", title: "Payment Information", url: "AddAddress" },
+  { icon: "wallet", title: "Payment Information", url: "AccountDetails" },
   { icon: "History", title: "Booking History", url: "BookView" },
   { icon: "History", title: "Service Location", url: "ServiceDetail" },
-  { icon: "History", title: "Earnings", url: "AddAddress" },
+  { icon: "History", title: "Earnings", url: "Earnings" },
 ]
 
 const settingsData: Profile[] = [
-  { icon: "History", title: "Enable Notifications", url: "AddAddress" },
-  { icon: "paddlock", title: "Change Password", url: "AddAddress" },
-  { icon: "signOut", title: "Sign Out", url: "AddAddress" },
+  { icon: "History", title: "Enable Notifications", url: "Notifications" },
+  { icon: "paddlock", title: "Change Password", url: "ChangePassword" },
+  { icon: "signOut", title: "Sign Out", url: "" },
 ]
 
 const policyData: Profile[] = [
-  { icon: "account", title: "Contact Support", url: "AddAddress" },
-  { icon: "addService", title: "Terms and Conditions", url: "AddAddress" },
+  { icon: "account", title: "Contact Support", url: "Support" },
+  { icon: "addService", title: "Terms and Conditions", url: "TermAndConditions" },
   { icon: "personSupport", title: "Privacy Policy", url: "PrivacyPolicy" },
 ]
 
@@ -43,13 +43,23 @@ export const ServiceProviderProfileScreen: FC<ProfileScreenProps> = observer(fun
   _props,
 ) {
   // Pull in one of our MST stores
-  // const { someStore, anotherStore } = useStores()
+  const {
+    authenticationStore: {
+      logout,
+    },
+  } = useStores()
+  const { onboardingStore: { setHasCompletedOnboarding }, } = useStores()
 
   // Pull in navigation via hook
   const navigation = useNavigation()
   // const { navigation } = _props
   const goTo = (url: any) => {
     if (url) navigation.navigate(url)
+  }
+  const doLogout = () => {
+     //TODO: uncomment this if you want to test onboarding screens
+    // setHasCompletedOnboarding(false)  
+    logout()
   }
   return (
     <Screen preset="scroll" contentContainerStyle={screenContentContainer} safeAreaEdges={["top"]}>
@@ -59,12 +69,12 @@ export const ServiceProviderProfileScreen: FC<ProfileScreenProps> = observer(fun
           <View style={styles.mildSpacing}>
             <Button
               // onPress={() => Alert.alert("pressed")}
-              LeftAccessory={(props) => <Icon icon="bell" />}
+              LeftAccessory={(props) => <Icon icon="bell" onPress={()=>navigation.navigate("AllNotifications")} />}
             />
 
             <Button
               // onPress={() => Alert.alert("pressed")}
-              LeftAccessory={(props) => <Icon icon="Edit" />}
+              LeftAccessory={(props) => <Icon icon="Edit"  onPress={()=>navigation.navigate("MainProfile")} />}
             />
           </View>
         </View>
@@ -113,7 +123,7 @@ export const ServiceProviderProfileScreen: FC<ProfileScreenProps> = observer(fun
         <FlatList
           data={settingsData}
           renderItem={({ item }) => (
-            <Pressable onPress={() => goTo(item.url)}>
+            <Pressable onPress={() => { item.title === "Sign Out" ? doLogout() : goTo(item.url) }}>
               <View style={styles.itemWrapper}>
                 <View style={styles.mildSpacing}>
                   <Icon icon={item.icon} />
@@ -127,7 +137,7 @@ export const ServiceProviderProfileScreen: FC<ProfileScreenProps> = observer(fun
         />
         <Text preset="bold" size="xs" text="Subscription" style={styles.profileText} />
 
-        <Pressable onPress={() => goTo("ProviderSubscription")}>
+      <Pressable onPress={() => goTo("ProviderSubscription")}>
           <View style={styles.itemWrapper}>
             <Text preset="default" size="xs" text="Upgrade your plan" style={styles.menuText} />
             <Icon icon="caretRight" />
@@ -163,7 +173,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginBottom: 24,
   },
-  menuText: { fontWeight: "500", color: colors.palette.neutral500 },
+  menuText: { fontWeight: "400", color: colors.text },
 
   mildSpacing: {
     flexDirection: "row",

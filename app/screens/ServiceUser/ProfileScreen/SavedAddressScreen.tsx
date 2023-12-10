@@ -3,7 +3,7 @@ import React, { FC, useState } from "react"
 import { observer } from "mobx-react-lite"
 import { StyleSheet, View, ViewStyle, TouchableOpacity, Pressable } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
-import { CustomCheckBox, Icon, OtherHeader, Screen, Search, Text } from "app/components"
+import { CustomCheckBox, HeaderWithBackButton, Icon, OtherHeader, Screen, Search, Text } from "app/components"
 import { screenContentContainer } from "app/styles/mainStyles"
 import { colors } from "app/theme"
 import { address } from "app/components/serviceUser/DummyData/ProfileScreensData"
@@ -35,7 +35,7 @@ export const SavedAddressScreen: FC<SavedAddressScreenProps> = observer(
         contentContainerStyle={screenContentContainer}
         safeAreaEdges={["bottom"]}
       >
-        <OtherHeader pageTitle="Saved Addresses" />
+        <HeaderWithBackButton title="Saved Addresses" />
         <Search />
         {address.map((data, index) => (
           <View style={styles.container} key={index}>

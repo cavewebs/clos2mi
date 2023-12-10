@@ -8,9 +8,9 @@ import { Icon, IconTypes } from "../../components/Icon"
 import Checkbox from "expo-checkbox"
 import { colors } from "app/theme"
 
-// import { useNavigation } from "@react-navigation/native"
+import { useNavigation } from "@react-navigation/native"
 
-interface ViewServicesScreenProps extends AppStackScreenProps<"ViewServices"> {}
+interface ViewServicesScreenProps extends AppStackScreenProps<"ViewServices"> { }
 
 export const ViewServicesScreen: FC<ViewServicesScreenProps> = observer(
   function ViewServicesScreen() {
@@ -27,18 +27,18 @@ export const ViewServicesScreen: FC<ViewServicesScreenProps> = observer(
     // const { someStore, anotherStore } = useStores()
 
     // Pull in navigation via hook
-    // const navigation = useNavigation()
+    const navigation = useNavigation()
     return (
       <Screen
         preset="auto"
         contentContainerStyle={screenContentContainer}
-        safeAreaEdges={["top", "bottom"]}
+        safeAreaEdges={["bottom", "top"]}
       >
         <View>
           <View style={styles.spaceItems}>
             <Button
               // onPress={() => Alert.alert("pressed")}
-              LeftAccessory={(props) => <Icon icon="back" />}
+              LeftAccessory={(props) => <Icon icon="pin" />}
             />
             <View style={styles.mildSpacing}>
               <Button
@@ -159,11 +159,11 @@ export const ViewServicesScreen: FC<ViewServicesScreenProps> = observer(
           />
           <PreviousWork />
           <View style={{ flexDirection: "row", alignItems: "center", gap: 6, marginTop: 32 }}>
-            <Button preset="default" text="Cancel" style={{ flex: 1 }} />
-            <Button preset="primary" text="Save" style={{ flex: 1 }} />
+            <Button preset="default" text="Cancel" style={{ flex: 1 }} onPress={()=>navigation.goBack()} />
+            <Button preset="primary" text="Save" style={{ flex: 1 }} onPress={()=>navigation.goBack()} />
           </View>
         </View>
-      </Screen>
+      </Screen >
     )
   },
 )

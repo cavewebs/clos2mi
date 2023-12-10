@@ -1,4 +1,4 @@
-package com.close2mi.app.sp;
+package com.close2mi.app;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -19,7 +19,7 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "close2miSp";
+    return "close2mi";
   }
 
   /**

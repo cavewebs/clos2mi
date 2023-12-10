@@ -4,6 +4,7 @@ import { observer } from "mobx-react-lite"
 import { colors } from "app/theme"
 import { TextField } from "../TextField"
 import { Icon } from "../Icon"
+import { useNavigation } from "@react-navigation/native"
 
 export interface SearchProps {
   /**
@@ -18,7 +19,7 @@ export interface SearchProps {
 export const Search = observer(function Search(props: SearchProps) {
   const { style } = props
   const $styles = [$container, style]
-
+  const navigation = useNavigation()
   return (
       <View style={$styles}>
         <View style={styles.TextFieldContainer}>
@@ -26,7 +27,7 @@ export const Search = observer(function Search(props: SearchProps) {
             style={styles.TextField}
             inputWrapperStyle={styles.TextField}
             placeholder="Search"
-            RightAccessory={() => <Icon icon="search" style={styles.accessory} />}
+            RightAccessory={() => <Icon icon="search" style={styles.accessory} onPress={()=>navigation.navigate("SearchResult")} />}
           />
         </View>
       </View>

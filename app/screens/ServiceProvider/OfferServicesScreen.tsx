@@ -9,7 +9,7 @@ import { useNavigation } from "@react-navigation/native"
 import { colors } from "app/theme"
 // import { useStores } from "app/models"
 
-interface OfferServicesScreenProps extends AppStackScreenProps<"OfferServices"> {}
+interface OfferServicesScreenProps extends AppStackScreenProps<"OfferServices"> { }
 
 export const OfferServicesScreen: FC<OfferServicesScreenProps> = observer(
   function OfferServicesScreen() {
@@ -29,7 +29,7 @@ export const OfferServicesScreen: FC<OfferServicesScreenProps> = observer(
       <Screen
         preset="scroll"
         contentContainerStyle={screenContentContainer}
-        safeAreaEdges={["top", "bottom"]}
+        safeAreaEdges={["bottom"]}
       >
         <Text
           preset="bold"
@@ -182,7 +182,7 @@ export const OfferServicesScreen: FC<OfferServicesScreenProps> = observer(
         </View>
 
         <Button preset="primary" text="Continue" style={{ marginTop: 200 }} />
-      </Screen>
+      </Screen >
     )
   },
 )

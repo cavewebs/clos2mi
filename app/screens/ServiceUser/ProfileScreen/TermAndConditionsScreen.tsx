@@ -2,7 +2,7 @@ import React, { FC } from "react"
 import { observer } from "mobx-react-lite"
 import { ViewStyle, View, StyleSheet } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
-import { OtherHeader, Screen, Text } from "app/components"
+import { HeaderWithBackButton, OtherHeader, Screen, Text } from "app/components"
 import { screenContentContainer } from "app/styles/mainStyles"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "app/models"
@@ -16,8 +16,8 @@ export const TermAndConditionsScreen: FC<TermAndConditionsScreenProps> = observe
   // Pull in navigation via hook
   // const navigation = useNavigation()
   return (
-    <Screen style={$root} preset="scroll" contentContainerStyle={screenContentContainer} safeAreaEdges={["top", "bottom"]} >
-      <OtherHeader pageTitle="Terms and Conditions" />
+    <Screen style={$root} preset="scroll" contentContainerStyle={screenContentContainer} safeAreaEdges={["bottom"]} >
+       <HeaderWithBackButton title="Terms and Conditions" />
       <Text
           text="Close2mi has been giving services to its clients by If you are facing financial challenges, you may be eligible for a discounted therapy costIf you are facing financial challenges, you may be eligible for a discounted therapy cost."
           size="sm"

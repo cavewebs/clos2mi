@@ -140,7 +140,7 @@ export const ServiceDetailScreen: FC<ServiceDetailScreenProps> = observer(
             />
           </View>
 
-          <Button preset="primary" text="Add" />
+          <Button preset="primary" text="Add"  onPress={()=>navigation.goBack()} />
         </View>
       </Screen>
     )

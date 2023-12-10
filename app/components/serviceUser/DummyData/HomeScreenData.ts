@@ -7,11 +7,11 @@ const damiApparel = require("../../../../assets/images/damiApparel.png")
 const beautyMakeover = require("../../../../assets/images/beautyMakeover.png")
 
 export const services = [
-  { text: "Hair", icon: "hair" },
-  { text: "Nails", icon: "highFive" },
-  { text: "Beard", icon: "beard" },
-  { text: "Eye", icon: "eyelashes" },
-  { text: "Makeup", icon: "makeup" },
+  { serviceName: "Hair", icon: "hair", serviceOfferings: [{ serviceName: "Hair", icon: "hair", offerName: "Hair", price: 17.2, duration: 30 }, { serviceName: "Hair", icon: "hair", offerName: "Beard Trim", price: 5, duration: 15 }, { serviceName: "Hair", icon: "hair", offerName: "Clean Shave", price: 20, duration: 45 }] },
+  { serviceName: "Nails", icon: "highFive", serviceOfferings: [{ serviceName: "Nails", icon: "highFive", offerName: "Polish", price: 17.2, duration: 30 }, { serviceName: "Nails", icon: "highFive", offerName: "Pedicure", price: 5, duration: 15 }, { serviceName: "Nails", icon: "highFive", offerName: "Manicure", price: 20, duration: 45 }] },
+  { serviceName: "Beard", icon: "beard", serviceOfferings: [{ serviceName: "Beard", icon: "beard", offerName: "beard", price: 17.2, duration: 30 }, { serviceName: "Beard", icon: "beard", offerName: "Beard Trim", price: 5, duration: 15 }, { serviceName: "Beard", icon: "hair", offerName: "Clean Shave", price: 20, duration: 45 }] },
+  { serviceName: "Eye", icon: "eyelashes", serviceOfferings: [{ serviceName: "Eye", icon: "eyelashes", offerName: "eyelashes", price: 17.2, duration: 30 }, { serviceName: "Eye", icon: "eyelashes", offerName: "Beard Trim", price: 5, duration: 15 }, { serviceName: "Eye", icon: "hair", offerName: "Clean Shave", price: 20, duration: 45 }] },
+  { serviceName: "Makeup", icon: "makeup", serviceOfferings: [{ serviceName: "Makeup", icon: "makeup", offerName: "Makeup", price: 17.2, duration: 30 }, { serviceName: "Makeup", icon: "makeup", offerName: "Beard Trim", price: 5, duration: 15 }, { serviceName: "Makeup", icon: "makeup", offerName: "Clean Shave", price: 20, duration: 45 }] },
 ]
 
 export const recentSearch = [

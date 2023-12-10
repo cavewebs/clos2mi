@@ -5,15 +5,33 @@ import { AppStackScreenProps } from "app/navigators"
 import { Screen, Text, TextField, Button } from "app/components"
 import { screenContentContainer } from "app/styles/mainStyles"
 import { colors } from "app/theme"
-// import { useNavigation } from "@react-navigation/native"
+import { useNavigation } from "@react-navigation/native"
+import { useStores } from "app/models"
 // import { useStores } from "app/models"
 
-interface OtpScreenProps extends AppStackScreenProps<"Otp"> {}
+interface OtpScreenProps extends AppStackScreenProps<"Otp"> { }
 
 export const OtpScreen: FC<OtpScreenProps> = observer(function OtpScreen() {
   const [otp, setOtp] = useState(["", "", "", "", "", ""])
   const inputRef = useRef<TextInput[]>([])
 
+  const {
+    authenticationStore: {
+      authPhone,
+      setAuthPhone,
+      setAuthToken,
+      validationError,
+      userType,
+      logout,
+      isAuthenticated
+    },
+  } = useStores()
+  const { onboardingStore: { hasCompletedOnboarding, setHasCompletedOnboarding }, } = useStores()
+  // useEffect(()=>{
+  //   hasCompletedOnboarding ? navigation.navigate("ServiceProvider") : navigation.navigate("ServiceUser")
+  // }, [])
+
+  console.log("UISAI", isAuthenticated)
   const handleChange = (value, index) => {
     console.log(value, "new index " + index)
     console.log(otp)
@@ -33,20 +51,36 @@ export const OtpScreen: FC<OtpScreenProps> = observer(function OtpScreen() {
       inputRef.current[index - 1].focus()
     }
   }
+  const goTo = () => {
+    console.log("hasCompletedOnboarding", hasCompletedOnboarding)
+    console.log("isAuthenticated", isAuthenticated)
+    console.log("userType", userType)
+    if (hasCompletedOnboarding) {
+      userType == "sp" ? navigation.navigate("ServiceProvider") : navigation.navigate("ServiceUser")
+    } else {
+      navigation.navigate("EnableLocation")
+    }
+
+  }
 
   // Pull in one of our MST stores
   // const { someStore, anotherStore } = useStores()
 
   // Pull in navigation via hook
-  // const navigation = useNavigation()
+  const navigation = useNavigation()
   return (
     <Screen preset="scroll" safeAreaEdges={["top"]} contentContainerStyle={screenContentContainer}>
       <View style={styles.otpContainer}>
         <Text preset="heading" size="lg" text="Authentication" style={{ textAlign: "center" }} />
         <Text
           size="xs"
-          text="Enter the 6-digit authentication code sent to +44 909 633 1152"
+          text="Enter the 6-digit authentication code sent to "
           style={styles.labelText}
+        />
+        <Text
+          size="xs"
+          text="+44 909 633 1152"
+          style={styles.phoneNo}
         />
 
         <View style={styles.inputWrapper}>
@@ -74,7 +108,7 @@ export const OtpScreen: FC<OtpScreenProps> = observer(function OtpScreen() {
           ))}
         </View>
 
-        <Button preset="primary" text="Submit" />
+        <Button preset="primary" text="Submit" onPress={() => goTo()} />
 
         <View style={{ flexDirection: "row", justifyContent: "center", gap: 4 }}>
           <Text size="xs" text="Did not recieve an OTP? " style={styles.labelText} />
@@ -89,9 +123,13 @@ const styles = StyleSheet.create({
   labelText: {
     fontWeight: "400",
     color: "#7A7A7A",
+    marginBottom: 6,
     textAlign: "center",
-    marginBottom: 32,
-    marginTop: 16,
+  },
+  phoneNo: {
+    textAlign: "center",
+    marginBottom: 16,
+
   },
 
   inputWrapper: {

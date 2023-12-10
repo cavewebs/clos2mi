@@ -129,7 +129,7 @@ export const AllNotificationsScreen: FC<AllNotificationsScreenProps> = observer(
       </TouchableOpacity>
     )
     return (
-      <Screen preset="scroll" contentContainerStyle={screenContentContainer}>
+      <Screen preset="scroll" contentContainerStyle={screenContentContainer} safeAreaEdges={[ "bottom"]}>
         <HeaderWithBackButton title="Notifications" />
         <>
           {notificationsList.map((notification, index) => (

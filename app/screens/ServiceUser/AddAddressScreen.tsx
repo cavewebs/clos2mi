@@ -18,17 +18,34 @@ import {
   TextFieldData,
   addressType,
 } from "app/components/serviceUser/DummyData/AddAddressConstants"
-import { useNavigation } from "@react-navigation/native"
+import { useNavigation, } from "@react-navigation/native"
 import { colors } from "app/theme"
+import { useStores } from "app/models"
 
 const dummyMap = require("../../../assets/images/dummyMap.png")
 
-interface AddAddressScreenProps extends AppStackScreenProps<"AddAddress"> {}
+interface AddAddressScreenProps extends AppStackScreenProps<"AddAddress"> { }
 
-export const AddAddressScreen: FC<AddAddressScreenProps> = observer(function AddAddressScreen() {
+export const AddAddressScreen: FC<AddAddressScreenProps> = observer(function AddAddressScreen(props) {
   const [selectType, setSelectType] = useState(null)
   const navigation = useNavigation()
+  const { authenticationStore } = useStores()
+  const { params } = props.route.params || {}
 
+  const { userType, isAuthenticated, setAuthToken, logout } = authenticationStore
+  const { onboardingStore: { hasCompletedOnboarding }, } = useStores()
+  const decodeNextRoute = () => {
+    console.log("PRAMS", params)
+    if (hasCompletedOnboarding) {
+      userType == "sp" ? navigation.navigate("ServiceProvider") : navigation.navigate("ServiceUser")
+    } else {
+      navigation.navigate("EnableNotifications", { params: { nextPage: "Home" } })
+      // logout()
+    }
+    console.log("referringRouteName", params)
+    // navigation.navigate("ServiceProvider")
+
+  }
   return (
     <Screen style={$root} preset="scroll">
       <Header title="Add Address" titleStyle={styles.headerTitle} />
@@ -39,7 +56,7 @@ export const AddAddressScreen: FC<AddAddressScreenProps> = observer(function Add
       >
         <ScrollView>
           <Text
-            text="Use My Current Address"
+            text="Use My Current Address OK"
             preset="subheading"
             weight="semiBold"
             size="md"
@@ -56,15 +73,15 @@ export const AddAddressScreen: FC<AddAddressScreenProps> = observer(function Add
           <View style={styles.selectWrapper}>
             {addressType.map((type) => (
               <View key={type.id} style={styles.selectWrapper}>
-              <Text text={type.type} />
-              <Checkbox
-                value={selectType === type.type}
-                onValueChange={() => {
-                  setSelectType(type.type);
-                }}
-                color={selectType === type.type ? colors.tint : undefined}
-              />
-            </View>
+                <Text text={type.type} />
+                <Checkbox
+                  value={selectType === type.type}
+                  onValueChange={() => {
+                    setSelectType(type.type);
+                  }}
+                  color={selectType === type.type ? colors.tint : undefined}
+                />
+              </View>
             ))}
           </View>
           {TextFieldData.map((data) => (
@@ -83,9 +100,7 @@ export const AddAddressScreen: FC<AddAddressScreenProps> = observer(function Add
             textStyle={styles.buttonText}
             pressedStyle={styles.pressedButton}
             pressedTextStyle={styles.pressedButtonText}
-            onPress={() => {
-              navigation.navigate("ServiceUser")
-            }}
+            onPress={() => { decodeNextRoute() }}
           />
         </ScrollView>
       </KeyboardAvoidingView>

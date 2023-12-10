@@ -2,15 +2,15 @@ import React, { FC } from "react"
 import { observer } from "mobx-react-lite"
 import { ViewStyle, View, StyleSheet } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
-import { Screen, Text, Button, BackArrowHeader } from "app/components"
+import { Screen, Text, Button, BackArrowHeader, HeaderWithBackButton } from "app/components"
 import { screenContentContainer } from "app/styles/mainStyles"
 import { Icon } from "../../components"
 import { colors } from "app/theme"
 import { FlatList } from "react-native-gesture-handler"
-// import { useNavigation } from "@react-navigation/native"
+import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "app/models"
 
-interface ProviderSubscriptionScreenProps extends AppStackScreenProps<"ProviderSubscription"> {}
+interface ProviderSubscriptionScreenProps extends AppStackScreenProps<"ProviderSubscription"> { }
 const premiumData: string[] = [
   "Access to Therapy",
   "Chat Therapy Sessions (Not real-time)",
@@ -26,16 +26,16 @@ export const ProviderSubscriptionScreen: FC<ProviderSubscriptionScreenProps> = o
     // const { someStore, anotherStore } = useStores()
 
     // Pull in navigation via hook
-    // const navigation = useNavigation()
+    const navigation = useNavigation()
     return (
       <Screen
         preset="scroll"
         contentContainerStyle={screenContentContainer}
-        safeAreaEdges={["top", "bottom"]}
+        safeAreaEdges={["bottom"]}
       >
         <View>
           <View style={{ flexDirection: "row", alignItems: "center", gap: 70, marginBottom: 8 }}>
-            <BackArrowHeader header="Subscription" />
+            <HeaderWithBackButton title="Subscription" />
           </View>
           <Text
             preset="default"
@@ -91,7 +91,7 @@ export const ProviderSubscriptionScreen: FC<ProviderSubscriptionScreenProps> = o
                 />
               }
 
-              <Button preset="default" text="Try Now" />
+              <Button preset="default" text="Try Now" onPress={()=>navigation.goBack()}/>
             </View>
           </View>
 
@@ -138,12 +138,12 @@ export const ProviderSubscriptionScreen: FC<ProviderSubscriptionScreenProps> = o
                   ))
                 }
 
-                <Button preset="default" text="Try Now" />
+                <Button preset="default" text="Try Now" onPress={()=>navigation.goBack()}/>
               </View>
             </View>
           </View>
         </View>
-      </Screen>
+      </Screen >
     )
   },
 )

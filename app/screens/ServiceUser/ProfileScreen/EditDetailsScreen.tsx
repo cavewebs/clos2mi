@@ -3,7 +3,7 @@ import React, { FC } from "react"
 import { observer } from "mobx-react-lite"
 import { ViewStyle, StyleSheet, View } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
-import { Button, OtherHeader, Screen, Text, TextField } from "app/components"
+import { Button, HeaderWithBackButton, OtherHeader, Screen, Text, TextField } from "app/components"
 import { screenContentContainer } from "app/styles/mainStyles"
 import { colors } from "app/theme"
 // import { useNavigation } from "@react-navigation/native"
@@ -22,9 +22,9 @@ export const EditDetailsScreen: FC<EditDetailsScreenProps> = observer(function E
       style={$root}
       preset="scroll"
       contentContainerStyle={screenContentContainer}
-      safeAreaEdges={["top", "bottom"]}
+      safeAreaEdges={[ "bottom"]}
     >
-      <OtherHeader pageTitle="Edit Details" />
+       <HeaderWithBackButton title="Edit Details" />
       <TextField
         label="Full Name"
         style={styles.textField}

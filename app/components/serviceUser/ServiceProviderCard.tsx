@@ -35,8 +35,8 @@ export const ServiceProviderCard = observer(function ServiceProviderCard(
   const { style, image, location, views, rating, name, navigate } = props
   const $styles = [$container, style]
 
-  return (
-    <TouchableOpacity onPress={()=>navigate && navigate()}>
+  const ServiceCard = () => {
+    return (
       <View style={$styles}>
         <ImageBackground source={image} style={styles.imageBackground} resizeMode="cover">
           <View style={styles.overlay}>
@@ -55,7 +55,20 @@ export const ServiceProviderCard = observer(function ServiceProviderCard(
           </View>
         </ImageBackground>
       </View>
-    </TouchableOpacity>
+    )
+  }
+  return (
+    <>
+      {navigate ? (
+        <TouchableOpacity onPress={() => navigate && navigate()}>
+
+          <ServiceCard />
+        </TouchableOpacity>
+
+      ) :
+        (<ServiceCard />)
+      }
+    </>
   )
 })
 

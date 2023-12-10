@@ -2,7 +2,7 @@ import React, { FC } from "react"
 import { observer } from "mobx-react-lite"
 import { ViewStyle, View, StyleSheet } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
-import { BookingCard, HorizontalTabs, OtherHeader, Screen, Search, SectionHeader, Services } from "app/components"
+import { BookingCard, HeaderWithBackButton, HorizontalTabs, OtherHeader, Screen, Search, SectionHeader, Services } from "app/components"
 // import { screenContentContainer } from "app/styles/mainStyles"
 import { spacing } from "app/theme"
 import {
@@ -10,7 +10,8 @@ import {
   inspiredTabs,
   services,
 } from "app/components/serviceUser/DummyData/HomeScreenData"
-// import { useNavigation } from "@react-navigation/native"
+import { screenContentContainer } from "app/styles/mainStyles"
+import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "app/models"
 
 interface InspiredByClose2MiScreenProps extends AppStackScreenProps<"InspiredByClose2Mi"> {}
@@ -21,15 +22,15 @@ export const InspiredByClose2MiScreen: FC<InspiredByClose2MiScreenProps> = obser
     // const { someStore, anotherStore } = useStores()
 
     // Pull in navigation via hook
-    // const navigation = useNavigation()
+    const navigation = useNavigation()
     return (
-      <Screen style={$root} preset="scroll">
-        <OtherHeader pageTitle="Inspired by Close2mi" />
+      <Screen preset="scroll" safeAreaEdges={["bottom"]} contentContainerStyle={screenContentContainer}>
+        <HeaderWithBackButton title="Inspired by Close2mi" />
         <Search />
         <HorizontalTabs tabs={inspiredTabs} />
         <View style={styles.serviceContainer}>
           {services.map((service) => (
-            <Services key={service.text} icon={service.icon} text={service.text} />
+            <Services key={service.serviceName} icon={service.icon} text={service.serviceName} onPress={() => { navigation.navigate("Services", { params: service }) }} />
           ))}
         </View>
 
@@ -49,6 +50,7 @@ export const InspiredByClose2MiScreen: FC<InspiredByClose2MiScreenProps> = obser
                 bottomTextLeft={results.bottomTextLeft}
                 bottomIconRight={results.bottomIconRight}
                 bottomTextRight={results.bottomTextRight}
+                navigate={()=>navigation.navigate()}
               />
             ))}
           </View>
@@ -58,11 +60,6 @@ export const InspiredByClose2MiScreen: FC<InspiredByClose2MiScreenProps> = obser
   },
 )
 
-const $root: ViewStyle = {
-  paddingVertical: spacing.xl,
-  paddingHorizontal: spacing.lg,
-  flex: 1,
-}
 
 const styles = StyleSheet.create({
   container: {

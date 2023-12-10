@@ -4,6 +4,7 @@ import { ViewStyle, View, TouchableOpacity } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
 import {
   BookingCard,
+  Header,
   HorizontalTabs,
   MainHeader,
   Screen,
@@ -29,7 +30,7 @@ export const ServiceUserBookingsScreen: FC<BookingsScreenProps> = observer(
     const navigation = useNavigation()
     return (
       <Screen style={$root} preset="scroll" contentContainerStyle={screenContentContainer}>
-        <MainHeader pageTitle="Bookings" icon3="notification" />
+        <Header titleMode="flex" titleContainerStyle={{alignItems: "flex-start"}} title="Bookings" rightIcon="notification" />
         <Search />
         <HorizontalTabs tabs={bookingTabs} />
         <View>

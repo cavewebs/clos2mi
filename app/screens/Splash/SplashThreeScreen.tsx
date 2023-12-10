@@ -3,11 +3,10 @@ import { observer } from "mobx-react-lite"
 import { ImageBackground, View, StyleSheet } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
 import { AutoImage, Button, Screen, Text } from "app/components"
-import { screenContentContainer } from "app/styles/mainStyles"
 import SplashBackground from "assets/images/line-pattern.png"
 import Logo from "assets/images/app-icon-all.png"
 import SplashImg3 from "assets/images/splash-3.png"
-import { colors } from "app/theme"
+import { colors, spacing } from "app/theme"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "app/models"
 interface SplashThreeScreenProps extends AppStackScreenProps<"SplashThree"> {}
@@ -20,7 +19,7 @@ export const SplashThreeScreen: FC<SplashThreeScreenProps> = observer(function S
     navigation.navigate("SelectUserType")
   }
   return (
-    <Screen preset="fixed" contentContainerStyle={screenContentContainer}>
+    <Screen preset="fixed" contentContainerStyle={styles.splashContainer}>
       <ImageBackground source={SplashBackground} style={styles.background}>
         <View style={styles.container}>
           <View style={styles.topView}>
@@ -62,9 +61,14 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     marginRight: 5,
   },
+  splashContainer: {
+    flex: 1,
+    paddingVertical: spacing.md,
+  },
   background: {
     flex: 1,
     resizeMode: "cover",
+    paddingHorizontal: spacing.md
   },
   bottomView: {
     marginBottom: 10,
@@ -113,7 +117,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     height: 345,
     justifyContent: "space-between",
-    width: 345,
+    width: "auto",
   },
   splashMsg: {
     alignItems: "center",
@@ -128,7 +132,7 @@ const styles = StyleSheet.create({
   topView: {
     flex: 1,
     flexDirection: "row",
-    justifyContent: "center",
+    justifyContent: "space-between",
     margin: 20,
   },
 })

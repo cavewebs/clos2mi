@@ -1,6 +1,6 @@
 import React, { FC } from "react"
 import { observer } from "mobx-react-lite"
-import { View, ImageRequireSource, FlatList, StyleSheet } from "react-native"
+import { View, ImageRequireSource, FlatList, StyleSheet, Pressable } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
 import { MyServices, Screen, Text } from "app/components"
 import { screenContentContainer } from "app/styles/mainStyles"
@@ -17,7 +17,7 @@ import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "app/models"
 
 interface ServiceProviderServicesScreenProps
-  extends AppStackScreenProps<"ServicePoviderServices"> {}
+  extends AppStackScreenProps<"ServicePoviderServices"> { }
 
 interface Beards {
   beard: ImageRequireSource
@@ -89,23 +89,25 @@ export const ServiceProviderServicesScreen: FC<ServiceProviderServicesScreenProp
     return (
       <Screen preset="auto" contentContainerStyle={screenContentContainer} safeAreaEdges={["top"]}>
         <View>
-          <View style={styles.wideSpacing}>
-            <Text preset="subheading" text="My Services" style={{ color: colors.text }} />
-            <View style={styles.mildSpacing}>
-              <Text
-                preset="bold"
-                size="xs"
-                text="Add Service"
-                style={{ color: colors.palette.primary600 }}
-              />
+          <Pressable onPress={() => navigation.navigate("ServiceDetail")} >
+            <View style={styles.wideSpacing}>
+              <Text preset="subheading" text="My Services" style={{ color: colors.text }} />
+              <View style={styles.mildSpacing}>
+                <Text
+                  preset="bold"
+                  size="xs"
+                  text="Add Service"
+                  style={{ color: colors.palette.primary600 }}
+                />
 
-              <Icon icon="add" onPress={() => navigation.navigate("ServiceDetail")} />
+                <Icon icon="add" />
+              </View>
             </View>
-          </View>
+          </Pressable>
 
           <FlatList
             data={beardData}
-            renderItem={({ item }) => (
+            renderItem={({ item, }) => (
               <MyServices
                 headerText={item.headerText}
                 price={item.price}
@@ -114,7 +116,7 @@ export const ServiceProviderServicesScreen: FC<ServiceProviderServicesScreenProp
                 serviceImg={item.beard}
               />
             )}
-            keyExtractor={(item) => item.time}
+            keyExtractor={(item) => `${item.beard}`}
           />
         </View>
       </Screen>
@@ -134,5 +136,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     marginBottom: 24,
+    marginTop: 20
   },
 })

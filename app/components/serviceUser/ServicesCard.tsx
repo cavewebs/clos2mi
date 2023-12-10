@@ -6,46 +6,67 @@ import { colors } from "app/theme"
 import { Text } from "app/components/Text"
 import { Icon } from "../Icon"
 import { Button } from "../Button"
+import { useNavigation } from "@react-navigation/native"
 
 export interface ServicesCardProps {
   /**
    * An optional style override useful for padding & margin.
    */
   style?: StyleProp<ViewStyle>
+  serviceDetails: ServiceDetails
 }
-
+interface ServiceDetails {
+  serviceName: string
+  icon: string
+  serviceOfferings: [{
+    categoryName: string
+    icon: string, offerName: string, price: number, duration: number
+  }]
+}
 /**
  * Describe your component here
  */
 export const ServicesCard = observer(function ServicesCard(props: ServicesCardProps) {
-  const { style } = props
+  const { style, serviceDetails } = props
   const $styles = [$container, style]
-
+  const navigation = useNavigation()
+  console.log("SERVIC£S", serviceDetails)
   return (
-    <View style={$styles}>
-      <View style={styles.containerStyle}>
-        <Text text="Hair Cut" size="md" weight="light" />
-        <View style={styles.container}>
-          <Icon icon="hourglass" size={12} />
-          <Text text="30 minutes" size="sm" weight="medium" style={styles.textColor} />
-        </View>
-      </View>
-      <View style={styles.containerStyle}>
-        <View style={styles.container}>
-          <Icon icon="pound" size={14} />
-          <Text text="500" size="lg" weight="light" />
-        </View>
-        <Button
-          text="Book"
-          style={styles.button}
-          textStyle={styles.buttonText}
-          pressedStyle={styles.pressedButton}
-          pressedTextStyle={styles.pressedButtonText}
-        />
-      </View>
+    <View>
+      {serviceDetails ? (
+        serviceDetails.serviceOfferings.map((serviceDetail, index) => (
+          <View key={index} style={$styles}>
+            <View style={styles.containerStyle}>
+              <Text text={serviceDetail.offerName} size="sm" weight="light" />
+              <View style={styles.container}>
+                <Icon icon="hourglass" size={12} />
+                <Text text={serviceDetail.duration + " minutes"} size="xs" weight="medium" style={styles.textColor} />
+              </View>
+            </View>
+            <View style={styles.containerStyle}>
+              <View style={styles.container}>
+                <Icon icon="pound" size={14} color={colors.tint} />
+                <Text text={serviceDetail.price as unknown as string} size="sm" weight="medium" style={{ color: colors.text }} />
+              </View>
+              <Button
+                text="Book"
+                style={styles.button}
+                textStyle={styles.buttonText}
+                pressedStyle={styles.pressedButton}
+                pressedTextStyle={styles.pressedButtonText}
+                onPress={() => navigation.navigate("BookService", serviceDetail)}
+              />
+            </View>
+          </View>
+        ))
+      ) : (
+        <Text>No service details available</Text>
+      )}
     </View>
   )
 })
+
+
 
 const $container: ViewStyle = {
   justifyContent: "center",
@@ -61,7 +82,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: "#F5F5FF",
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: "600",
     textAlign: "center",
   },

@@ -21,7 +21,7 @@ export const PendingBookingsScreen: FC<PendingBookingsScreenProps> = observer(
       <Screen style={$root} preset="scroll" contentContainerStyle={screenContentContainer}>
         <Header title="Pending Bookings" leftIcon="back" onLeftPress={() => navigation.goBack()} />
         <View>
-          <Booking data={bookingsData.filter((data) => data.isPending === true)} />
+          <Booking data={bookingsData.filter((data) => data.status === "Upcoming")} />
         </View>
       </Screen>
     )

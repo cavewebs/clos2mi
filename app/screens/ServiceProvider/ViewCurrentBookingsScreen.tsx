@@ -7,7 +7,7 @@ import { screenContentContainer } from "app/styles/mainStyles"
 import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "app/models"
 
-interface ViewCurrentBookingsScreenProps extends AppStackScreenProps<"ViewCurrentBookings"> {}
+interface ViewCurrentBookingsScreenProps extends AppStackScreenProps<"ViewCurrentBookings"> { }
 
 export const ViewCurrentBookingsScreen: FC<ViewCurrentBookingsScreenProps> = observer(
   function ViewCurrentBookingsScreen() {
@@ -22,12 +22,12 @@ export const ViewCurrentBookingsScreen: FC<ViewCurrentBookingsScreenProps> = obs
         style={$root}
         preset="scroll"
         contentContainerStyle={screenContentContainer}
-        safeAreaEdges={["top", "bottom"]}
+        safeAreaEdges={["bottom"]}
       >
         {/* use what Header if you like or the Text if it suits better don't forget to delete the unused import at the end */}
         {/* <Text preset="heading" text="notifications" /> */}
-        <Header title="View Books" leftIcon="back" onLeftPress={() => navigation.goBack()} />
-        <ViewBookings
+        < Header title="View Books" leftIcon="back" onLeftPress={() => navigation.goBack()} />
+        < ViewBookings
           services="Haircut"
           min="60 minutes"
           people="2 people"
@@ -41,7 +41,7 @@ export const ViewCurrentBookingsScreen: FC<ViewCurrentBookingsScreenProps> = obs
           status
           isView
         />
-      </Screen>
+      </Screen >
     )
   },
 )

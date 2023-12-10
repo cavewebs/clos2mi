@@ -1,8 +1,8 @@
 import React, { FC, useState } from "react"
 import { observer } from "mobx-react-lite"
-import { ViewStyle, View, StyleSheet, TouchableOpacity, Image, TextInput } from "react-native"
+import { ViewStyle, View, StyleSheet, TouchableOpacity, } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
-import { Screen, Text, Button, Icon, AutoImage } from "app/components"
+import { Screen, Text, Button, Icon, } from "app/components"
 import { useStores } from "app/models"
 import { screenContentContainer } from "app/styles/mainStyles"
 import { colors, spacing } from "app/theme"
@@ -79,8 +79,9 @@ export const SelectUserTypeScreen: FC<SelectUserTypeScreenProps> = observer(
     }
     return (
       <Screen
+      style={{flex: 1}}
         preset="auto"
-        contentContainerStyle={screenContentContainer}
+        contentContainerStyle={[screenContentContainer, {flex: 1}]}
         safeAreaEdges={["top", "bottom"]}
       >
         <View style={styles.container}>
@@ -174,7 +175,7 @@ export const SelectUserTypeScreen: FC<SelectUserTypeScreenProps> = observer(
 
 const styles = StyleSheet.create({
   bottomView: {
-    marginBottom: 20,
+    marginBottom: 50,
   },
   button: {
     alignItems: "center",

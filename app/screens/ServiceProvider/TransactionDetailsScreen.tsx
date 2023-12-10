@@ -9,7 +9,7 @@ import { colors } from "app/theme"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "app/models"
 
-interface TransactionDetailsScreenProps extends AppStackScreenProps<"TransactionDetails"> {}
+interface TransactionDetailsScreenProps extends AppStackScreenProps<"TransactionDetails"> { }
 
 export const TransactionDetailsScreen: FC<TransactionDetailsScreenProps> = observer(
   function TransactionDetailsScreen() {
@@ -22,7 +22,7 @@ export const TransactionDetailsScreen: FC<TransactionDetailsScreenProps> = obser
       <Screen
         preset="scroll"
         contentContainerStyle={screenContentContainer}
-        safeAreaEdges={["top", "bottom"]}
+        safeAreaEdges={["bottom"]}
       >
         <View>
           <BackArrowHeader header="Booking View" />
@@ -66,7 +66,7 @@ export const TransactionDetailsScreen: FC<TransactionDetailsScreenProps> = obser
             </View>
           </View>
         </View>
-      </Screen>
+      </Screen >
     )
   },
 )

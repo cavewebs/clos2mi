@@ -2,10 +2,11 @@ import React, { FC } from "react"
 import { observer } from "mobx-react-lite"
 import { StyleSheet, View, ViewStyle } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
-import { Icon, OtherHeader, PopularSearches, Screen, Search, SectionHeader, ServiceProviderCard, Text } from "app/components"
+import { HeaderWithBackButton, Icon, OtherHeader, PopularSearches, Screen, Search, SectionHeader, ServiceProviderCard, Text } from "app/components"
 // import { screenContentContainer } from "app/styles/mainStyles"
 import { popularSearch, recentSearchCache, serviceProvider } from "app/components/serviceUser/DummyData/HomeScreenData"
 import { spacing } from "app/theme"
+import { screenContentContainer } from "app/styles/mainStyles"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "app/models"
 
@@ -21,10 +22,10 @@ export const SearchScreen: FC<SearchScreenProps> = observer(function SearchScree
     <Screen
       style={$root}
       preset="scroll"
-    // contentContainerStyle={screenContentContainer}
-    // safeAreaEdges={["top", "bottom"]}
+      contentContainerStyle={screenContentContainer}
+      safeAreaEdges={["bottom"]}
     >
-      <OtherHeader pageTitle="Search" />
+      <HeaderWithBackButton title="Search" />
       <Search />
       <View>
         <SectionHeader leftText="Recent Searches" rightText="Clear All" />
@@ -64,8 +65,6 @@ export const SearchScreen: FC<SearchScreenProps> = observer(function SearchScree
 })
 
 const $root: ViewStyle = {
-  paddingVertical: spacing.xl,
-  paddingHorizontal: spacing.lg,
   flex: 1,
 }
 

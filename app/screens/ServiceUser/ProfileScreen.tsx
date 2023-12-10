@@ -2,12 +2,12 @@ import React, { FC } from "react"
 import { observer } from "mobx-react-lite"
 import { ViewStyle, View, StyleSheet } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
-import { Icon, MainHeader, ProfileContent, Screen, SectionHeader, Text } from "app/components"
+import { Header, Icon, MainHeader, ProfileContent, Screen, SectionHeader, Text } from "app/components"
 import { screenContentContainer } from "app/styles/mainStyles"
 // import { useNavigation } from "@react-navigation/native"
-// import { useStores } from "app/models"
+import { useStores } from "app/models"
 
-interface ProfileScreenProps extends AppStackScreenProps<"ServiceUserProfile"> {}
+interface ProfileScreenProps extends AppStackScreenProps<"ServiceUserProfile"> { }
 
 export const ServiceUserProfileScreen: FC<ProfileScreenProps> = observer(function ProfileScreen() {
   // Pull in one of our MST stores
@@ -15,9 +15,20 @@ export const ServiceUserProfileScreen: FC<ProfileScreenProps> = observer(functio
 
   // Pull in navigation via hook
   // const navigation = useNavigation()
+  const { onboardingStore: { setHasCompletedOnboarding }, } = useStores()
+
+  const {
+    authenticationStore: { logout },
+  } = useStores()
+  const doLogout = () => {
+    //TODO: uncomment this if you want to test onboarding screens
+    // setHasCompletedOnboarding(false) 
+    logout()
+  }
   return (
     <Screen style={$root} preset="scroll" contentContainerStyle={screenContentContainer}>
-      <MainHeader pageTitle="Profile" icon2="notification" icon3="editPencil" />
+      <Header leftIcon="notification" title="Profile" rightIcon="editPencil" />
+
       <View style={styles.topContainer}>
         <Icon icon="userImage" size={48} />
         <View>
@@ -33,7 +44,7 @@ export const ServiceUserProfileScreen: FC<ProfileScreenProps> = observer(functio
         <SectionHeader leftText="Personal Details" />
         <ProfileContent leftText="Mobile Number" rightText="09096631152" />
         <ProfileContent leftText="Gender" rightText="Female" />
-        <ProfileContent leftText="Addresses" rightIcon="chevronRight"/>
+        <ProfileContent leftText="Addresses" rightIcon="chevronRight" />
       </View>
       <View>
         <SectionHeader leftText="Payment" />
@@ -52,7 +63,7 @@ export const ServiceUserProfileScreen: FC<ProfileScreenProps> = observer(functio
       <View>
         <SectionHeader leftText="Security" />
         <ProfileContent leftText="Change Password" rightIcon="chevronRight" />
-        <ProfileContent leftText="Sign Out" rightIcon="chevronRight" />
+        <ProfileContent leftText="Sign Out" rightIcon="chevronRight" onPress={() => { doLogout() }} />
       </View>
     </Screen>
   )

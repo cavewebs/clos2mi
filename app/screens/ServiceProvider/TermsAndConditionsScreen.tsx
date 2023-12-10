@@ -8,7 +8,7 @@ import { colors } from "app/theme"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "app/models"
 
-interface TermsAndConditionsScreenProps extends AppStackScreenProps<"TermsAndConditions"> {}
+interface TermsAndConditionsScreenProps extends AppStackScreenProps<"TermsAndConditions"> { }
 
 export const TermsAndConditionsScreen: FC<TermsAndConditionsScreenProps> = observer(
   function TermsAndConditionsScreen() {
@@ -21,7 +21,7 @@ export const TermsAndConditionsScreen: FC<TermsAndConditionsScreenProps> = obser
       <Screen
         preset="scroll"
         contentContainerStyle={screenContentContainer}
-        safeAreaEdges={["top", "bottom"]}
+        safeAreaEdges={["bottom"]}
       >
         <View>
           <BackArrowHeader header="Terms and Conditions" />
@@ -56,7 +56,7 @@ export const TermsAndConditionsScreen: FC<TermsAndConditionsScreenProps> = obser
             style={styles.policyText}
           />
         </View>
-      </Screen>
+      </Screen >
     )
   },
 )

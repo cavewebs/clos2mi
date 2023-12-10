@@ -7,7 +7,7 @@ import { screenContentContainer } from "app/styles/mainStyles"
 import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "app/models"
 
-interface AccountDetailsScreenProps extends AppStackScreenProps<"AccountDetails"> {}
+interface AccountDetailsScreenProps extends AppStackScreenProps<"AccountDetails"> { }
 
 export const AccountDetailsScreen: FC<AccountDetailsScreenProps> = observer(
   function AccountDetailsScreen() {
@@ -21,12 +21,12 @@ export const AccountDetailsScreen: FC<AccountDetailsScreenProps> = observer(
       <Screen
         preset="scroll"
         contentContainerStyle={screenContentContainer}
-        safeAreaEdges={["top", "bottom"]}
+        safeAreaEdges={["bottom"]}
       >
         {/* use what Header if you like or the Text if it suits better don't forget to delete the unused import at the end */}
         {/* <Text preset="heading" text="notifications" /> */}
-        <Header title="Acount Details" leftIcon="back" onLeftPress={() => navigation.goBack()} />
-        <View style={{ marginTop: 32 }}>
+        < Header title="Acount Details" leftIcon="back" onLeftPress={() => navigation.goBack()} />
+        < View style={{ marginTop: 32 }}>
           <View style={styles.bottomGap}>
             <Text size="xs" weight="medium" text="Sort Code" style={styles.firstText} />
             <Text size="sm" weight="normal" text="9079797073" style={styles.secondText} />
@@ -46,8 +46,8 @@ export const AccountDetailsScreen: FC<AccountDetailsScreenProps> = observer(
             <Text size="xs" weight="medium" text="Account Holder Type" style={styles.firstText} />
             <Text size="sm" weight="normal" text="Business" style={styles.secondText} />
           </View>
-        </View>
-      </Screen>
+        </View >
+      </Screen >
     )
   },
 )

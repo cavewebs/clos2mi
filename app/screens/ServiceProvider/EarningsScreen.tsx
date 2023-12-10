@@ -11,6 +11,7 @@ import {
   Button,
   BarCharts,
   SectionText,
+  HeaderWithBackButton,
 } from "app/components"
 import { screenContentContainer } from "app/styles/mainStyles"
 import HomeBanner from "assets/images/home-banner.png"
@@ -30,10 +31,10 @@ export const EarningsScreen: FC<EarningsScreenProps> = observer(function Earning
     <Screen
       preset="scroll"
       contentContainerStyle={screenContentContainer}
-      safeAreaEdges={["top", "bottom"]}
+      safeAreaEdges={["bottom"]}
     >
       <View>
-        <BackArrowHeader header="Earnings" />
+        <HeaderWithBackButton title="Earnings" />
 
         <View style={{ display: "flex", alignItems: "center", marginTop: 30 }}>
           <AutoImage source={HomeBanner} style={styles.bannerImg} />

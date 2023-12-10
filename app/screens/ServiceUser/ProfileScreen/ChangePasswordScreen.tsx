@@ -3,10 +3,10 @@ import React, { FC } from "react"
 import { observer } from "mobx-react-lite"
 import { ViewStyle, StyleSheet } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
-import { Button, OtherHeader, Screen, Text, TextField } from "app/components"
+import { Button, HeaderWithBackButton, OtherHeader, Screen, Text, TextField } from "app/components"
 import { screenContentContainer } from "app/styles/mainStyles"
 import { colors } from "app/theme"
-// import { useNavigation } from "@react-navigation/native"
+import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "app/models"
 
 interface ChangePasswordScreenProps extends AppStackScreenProps<"ChangePassword"> {}
@@ -17,18 +17,25 @@ export const ChangePasswordScreen: FC<ChangePasswordScreenProps> = observer(
     // const { someStore, anotherStore } = useStores()
 
     // Pull in navigation via hook
-    // const navigation = useNavigation()
+    const navigation = useNavigation()
     return (
       <Screen
         style={$root}
         preset="scroll"
         contentContainerStyle={screenContentContainer}
-        safeAreaEdges={["top", "bottom"]}
+        safeAreaEdges={[ "bottom"]}
       >
-        <OtherHeader pageTitle="Change password" />
+         <HeaderWithBackButton title="Change password" />
         <Text
-          text="Your new password must be different fron the previous password"
+          text="Your new password must be different fron the current password"
           style={styles.subTitle}
+        />
+        <TextField
+          label="Enter Current Password"
+          style={styles.textField}
+          inputWrapperStyle={styles.textField}
+          containerStyle={styles.containerStyle}
+          keyboardType="default"
         />
         <TextField
           label="Enter New Password"
@@ -51,6 +58,7 @@ export const ChangePasswordScreen: FC<ChangePasswordScreenProps> = observer(
           textStyle={styles.buttonText}
           pressedStyle={styles.pressedButton}
           pressedTextStyle={styles.pressedButtonText}
+          onPress={()=>navigation.goBack()}
         />
       </Screen>
     )
@@ -91,7 +99,9 @@ const styles = StyleSheet.create({
     color: colors.palette.primary600,
   },
   subTitle: {
-    textAlign: "center",
+    // textAlign: "center",
+    marginVertical: 10,
+    marginBottom: 30
   },
   textContainer: {
     borderBottomColor: colors.palette.neutral200,

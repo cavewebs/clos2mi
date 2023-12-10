@@ -56,7 +56,7 @@ export const ServiceProviderHomeScreen: FC<HomeScreenProps> = observer(function 
         <Text preset="bold" text="Home" size="lg" />
         <View style={styles.spaceItems}>
           <Button
-            onPress={() => navigation.navigate("Address")}
+            onPress={() => navigation.navigate("SavedAddress")}
             LeftAccessory={(props) => <Icon icon="solarMapLinear" />}
           />
 
@@ -98,7 +98,7 @@ export const ServiceProviderHomeScreen: FC<HomeScreenProps> = observer(function 
       <SectionText
         subheading="Pending Bookings"
         text="View All"
-        onPress={() => goTo("PendingBookings")}
+        onPress={() => goTo("ViewPendingBookings")}
       />
       <Booking data={bookingsData.filter((data) => data.status === "Upcoming")} />
 

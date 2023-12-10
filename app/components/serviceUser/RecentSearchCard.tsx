@@ -46,7 +46,7 @@ export const RecentSearchCard = observer(function RecentSearchCard(props: Recent
 
 const $container: ViewStyle = {
   justifyContent: "center",
-  width: 122,
+  // width: 122,
   marginBottom: 12
 }
 

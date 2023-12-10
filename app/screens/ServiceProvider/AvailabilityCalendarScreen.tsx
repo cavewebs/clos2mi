@@ -2,12 +2,12 @@ import React, { FC } from "react"
 import { observer } from "mobx-react-lite"
 import { ViewStyle, View } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
-import { Screen, Text, BackArrowHeader, Calendars } from "app/components"
+import { Screen, Text, BackArrowHeader, Calendars, HeaderWithBackButton } from "app/components"
 import { screenContentContainer } from "app/styles/mainStyles"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "app/models"
 
-interface AvailabilityCalendarScreenProps extends AppStackScreenProps<"AvailabilityCalendar"> {}
+interface AvailabilityCalendarScreenProps extends AppStackScreenProps<"AvailabilityCalendar"> { }
 
 export const AvailabilityCalendarScreen: FC<AvailabilityCalendarScreenProps> = observer(
   function AvailabilityCalendarScreen() {
@@ -21,14 +21,14 @@ export const AvailabilityCalendarScreen: FC<AvailabilityCalendarScreenProps> = o
         style={$root}
         preset="scroll"
         contentContainerStyle={screenContentContainer}
-        safeAreaEdges={["top", "bottom"]}
+        safeAreaEdges={["bottom"]}
       >
         <View>
-          <BackArrowHeader header="Availability" />
+          <HeaderWithBackButton title="Availability" />
           <Text text="Specify opening time on specific days" />
           <Calendars />
         </View>
-      </Screen>
+      </Screen >
     )
   },
 )

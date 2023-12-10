@@ -9,7 +9,7 @@ import { colors } from "app/theme"
 import bro from "assets/images/bro.png"
 // import { useStores } from "app/models"
 
-interface SubmitNotificationScreenProps extends AppStackScreenProps<"SubmitNotification"> {}
+interface SubmitNotificationScreenProps extends AppStackScreenProps<"SubmitNotification"> { }
 
 export const SubmitNotificationScreen: FC<SubmitNotificationScreenProps> = observer(
   function SubmitNotificationScreen() {
@@ -23,7 +23,7 @@ export const SubmitNotificationScreen: FC<SubmitNotificationScreenProps> = obser
       <Screen
         preset="scroll"
         contentContainerStyle={screenContentContainer}
-        safeAreaEdges={["top", "bottom"]}
+        safeAreaEdges={["bottom"]}
       >
         <View style={styles.imageWrapper}>
           <AutoImage source={bro} style={{ width: 240, height: 233.5 }} />
@@ -44,7 +44,7 @@ export const SubmitNotificationScreen: FC<SubmitNotificationScreenProps> = obser
         />
 
         <Button preset="primary" text="View Account" />
-      </Screen>
+      </Screen >
     )
   },
 )

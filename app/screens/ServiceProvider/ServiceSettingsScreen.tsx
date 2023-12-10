@@ -11,7 +11,7 @@ import { colors } from "app/theme"
 import HomeBanner from "assets/images/home-banner.png"
 import beardImg from "assets/images/trim-beard0.png"
 
-interface ServiceSettingsScreenProps extends AppStackScreenProps<"ServiceSettings"> {}
+interface ServiceSettingsScreenProps extends AppStackScreenProps<"ServiceSettings"> { }
 
 export const ServiceSettingsScreen: FC<ServiceSettingsScreenProps> = observer(
   function ServiceSettingsScreen() {
@@ -26,7 +26,7 @@ export const ServiceSettingsScreen: FC<ServiceSettingsScreenProps> = observer(
       <Screen
         preset="scroll"
         contentContainerStyle={screenContentContainer}
-        safeAreaEdges={["top", "bottom"]}
+        safeAreaEdges={["bottom"]}
       >
         <View>
           <View style={styles.widespacing}>
@@ -98,7 +98,7 @@ export const ServiceSettingsScreen: FC<ServiceSettingsScreenProps> = observer(
             serviceImg={beardImg}
           />
         </View>
-      </Screen>
+      </Screen >
     )
   },
 )

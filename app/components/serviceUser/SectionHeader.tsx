@@ -13,14 +13,14 @@ export interface SectionHeaderProps {
   rightText?: string
   leftTextStyle?: TextStyle
   rightTextStyle?: TextStyle
-  navigate?: () => void;
+  onLeftTextPress?: () => void;
 }
 
 /**
  * Describe your component here
  */
 export const SectionHeader = observer(function SectionHeader(props: SectionHeaderProps) {
-  const { style, leftText, rightText,rightTextStyle, leftTextStyle, navigate } = props
+  const { style, leftText, rightText, rightTextStyle, leftTextStyle, onLeftTextPress } = props
   const $styles = [$container, style]
 
   return (
@@ -29,8 +29,8 @@ export const SectionHeader = observer(function SectionHeader(props: SectionHeade
         <Text text={leftText} weight="semiBold" size="sm" style={[styles.leftText, leftTextStyle]} />
         <TouchableOpacity>
           <Text text={rightText} weight="semiBold" size="sm" style={[styles.rightText, rightTextStyle]} onPress={() => {
-                navigate && navigate();
-              }}/>
+            onLeftTextPress && onLeftTextPress();
+          }} />
         </TouchableOpacity>
       </View>
     </View>

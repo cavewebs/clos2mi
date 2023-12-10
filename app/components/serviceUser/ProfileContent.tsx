@@ -5,6 +5,7 @@ import { colors } from "app/theme"
 import { Text } from "app/components/Text"
 import { Icon, IconTypes } from "../Icon"
 import Checkbox from "expo-checkbox"
+import { Pressable } from "@gluestack-ui/themed"
 
 export interface ProfileContentProps {
   /**
@@ -14,17 +15,19 @@ export interface ProfileContentProps {
   leftText: string
   rightText?: string
   rightIcon?: IconTypes
+  onPress?: ()=>void
 }
 
 /**
  * Describe your component here
  */
 export const ProfileContent = observer(function ProfileContent(props: ProfileContentProps) {
-  const { style, leftText, rightText, rightIcon } = props
+  const { style, leftText, rightText, rightIcon, onPress } = props
   const $styles = [$container, style]
 
   return (
-    <View style={$styles}>
+    <Pressable onPress={()=>onPress()} >
+    <View style={$styles} >
       <View style={styles.container}>
         <Text text={leftText} weight="normal" size="sm" />
 
@@ -37,6 +40,7 @@ export const ProfileContent = observer(function ProfileContent(props: ProfileCon
         </View>
       </View>
     </View>
+    </Pressable>
   )
 })
 

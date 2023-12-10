@@ -2,7 +2,7 @@ import React, { FC, useState } from "react"
 import { observer } from "mobx-react-lite"
 import { View, StyleSheet } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
-import { Header, Screen, Text, TextField, ImageUploader, Button } from "app/components"
+import { Header, Screen, Text, TextField, ImageUploader, Button, HeaderWithBackButton } from "app/components"
 import { screenContentContainer } from "app/styles/mainStyles"
 import { useNavigation } from "@react-navigation/native"
 import { colors } from "app/theme"
@@ -26,9 +26,9 @@ export const MainProfileScreen: FC<MainProfileScreenProps> = observer(function M
     <Screen
       preset="scroll"
       contentContainerStyle={screenContentContainer}
-      safeAreaEdges={["top", "bottom"]}
+      safeAreaEdges={["bottom"]}
     >
-      <Header title="mainProfile" leftIcon="back" onLeftPress={() => navigation.goBack()} />
+      <HeaderWithBackButton title="Main Profile" />
       <View>
         <Text
           preset="default"
@@ -122,7 +122,7 @@ export const MainProfileScreen: FC<MainProfileScreenProps> = observer(function M
         style={styles.close2meText}
       />
 
-      <Button preset="primary" text="Save and Continue" />
+      <Button preset="primary" text="Save and Continue" onPress={()=>navigation.goBack()} />
     </Screen>
   )
 })

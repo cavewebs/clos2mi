@@ -5,6 +5,7 @@ import { ViewStyle, StyleSheet } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
 import {
   Button,
+  HeaderWithBackButton,
   OptionPicker,
   OtherHeader,
   Screen,
@@ -30,9 +31,9 @@ export const ReportScreen: FC<ReportScreenProps> = observer(function ReportScree
       style={$root}
       preset="scroll"
       contentContainerStyle={screenContentContainer}
-      safeAreaEdges={["top", "bottom"]}
+      safeAreaEdges={[ "bottom"]}
     >
-      <OtherHeader pageTitle="Report" />
+       <HeaderWithBackButton title="Report" />
       <OptionPicker />
       <TextField
         label="Subject"

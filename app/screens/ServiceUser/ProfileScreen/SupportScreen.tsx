@@ -3,10 +3,10 @@ import React, { FC } from "react"
 import { observer } from "mobx-react-lite"
 import { ViewStyle, StyleSheet } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
-import { Button, OtherHeader, Screen, SectionHeader, Text, TextField } from "app/components"
+import { Button, HeaderWithBackButton, OtherHeader, Screen, SectionHeader, Text, TextField } from "app/components"
 import { screenContentContainer } from "app/styles/mainStyles"
 import { colors } from "app/theme"
-// import { useNavigation } from "@react-navigation/native"
+import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "app/models"
 
 interface SupportScreenProps extends AppStackScreenProps<"Support"> {}
@@ -16,10 +16,10 @@ export const SupportScreen: FC<SupportScreenProps> = observer(function SupportSc
   // const { someStore, anotherStore } = useStores()
 
   // Pull in navigation via hook
-  // const navigation = useNavigation()
+  const navigation = useNavigation()
   return (
-    <Screen style={$root} preset="scroll" contentContainerStyle={screenContentContainer} safeAreaEdges={["top", "bottom"]} >
-      <OtherHeader pageTitle="Support" />
+    <Screen style={$root} preset="scroll" contentContainerStyle={screenContentContainer} safeAreaEdges={["bottom"]} >
+      <HeaderWithBackButton title="Support" />
       <TextField
         label="Subject"
         keyboardType="default"
@@ -45,6 +45,7 @@ export const SupportScreen: FC<SupportScreenProps> = observer(function SupportSc
         textStyle={styles.buttonText}
         pressedStyle={styles.pressedButton}
         pressedTextStyle={styles.pressedButtonText}
+        onPress={()=>navigation.goBack()}
       />
     </Screen>
   )

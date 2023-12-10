@@ -1,4 +1,4 @@
-package com.close2mi.app.sp;
+package com.close2mi.app;
 
 import android.app.Application;
 import android.content.res.Configuration;

@@ -4,32 +4,34 @@ import React, { FC } from "react"
 import { observer } from "mobx-react-lite"
 import { Image, StyleSheet, View, ViewStyle } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
-import { Button, Icon, OtherHeader, Screen, SectionHeader, Text, TextField } from "app/components"
+import { Button, CustomCheckBox, DateTimePicker, HeaderWithBackButton, Icon, OtherHeader, PopularSearches, Screen, SectionHeader, Text, TextField } from "app/components"
 import { screenContentContainer } from "app/styles/mainStyles"
 import { works } from "app/components/serviceUser/DummyData/BookingScreenData"
 import { colors } from "app/theme"
 import Checkbox from "expo-checkbox"
 import { addressType } from "app/components/serviceUser/DummyData/AddAddressConstants"
-// import { useNavigation } from "@react-navigation/native"
+import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "app/models"
 
-interface BookServiceScreenProps extends AppStackScreenProps<"BookService"> {}
+interface BookServiceScreenProps extends AppStackScreenProps<"BookService"> { }
 
-export const BookServiceScreen: FC<BookServiceScreenProps> = observer(function BookServiceScreen() {
+export const BookServiceScreen: FC<BookServiceScreenProps> = observer(function BookServiceScreen(props) {
   // Pull in one of our MST stores
   // const { someStore, anotherStore } = useStores()
-
+  const { params } = props.route.params || {}; // Perform null-checking
   // Pull in navigation via hook
-  // const navigation = useNavigation()
+  console.log("BOO SRE", params)
+
+  const navigation = useNavigation()
   return (
     <Screen
       style={$root}
       preset="scroll"
       contentContainerStyle={screenContentContainer}
-      safeAreaEdges={["top", "bottom"]}
+      safeAreaEdges={["bottom"]}
     >
-      <OtherHeader pageTitle="Book Service" />
-      <SectionHeader leftText="Previous Work" rightText="View All" />
+      <HeaderWithBackButton title="Book Service" />
+      <SectionHeader leftText="Previous Work" rightText="View All" onLeftTextPress={() => navigation.navigate("PreviousWork")} />
       <View style={styles.worksContainer}>
         {works.map((work, index) => (
           <Image key={index} source={work} />
@@ -37,7 +39,7 @@ export const BookServiceScreen: FC<BookServiceScreenProps> = observer(function B
       </View>
 
       <View style={styles.containerStyle}>
-        <Text text="Hair Cut" size="md" weight="light" />
+        <Text text={params?.serviceName ? params.serviceName : "Hair Cut"} size="md" weight="medium" />
         <View style={styles.container}>
           <Icon icon="hourglass" size={12} />
           <Text text="30 minutes" size="sm" weight="medium" style={styles.textColor} />
@@ -57,16 +59,29 @@ export const BookServiceScreen: FC<BookServiceScreenProps> = observer(function B
         inputWrapperStyle={styles.textField}
         containerStyle={styles.textContainer}
         keyboardType="numbers-and-punctuation"
+        status="disabled"
+        RightAccessory={() => <Icon icon="date" size={24} style={{ alignContent: "center", alignItems: "center", justifyContent: "center", margin: 5 }} />}
       />
 
       <SectionHeader leftText="Available Slots" />
+      <View style={styles.selectWrapper}>
+        {addressType.map((type, index) => (
+          <View key={type.id} style={styles.selectWrapper}>
+            <PopularSearches text={index + 1 + ":00PM"} key={"male"} textFontWeight="semiBold" />
+            <PopularSearches text={index + 4 + ":00PM"} key={"male2"} textFontWeight="semiBold" />
+            <PopularSearches text={index + 7 + ":00PM"} key={"male3"} textFontWeight="semiBold" />
+          </View>
+        ))}
+      </View>
+
+
 
       <SectionHeader leftText="Service Location" />
       <View style={styles.selectWrapper}>
         {addressType.map((type) => (
           <View key={type.id} style={styles.selectWrapper}>
             <Text text={type.type} />
-            <Checkbox />
+            <CustomCheckBox />
           </View>
         ))}
       </View>
@@ -77,15 +92,16 @@ export const BookServiceScreen: FC<BookServiceScreenProps> = observer(function B
       </View>
 
       <View style={styles.buttonContainer}>
-        <Button style={styles.cancelButton}>
+        <Button style={styles.cancelButton} onPress={() => navigation.navigate("ServiceUser", { screen: "Cart", params: params })}>
           <Text style={styles.cancelButtonText} text="Add to Cart" />
         </Button>
         <Button
-          text={"Button Appointment"}
+          text={"Book Appointment"}
           style={styles.acceptButton}
           textStyle={styles.buttonText}
           pressedStyle={styles.pressedButton}
           pressedTextStyle={styles.pressedButtonText}
+          onPress={() => navigation.navigate("ConfirmPayment")}
         />
       </View>
     </Screen>
@@ -104,10 +120,10 @@ const styles = StyleSheet.create({
   },
   acceptButtonText: { fontSize: 14, fontWeight: "500", color: colors.palette.primary50 },
   buttonContainer: {
-    display: "flex",
     flexDirection: "row",
     gap: 8,
     justifyContent: "space-between",
+    paddingVertical: 20
   },
   pressedButton: {
     backgroundColor: "#F5F5FF",
@@ -116,7 +132,7 @@ const styles = StyleSheet.create({
     color: colors.palette.primary600,
   },
   buttonText: {
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: "600",
     color: "#F5F5FF",
     textAlign: "center",
@@ -126,17 +142,21 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     gap: 8,
+    backgroundColor: colors.palette.primary50,
+    borderRadius: 30,
+    paddingVertical: 4,
+    paddingHorizontal: 8
   },
   containerStyle: {
     alignItems: "center",
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: 10,
+    marginVertical: 20,
   },
   priceContainer: {
-    backgroundColor:"#F9F9F9",
-    borderRadius:16,
+    backgroundColor: "#F9F9F9",
+    borderRadius: 16,
     display: "flex",
     flexDirection: "column",
     gap: 8,
@@ -145,6 +165,7 @@ const styles = StyleSheet.create({
   selectWrapper: {
     display: "flex",
     flexDirection: "row",
+    flexWrap: "wrap",
     gap: 8,
     justifyContent: "space-between",
     marginBottom: 5,
@@ -157,6 +178,8 @@ const styles = StyleSheet.create({
   },
   textField: {
     backgroundColor: colors.palette.neutral100,
+    alignContent: "center",
+    alignItems: "center"
   },
   worksContainer: {
     display: "flex",
@@ -168,7 +191,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.palette.primary50,
     borderRadius: 24,
     borderColor: "#D0D5DD",
-    width: "48%",
+    paddingHorizontal: 26
   },
   cancelButtonText: { fontSize: 14, fontWeight: "500", color: "#374151" },
 })

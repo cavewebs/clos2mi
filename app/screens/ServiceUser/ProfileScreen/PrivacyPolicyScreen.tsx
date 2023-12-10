@@ -2,7 +2,7 @@ import React, { FC } from "react"
 import { observer } from "mobx-react-lite"
 import { StyleSheet, View, ViewStyle } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
-import { OtherHeader, Screen, Text } from "app/components"
+import { HeaderWithBackButton, OtherHeader, Screen, Text } from "app/components"
 import { screenContentContainer } from "app/styles/mainStyles"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "app/models"
@@ -21,9 +21,9 @@ export const PrivacyPolicyScreen: FC<PrivacyPolicyScreenProps> = observer(
         style={$root}
         preset="scroll"
         contentContainerStyle={screenContentContainer}
-        safeAreaEdges={["top", "bottom"]}
+        safeAreaEdges={["bottom"]}
       >
-        <OtherHeader pageTitle="Privacy Policy" />
+         <HeaderWithBackButton title="Privacy Policy" />
         <Text
           text="Close2mi understands the importance of protecting the privacy of its users. The information collected is used to market and improve the services we and our subsidiaries offer, to improve the Close2mi website and to contact you with updates to the website or for other marketing purposes."
           size="sm"

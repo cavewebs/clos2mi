@@ -27,7 +27,7 @@ export const MainHeader = observer(function MainHeader(props: MainHeaderProps) {
   const $styles = [$container, style]
 
   return (
-    <View style={$styles}>
+    <View style={$styles} >
       <View style={styles.containerStyle}>
         <Pressable onPress={() => onNamePress()} >
           <View style={styles.TextArea} >

@@ -3,7 +3,7 @@ import React, { FC } from "react"
 import { observer } from "mobx-react-lite"
 import { StyleSheet, Touchable, TouchableOpacity, View, ViewStyle } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
-import { Icon, OtherHeader, Screen, ServiceProviderCard, Text } from "app/components"
+import { HeaderWithBackButton, Icon, OtherHeader, Screen, ServiceProviderCard, Text } from "app/components"
 import { screenContentContainer } from "app/styles/mainStyles"
 import { colors } from "app/theme"
 // import { useNavigation } from "@react-navigation/native"
@@ -24,9 +24,9 @@ export const ViewBookingsScreen: FC<ViewBookingsScreenProps> = observer(
         style={$root}
         preset="scroll"
         contentContainerStyle={screenContentContainer}
-        safeAreaEdges={["top", "bottom"]}
+        safeAreaEdges={["bottom"]}
       >
-        <OtherHeader pageTitle="Booking" />
+         <HeaderWithBackButton title="Booking" />
         <TouchableOpacity>
           <ServiceProviderCard
             image={image}

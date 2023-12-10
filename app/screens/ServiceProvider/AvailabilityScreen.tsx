@@ -54,7 +54,7 @@ export const AvailabilityScreen: FC<AvailabilityScreenProps> = observer(
                 <TextField
                   value={input}
                   onChangeText={(value) => setInput(value)}
-                  RightAccessory={() => <Icon icon="carbonTime" />}
+                  RightAccessory={() => <Icon icon="carbonTime" style={styles.clockIcon} />}
                   placeholder="You Open"
                   inputWrapperStyle={styles.inputWrapper}
                 />
@@ -63,7 +63,7 @@ export const AvailabilityScreen: FC<AvailabilityScreenProps> = observer(
                 <TextField
                   value={input}
                   onChangeText={(value) => setInput(value)}
-                  RightAccessory={() => <Icon icon="carbonTime" />}
+                  RightAccessory={() => <Icon icon="carbonTime" style={styles.clockIcon} />}
                   placeholder="You Open"
                   inputWrapperStyle={styles.inputWrapper}
                 />
@@ -85,7 +85,7 @@ export const AvailabilityScreen: FC<AvailabilityScreenProps> = observer(
                       <TextField
                         value={input}
                         onChangeText={(value) => setInput(value)}
-                        RightAccessory={() => <Icon icon="carbonTime" />}
+                        RightAccessory={() => <Icon icon="carbonTime" style={styles.clockIcon} />}
                         placeholder="You Open"
                         inputWrapperStyle={styles.inputWrapper}
                       />
@@ -94,7 +94,7 @@ export const AvailabilityScreen: FC<AvailabilityScreenProps> = observer(
                       <TextField
                         value={input}
                         onChangeText={(value) => setInput(value)}
-                        RightAccessory={() => <Icon icon="carbonTime" />}
+                        RightAccessory={() => <Icon icon="carbonTime" style={styles.clockIcon} />}
                         placeholder="You Open"
                         inputWrapperStyle={styles.inputWrapper}
                       />
@@ -106,7 +106,7 @@ export const AvailabilityScreen: FC<AvailabilityScreenProps> = observer(
             />
           </View>
 
-          <Button preset="primary" text="Update" />
+          <Button preset="primary" text="Update" onPress={()=>navigation.goBack()} />
         </View>
       </Screen>
     )
@@ -134,6 +134,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingLeft: 8,
     paddingRight: 8,
+    marginRight: 5
+  },
+  clockIcon: {
+    marginRight: 5
   },
 
   // labelTxt: {

@@ -11,10 +11,12 @@ export interface CheckBoxProps {
    * An optional style override useful for padding & margin.
    */
   style?: StyleProp<ViewStyle>
-  label: string
-  onChange: (value: boolean, id: string) => void
+  checkboxSelectedStyle?: StyleProp<ViewStyle>
+  checkboxStyle?: StyleProp<ViewStyle>
+  label?: string
+  onChange?: (value: boolean, id: string) => void
   disabled?: boolean,
-  value: boolean,
+  value?: boolean,
   id?: string
 }
 
@@ -23,7 +25,7 @@ export interface CheckBoxProps {
  */
 export const CustomCheckBox = observer(function CustomCheckBox(props: CheckBoxProps) {
 
-  const { style, label, id, value, onChange, disabled = false } = props
+  const { style, label, id, checkboxSelectedStyle, checkboxStyle, value, onChange, disabled = false } = props
 
   const toggleCheckbox = () => {
     if (!disabled) {
@@ -41,9 +43,9 @@ export const CustomCheckBox = observer(function CustomCheckBox(props: CheckBoxPr
       <Text style={[styles.label, disabled && { color: '#999999' }]}>{label}</Text>
       <View style={styles.checkbox}>
         {value ? (
-          <Ionicons name="checkbox-outline" size={24} color={colors.tint} />
+          <Ionicons name="checkbox-outline" size={24} color={colors.tint} style={checkboxSelectedStyle} />
         ) : (
-          <Ionicons name="square-outline" size={24}  />
+          <Ionicons name="square-outline" size={24} style={checkboxStyle}  />
         )}
       </View>
     </TouchableOpacity>

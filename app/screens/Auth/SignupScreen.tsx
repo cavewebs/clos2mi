@@ -10,6 +10,7 @@ import {
   Button,
   Toggle,
   TextFieldAccessoryProps,
+  DateTimePicker,
 } from "app/components"
 import FlagSelector from "app/components/Custom/FlagSelector"
 import { screenContentContainer } from "app/styles/mainStyles"
@@ -18,10 +19,10 @@ import DatePicker from "react-native-datepicker"
 import Checkbox from "expo-checkbox"
 import { useStores } from "app/models"
 import { colors } from "app/theme"
-// import { useNavigation } from "@react-navigation/native"
+import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "app/models"
 
-interface SignupScreenProps extends AppStackScreenProps<"Signup"> {}
+interface SignupScreenProps extends AppStackScreenProps<"Signup"> { }
 
 export const SignupScreen: FC<SignupScreenProps> = observer(function SignupScreen() {
   const [isAuthPasswordHidden, setIsAuthPasswordHidden] = useState(true)
@@ -42,9 +43,16 @@ export const SignupScreen: FC<SignupScreenProps> = observer(function SignupScree
       validationError,
       userType,
       setUserType,
+      isAuthenticated
     },
   } = useStores()
+  const { onboardingStore: { hasCompletedOnboarding, setHasCompletedOnboarding }, } = useStores()
 
+  console.log("£Suduer", userType)
+
+  console.log("onboard", hasCompletedOnboarding)
+
+  console.log("Auth", isAuthenticated)
   const PasswordRightAccessory = useMemo(
     () =>
       function PasswordRightAccessory(props: TextFieldAccessoryProps) {
@@ -66,16 +74,20 @@ export const SignupScreen: FC<SignupScreenProps> = observer(function SignupScree
     setShowDatePicker(Platform.OS === "ios") // Close the picker on iOS
     setDate(currentDate)
   }
+  const register = () => {
+    setAuthToken(String(Date.now()))
+    navigation.navigate("OnboardingOtp")
+  }
 
   // Pull in navigation via hook
-  // const navigation = useNavigation()
+  const navigation = useNavigation()
   return (
     <Screen
       contentContainerStyle={screenContentContainer}
       safeAreaEdges={["bottom", "top"]}
       preset="scroll"
     >
-      <View style={{ marginTop: 20, marginBottom: 32 }}>
+      <View style={{ marginTop: 20, marginBottom: 22 }}>
         <Text
           preset="subheading"
           text="Sign Up"
@@ -97,14 +109,15 @@ export const SignupScreen: FC<SignupScreenProps> = observer(function SignupScree
         />
       </View>
       <View style={styles.inputGap}>
-        <TextField value={surname} onChangeText={(value) => setSurname(value)} label="Surname" />
+        <TextField value={surname} onChangeText={(value) => setSurname(value)} label="Last Name" />
       </View>
       <View style={styles.inputGap}>
         <TextField
           value={email}
           onChangeText={(value) => setEmail(value)}
           label="Email Address"
-          LabelTextProps={{ style: { color: colors.palette.primary600 } }}
+          LabelTextProps={{ style: { color: colors.text } }}
+          keyboardType="email-address"
         />
       </View>
 
@@ -117,12 +130,19 @@ export const SignupScreen: FC<SignupScreenProps> = observer(function SignupScree
           display="default"
           onChange={handleDateChange}
         /> */}
-        <DatePicker
+        {/* <DatePicker
           date={date}
           mode="date"
           format="YYYY-MM-DD"
           onDateChange={() => setDate(date)}
           style={styles.dateStyle}
+        /> */}
+        <TextField
+          value={date}
+          onChangeText={(value) => setDate(value)}
+          label="Date of Birth"
+          keyboardType="numbers-and-punctuation"
+          RightAccessory={() => <Icon icon="Calendar" style={{alignSelf: "center", margin: 5}} />}
         />
       </View>
 
@@ -161,7 +181,7 @@ export const SignupScreen: FC<SignupScreenProps> = observer(function SignupScree
         />
       </View>
 
-      <Button preset="primary" text="Proceed" style={styles.inputGap} />
+      <Button preset="primary" text="Proceed" style={styles.btn} onPress={()=>register()} />
 
       <View style={styles.checkboxContainer}>
         <Checkbox
@@ -177,11 +197,11 @@ export const SignupScreen: FC<SignupScreenProps> = observer(function SignupScree
       </View>
 
       <View style={styles.bottomTextContainer}>
-        <Text size="xs" text="Already have an account?" style={{ textAlign: "center" }} />
+        <Text size="xs" text="Already have an account?" style={{ textAlign: "center" }} onPress={() => navigation.navigate("Signin")} />
         <Text
           size="xs"
           text="Sign In"
-          style={{ fontWeight: "400", color: colors.palette.primary600, textAlign: "center" }}
+          style={{ fontWeight: "400", color: colors.palette.primary600, textAlign: "center" }} onPress={() => navigation.navigate("Signin")}
         />
       </View>
     </Screen>
@@ -215,10 +235,15 @@ const styles = StyleSheet.create({
     gap: 4,
     alignItems: "center",
     justifyContent: "center",
+    marginVertical: 20
   },
 
   inputGap: {
-    marginBottom: 20,
+    marginBottom: 10,
+  },
+
+  btn: {
+    marginVertical: 20,
   },
 
   dateStyle: {
