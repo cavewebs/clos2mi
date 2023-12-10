@@ -11,7 +11,7 @@ import {
   ServiceProviderServicesScreen,
   ServiceProviderBookingsScreen,
   ServiceProviderProfileScreen,
-  BookViewScreen,
+  // BookViewScreen,
 } from "app/screens"
 
 export type ServiceProviderTabParamList = {

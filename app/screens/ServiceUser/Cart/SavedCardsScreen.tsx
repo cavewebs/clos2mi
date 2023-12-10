@@ -16,7 +16,12 @@ export const SavedCardsScreen: FC<SavedCardsScreenProps> = observer(function Sav
   // Pull in navigation via hook
   // const navigation = useNavigation()
   return (
-    <Screen style={$root} preset="scroll" contentContainerStyle={screenContentContainer} safeAreaEdges={["top", "bottom"]} >
+    <Screen
+      style={$root}
+      preset="scroll"
+      contentContainerStyle={screenContentContainer}
+      safeAreaEdges={["top", "bottom"]}
+    >
       <Text preset="heading" text="savedCards" />
     </Screen>
   )

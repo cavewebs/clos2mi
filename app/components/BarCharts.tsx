@@ -2,7 +2,7 @@ import * as React from "react"
 import { StyleProp, TextStyle, View, ViewStyle, Dimensions } from "react-native"
 import { observer } from "mobx-react-lite"
 import { colors, typography } from "app/theme"
-// import { BarChart } from "react-native-chart-kit"
+import { BarChart } from "react-native-chart-kit"
 
 type Datasets = {
   data: number[]
@@ -50,18 +50,17 @@ export const BarCharts = observer(function BarCharts(props: BarChartsProps) {
   const screenWidth = Dimensions.get("window").width
 
   return (
-    // <BarChart
-    //   style={{ borderRadius: 16 }}
-    //   data={data}
-    //   width={343}
-    //   height={162}
-    //   yAxisLabel="$"
-    //   chartConfig={chartConfig}
-    //   verticalLabelRotation={0}
-    //   yAxisSuffix=""
-    //   fromZero={false}
-    // />
-    <></>
+    <BarChart
+      style={{ borderRadius: 16 }}
+      data={data}
+      width={343}
+      height={162}
+      yAxisLabel="$"
+      chartConfig={chartConfig}
+      verticalLabelRotation={0}
+      yAxisSuffix=""
+      fromZero={false}
+    />
   )
 })
 

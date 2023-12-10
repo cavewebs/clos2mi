@@ -16,13 +16,14 @@ import { screenContentContainer } from "app/styles/mainStyles"
 import { colors } from "app/theme"
 import { bookingsData } from "app/DummyData/BookingsData"
 
-// import { useNavigation } from "@react-navigation/native"
+import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "app/models"
 
 interface BookingsScreenProps extends AppStackScreenProps<"ServiceProviderBookings"> {}
 
 export const ServiceProviderBookingsScreen: FC<BookingsScreenProps> = observer(
   function BookingsScreen() {
+    const navigation = useNavigation()
     const [searchItem, setSearchItem] = useState<string>("")
     // Pull in one of our MST stores
     // const { someStore, anotherStore } = useStores()
@@ -65,10 +66,18 @@ export const ServiceProviderBookingsScreen: FC<BookingsScreenProps> = observer(
             placeholder="Search"
             inputWrapperStyle={styles.inputWrapperStyle}
           />
-          <SectionText subheading="Pending Bookings" text="View All" />
+          <SectionText
+            subheading="Pending Bookings"
+            text="View All"
+            onPress={() => navigation.navigate("ViewPendingBookings")}
+          />
           <Booking data={bookingsData.filter((data) => data.status === "Upcoming")} />
 
-          <SectionText subheading="Bookings" text="View All" />
+          <SectionText
+            subheading="Bookings"
+            text="View All"
+            onPress={() => navigation.navigate("ViewCurrentBookings")}
+          />
           <View style={styles.tabs}>
             {homeTab.map((item, i) => (
               <Button
@@ -111,9 +120,7 @@ const styles = StyleSheet.create({
   inputWrapperStyle: {
     paddingHorizontal: 24,
     borderRadius: 24,
-    justifyContent: "center",
     alignItems: "center",
-    height: 40,
   },
 
   buttonWrapper: {

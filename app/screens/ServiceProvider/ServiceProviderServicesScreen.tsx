@@ -13,7 +13,7 @@ import fourthBeard from "assets/images/trim-beard3.png"
 import fifthBeard from "assets/images/trim-beard4.png"
 import sixthBeard from "assets/images/trim-beard5.png"
 import seventhBeard from "assets/images/trim-beard6.png"
-// import { useNavigation } from "@react-navigation/native"
+import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "app/models"
 
 interface ServiceProviderServicesScreenProps
@@ -85,7 +85,7 @@ export const ServiceProviderServicesScreen: FC<ServiceProviderServicesScreenProp
     // const { someStore, anotherStore } = useStores()
 
     // Pull in navigation via hook
-    // const navigation = useNavigation()
+    const navigation = useNavigation()
     return (
       <Screen preset="auto" contentContainerStyle={screenContentContainer} safeAreaEdges={["top"]}>
         <View>
@@ -99,7 +99,7 @@ export const ServiceProviderServicesScreen: FC<ServiceProviderServicesScreenProp
                 style={{ color: colors.palette.primary600 }}
               />
 
-              <Icon icon="add" />
+              <Icon icon="add" onPress={() => navigation.navigate("ServiceDetail")} />
             </View>
           </View>
 

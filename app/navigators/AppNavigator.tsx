@@ -50,6 +50,7 @@ export type AppStackParamList = {
   Otp: undefined
   Signin: undefined
   ResetPassword: undefined
+  AllNotifications: undefined
 
   // ServiceUser Screens
   PrivacyPolicy: undefined
@@ -63,7 +64,6 @@ export type AppStackParamList = {
   InspiredByClose2Mi: undefined
   PopularInYourArea: undefined
   EditDetails: undefined
-  ChangePassword: undefined
   SavedAddress: undefined
   AddNewAddress: undefined
   ViewBookings: undefined
@@ -74,7 +74,6 @@ export type AppStackParamList = {
   TermAndConditions: undefined
   Report: undefined
   Support: undefined
-
 
   // ServiceProvider Screens
   ServiceProviderBookings: undefined
@@ -89,7 +88,6 @@ export type AppStackParamList = {
   BookView: undefined
   ServiceDetail: undefined
   Availability: undefined
-  PendingBookings: undefined
   TermsAndConditions: undefined
   Reviews: undefined
   Earnings: undefined
@@ -97,6 +95,7 @@ export type AppStackParamList = {
   Reports: undefined
   AvailabilityCalendar: undefined
   ProviderSupport: undefined
+  ChangePassword: undefined
   AddAddress: undefined
   ProviderNotification: undefined
   AccountDetails: undefined
@@ -105,8 +104,10 @@ export type AppStackParamList = {
   OfferServices: undefined
   MainDetail: undefined
   MainProfile: undefined
-
-  AllNotifications: undefined
+  EnableNotifications: undefined
+  SubmitNotification: undefined
+  ViewPendingBookings: undefined
+  ViewCurrentBookings: undefined
   // IGNITE_GENERATOR_ANCHOR_APP_STACK_PARAM_LIST
 }
 
@@ -155,18 +156,30 @@ const AppStack = observer(function AppStack() {
               <Stack.Screen name="ServiceUser" component={ServiceUserNavigator} />
               <Stack.Screen name="AddAddress" component={Screens.AddAddressScreen} />
               <Stack.Screen name="ServiceUserHome" component={Screens.ServiceUserHomeScreen} />
-              <Stack.Screen name="ServiceUserBookings" component={Screens.ServiceUserBookingsScreen} />
+              <Stack.Screen
+                name="ServiceUserBookings"
+                component={Screens.ServiceUserBookingsScreen}
+              />
               <Stack.Screen name="ServiceUserCart" component={Screens.ServiceUserCartScreen} />
-              <Stack.Screen name="ServiceUserProfile" component={Screens.ServiceUserProfileScreen} />
+              <Stack.Screen
+                name="ServiceUserProfile"
+                component={Screens.ServiceUserProfileScreen}
+              />
               <Stack.Screen name="Search" component={Screens.SearchScreen} />
               <Stack.Screen name="SearchResult" component={Screens.SearchResultScreen} />
-              <Stack.Screen name="InspiredByClose2Mi" component={Screens.InspiredByClose2MiScreen} />
+              <Stack.Screen
+                name="InspiredByClose2Mi"
+                component={Screens.InspiredByClose2MiScreen}
+              />
               <Stack.Screen name="PopularInYourArea" component={Screens.PopularInYourAreaScreen} />
               <Stack.Screen name="EditDetails" component={Screens.EditDetailsScreen} />
               <Stack.Screen name="SavedAddress" component={Screens.SavedAddressScreen} />
               <Stack.Screen name="AddNewAddress" component={Screens.AddNewAddressScreen} />
               <Stack.Screen name="ViewBookings" component={Screens.ViewBookingsScreen} />
-              <Stack.Screen name="ServiceProviderDetails" component={Screens.ServiceProviderDetailsScreen} />
+              <Stack.Screen
+                name="ServiceProviderDetails"
+                component={Screens.ServiceProviderDetailsScreen}
+              />
               <Stack.Screen name="Services" component={Screens.ServicesScreen} />
               <Stack.Screen name="BookService" component={Screens.BookServiceScreen} />
               <Stack.Screen name="SavedCards" component={Screens.SavedCardsScreen} />
@@ -179,6 +192,7 @@ const AppStack = observer(function AppStack() {
             <>
               {/* Service Provider Screens */}
 
+              <Stack.Screen name="ServiceUser" component={ServiceProviderNavigator} />
 
               <Stack.Screen
                 name="ServiceProviderHome"
@@ -188,7 +202,7 @@ const AppStack = observer(function AppStack() {
                 name="ServiceProviderBookings"
                 component={Screens.ServiceProviderBookingsScreen}
               />
-              <Stack.Screen name="PendingBookings" component={Screens.PendingBookingsScreen} />
+              {/* <Stack.Screen name="PendingBookings" component={Screens.PendingBookingsScreen} /> */}
               <Stack.Screen
                 name="ServiceProviderServices"
                 component={Screens.ServiceProviderServicesScreen}
@@ -198,7 +212,7 @@ const AppStack = observer(function AppStack() {
                 component={Screens.ServiceProviderProfileScreen}
               />
 
-              <Stack.Screen name="ServiceSettings" component={Screens.ServiceSettingsScreen} />
+              {/* <Stack.Screen name="ServiceSettings" component={Screens.ServiceSettingsScreen} /> */}
               <Stack.Screen name="Earnings" component={Screens.EarningsScreen} />
               <Stack.Screen
                 name="AvailabilityCalendar"
@@ -219,6 +233,7 @@ const AppStack = observer(function AppStack() {
             </>
           )}
           <Stack.Screen name="Notifications" component={Screens.NotificationsScreen} />
+          <Stack.Screen name="AllNotifications" component={Screens.AllNotificationsScreen} />
           <Stack.Screen name="Address" component={Screens.AddAddressScreen} />
         </>
       ) : (
@@ -251,11 +266,18 @@ const AppStack = observer(function AppStack() {
       <Stack.Screen name="MainProfile" component={Screens.MainProfileScreen} />
       {/* Service Provider Screens */}
       <Stack.Screen name="ServiceProviderHome" component={Screens.ServiceProviderHomeScreen} />
-      <Stack.Screen name="ServiceProviderBookings" component={Screens.ServiceProviderBookingsScreen} />
-      <Stack.Screen name="ServiceProviderServices" component={Screens.ServiceProviderServicesScreen} />
-      <Stack.Screen name="ServiceProviderProfile" component={Screens.ServiceProviderProfileScreen} />
-
-
+      <Stack.Screen
+        name="ServiceProviderBookings"
+        component={Screens.ServiceProviderBookingsScreen}
+      />
+      <Stack.Screen
+        name="ServiceProviderServices"
+        component={Screens.ServiceProviderServicesScreen}
+      />
+      <Stack.Screen
+        name="ServiceProviderProfile"
+        component={Screens.ServiceProviderProfileScreen}
+      />
 
       <Stack.Screen name="AllNotifications" component={Screens.AllNotificationsScreen} />
       {/* IGNITE_GENERATOR_ANCHOR_APP_STACK_SCREENS */}
@@ -264,7 +286,7 @@ const AppStack = observer(function AppStack() {
 })
 
 export interface NavigationProps
-  extends Partial<React.ComponentProps<typeof NavigationContainer>> { }
+  extends Partial<React.ComponentProps<typeof NavigationContainer>> {}
 
 export const AppNavigator = observer(function AppNavigator(props: NavigationProps) {
   const colorScheme = useColorScheme()
