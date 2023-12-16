@@ -11,6 +11,7 @@ import {
   ServiceProviderServicesScreen,
   ServiceProviderBookingsScreen,
   ServiceProviderProfileScreen,
+  AvailabilityCalendarScreen,
   // BookViewScreen,
 } from "app/screens"
 

@@ -9,7 +9,7 @@ import { colors } from "app/theme"
 import bro from "assets/images/bro.png"
 // import { useStores } from "app/models"
 
-interface SubmitNotificationScreenProps extends AppStackScreenProps<"SubmitNotification"> { }
+interface SubmitNotificationScreenProps extends AppStackScreenProps<"SubmitNotification"> {}
 
 export const SubmitNotificationScreen: FC<SubmitNotificationScreenProps> = observer(
   function SubmitNotificationScreen() {
@@ -43,8 +43,12 @@ export const SubmitNotificationScreen: FC<SubmitNotificationScreenProps> = obser
           style={styles.bottomText}
         />
 
-        <Button preset="primary" text="View Account" />
-      </Screen >
+        <Button
+          preset="primary"
+          text="View Account"
+          onPress={() => navigation.navigate("OnboardingAddAddress")}
+        />
+      </Screen>
     )
   },
 )

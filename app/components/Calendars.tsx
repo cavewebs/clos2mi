@@ -1,6 +1,7 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { StyleSheet, View, Button, Platform } from "react-native"
 import * as Calendar from "expo-calendar"
+import CalendarPicker from "react-native-calendar-picker"
 import { observer } from "mobx-react-lite"
 import { colors, typography } from "app/theme"
 import { Text } from "app/components/Text"
@@ -49,6 +50,7 @@ async function createCalendar() {
 }
 
 export const Calendars = observer(function Calendars(props: CalendarProps) {
+  const [selectedDate, setSelectedDate] = useState(new Date())
   useEffect(() => {
     ;(async () => {
       const { status } = await Calendar.requestCalendarPermissionsAsync()
@@ -61,7 +63,7 @@ export const Calendars = observer(function Calendars(props: CalendarProps) {
   }, [])
   return (
     <View>
-      <Button title="Create a new calendar" onPress={createCalendar} />
+      <CalendarPicker onDateChange={setSelectedDate} />
     </View>
   )
 })

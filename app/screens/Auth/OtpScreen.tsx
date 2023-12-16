@@ -9,7 +9,7 @@ import { useNavigation } from "@react-navigation/native"
 import { useStores } from "app/models"
 // import { useStores } from "app/models"
 
-interface OtpScreenProps extends AppStackScreenProps<"Otp"> { }
+interface OtpScreenProps extends AppStackScreenProps<"Otp"> {}
 
 export const OtpScreen: FC<OtpScreenProps> = observer(function OtpScreen() {
   const [otp, setOtp] = useState(["", "", "", "", "", ""])
@@ -23,10 +23,12 @@ export const OtpScreen: FC<OtpScreenProps> = observer(function OtpScreen() {
       validationError,
       userType,
       logout,
-      isAuthenticated
+      isAuthenticated,
     },
   } = useStores()
-  const { onboardingStore: { hasCompletedOnboarding, setHasCompletedOnboarding }, } = useStores()
+  const {
+    onboardingStore: { hasCompletedOnboarding, setHasCompletedOnboarding },
+  } = useStores()
   // useEffect(()=>{
   //   hasCompletedOnboarding ? navigation.navigate("ServiceProvider") : navigation.navigate("ServiceUser")
   // }, [])
@@ -58,9 +60,8 @@ export const OtpScreen: FC<OtpScreenProps> = observer(function OtpScreen() {
     if (hasCompletedOnboarding) {
       userType == "sp" ? navigation.navigate("ServiceProvider") : navigation.navigate("ServiceUser")
     } else {
-      navigation.navigate("EnableLocation")
+      userType == "sp" ? navigation.navigate("MainProfile") : navigation.navigate("MainProfile")
     }
-
   }
 
   // Pull in one of our MST stores
@@ -77,11 +78,7 @@ export const OtpScreen: FC<OtpScreenProps> = observer(function OtpScreen() {
           text="Enter the 6-digit authentication code sent to "
           style={styles.labelText}
         />
-        <Text
-          size="xs"
-          text="+44 909 633 1152"
-          style={styles.phoneNo}
-        />
+        <Text size="xs" text="+44 909 633 1152" style={styles.phoneNo} />
 
         <View style={styles.inputWrapper}>
           {otp.map((text, index) => (
@@ -129,7 +126,6 @@ const styles = StyleSheet.create({
   phoneNo: {
     textAlign: "center",
     marginBottom: 16,
-
   },
 
   inputWrapper: {

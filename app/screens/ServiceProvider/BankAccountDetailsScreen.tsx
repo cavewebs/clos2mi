@@ -8,7 +8,7 @@ import { useNavigation } from "@react-navigation/native"
 import { colors } from "app/theme"
 // import { useStores } from "app/models"
 
-interface BankAccountDetailsScreenProps extends AppStackScreenProps<"BankAccountDetails"> { }
+interface BankAccountDetailsScreenProps extends AppStackScreenProps<"BankAccountDetails"> {}
 
 export const BankAccountDetailsScreen: FC<BankAccountDetailsScreenProps> = observer(
   function BankAccountDetailsScreen() {
@@ -117,8 +117,12 @@ export const BankAccountDetailsScreen: FC<BankAccountDetailsScreenProps> = obser
           </View>
         </View>
 
-        <Button preset="primary" text="Submit" onPress={() => { }} />
-      </Screen >
+        <Button
+          preset="primary"
+          text="Submit"
+          onPress={() => navigation.navigate("ProviderSubscription")}
+        />
+      </Screen>
     )
   },
 )

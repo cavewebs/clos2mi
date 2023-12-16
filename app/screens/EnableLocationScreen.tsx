@@ -10,21 +10,19 @@ import { useStores } from "app/models"
 
 const NotificationImage = require("../../assets/images/notification-bro.png")
 
-interface EnableLocationScreenProps extends AppStackScreenProps<"EnableLocation"> { }
+interface EnableLocationScreenProps extends AppStackScreenProps<"EnableLocation"> {}
 
 export const EnableLocationScreen: FC<EnableLocationScreenProps> = observer(
   function EnableLocationScreen() {
     // Pull in one of our MST stores
     // const { someStore, anotherStore } = useStores()
     const {
-      authenticationStore: {
-        setAuthToken,
-        userType,
-        logout
-      },
+      authenticationStore: { setAuthToken, userType, logout },
     } = useStores()
 
-    const { onboardingStore: { hasCompletedOnboarding, setHasCompletedOnboarding }, } = useStores()
+    const {
+      onboardingStore: { hasCompletedOnboarding, setHasCompletedOnboarding },
+    } = useStores()
 
     const [showModal, setShowModal] = React.useState(false)
 
@@ -37,9 +35,9 @@ export const EnableLocationScreen: FC<EnableLocationScreenProps> = observer(
         if (hasCompletedOnboarding) {
           navigation.goBack()
         } else {
-          navigation.navigate("OnboardingAddAddress")
+          navigation.navigate("BankAccountDetails")
         }
-      }, 1000);
+      }, 1000)
     }
     return (
       <Screen preset="fixed">
@@ -53,7 +51,8 @@ export const EnableLocationScreen: FC<EnableLocationScreenProps> = observer(
           <View>
             <Text style={styles.title}>Enable Location</Text>
             <Text style={styles.notificationBodyText}>
-              Close2mi would like to get your location to ensure you see businesses that are close to your location
+              Close2mi would like to get your location to ensure you see businesses that are close
+              to your location
             </Text>
           </View>
           <View>
@@ -145,6 +144,4 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     textAlign: "center",
   },
-
-
 })

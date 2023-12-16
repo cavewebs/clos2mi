@@ -115,7 +115,7 @@ export const iconRegistry = {
   Home: require("../../assets/icons/Home.png"),
   market: require("../../assets/icons/market.png"),
   Calendar: require("../../assets/icons/Calendar.png"),
-  scissors: require("../../assets/icons/scissors.png"),
+  scissors: require("../../assets/icons/Scissors.png"),
   BiClock: require("../../assets/icons/bi_clock.png"),
   HourGlass: require("../../assets/icons/hourglass.png"),
   addService: require("../../assets/icons/table-material.png"),

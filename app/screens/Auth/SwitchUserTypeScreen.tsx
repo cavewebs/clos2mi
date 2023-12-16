@@ -1,8 +1,8 @@
 import React, { FC, useState } from "react"
 import { observer } from "mobx-react-lite"
-import { ViewStyle, View, StyleSheet, TouchableOpacity, } from "react-native"
+import { ViewStyle, View, StyleSheet, TouchableOpacity } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
-import { Screen, Text, Button, Icon, } from "app/components"
+import { Screen, Text, Button, Icon } from "app/components"
 import { useStores } from "app/models"
 import { screenContentContainer } from "app/styles/mainStyles"
 import { colors, spacing } from "app/theme"
@@ -28,7 +28,7 @@ export const SwitchUserTypeScreen: FC<SwitchUserTypeScreenProps> = observer(
     const { userType } = authenticationStore
     const [isChecked, setIsChecked] = useState(false)
     const [noUserSelected, setNouserSelected] = useState(false)
-    const toast = useToast();
+    const toast = useToast()
 
     // Pull in navigation via hook
     const handleUserSelection = (userType: "su" | "sp") => {
@@ -39,7 +39,7 @@ export const SwitchUserTypeScreen: FC<SwitchUserTypeScreenProps> = observer(
 
     const proceed = () => {
       if (!isChecked) {
-        setNouserSelected(true);
+        setNouserSelected(true)
         ToastT()
         return
       }
@@ -78,9 +78,9 @@ export const SwitchUserTypeScreen: FC<SwitchUserTypeScreenProps> = observer(
     }
     return (
       <Screen
-      style={{flex: 1}}
+        style={{ flex: 1 }}
         preset="auto"
-        contentContainerStyle={[screenContentContainer, {flex: 1}]}
+        contentContainerStyle={[screenContentContainer, { flex: 1 }]}
         safeAreaEdges={["top", "bottom"]}
       >
         <View style={styles.container}>
@@ -164,7 +164,7 @@ export const SwitchUserTypeScreen: FC<SwitchUserTypeScreenProps> = observer(
             </TouchableOpacity>
           </View>
           <View style={styles.bottomView}>
-            <Button onPress={()=>proceed()} text="Proceed" preset="primary" />
+            <Button onPress={() => proceed()} text="Proceed" preset="primary" />
           </View>
         </View>
       </Screen>

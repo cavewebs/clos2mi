@@ -39,16 +39,24 @@ export type ServiceDetailsParamList = {
   data: {
     serviceName: string
     icon: string
-    serviceOfferings: [{
-      categoryName: string
-      icon: string, offerName: string, price: number, duration: number
-    }]
+    serviceOfferings: [
+      {
+        categoryName: string
+        icon: string
+        offerName: string
+        price: number
+        duration: number
+      },
+    ]
   }
 }
 export type ServiceDetailParamList = {
   data: {
     categoryName: string
-    icon: string, offerName: string, price: number, duration: number
+    icon: string
+    offerName: string
+    price: number
+    duration: number
   }
 }
 export type OnboardingParamList = {
@@ -136,10 +144,11 @@ export type AppStackParamList = {
   SwitchUserType: undefined
   ForgotPassword: undefined
   MapSearch: undefined
+  OnboardingOtp: NavigatorScreenParams<OnboardingParamList>
   EnableLocation: NavigatorScreenParams<OnboardingParamList>
   EnableNotifications: NavigatorScreenParams<OnboardingParamList>
   OnboardingAddAddress: NavigatorScreenParams<OnboardingParamList>
-  OnboardingOtp: NavigatorScreenParams<OnboardingParamList>
+
   OnboardingSetupProfile: NavigatorScreenParams<OnboardingParamList>
   // IGNITE_GENERATOR_ANCHOR_APP_STACK_PARAM_LIST
 }
@@ -210,7 +219,10 @@ const AppStack = observer(function AppStack() {
                     name="InspiredByClose2Mi"
                     component={Screens.InspiredByClose2MiScreen}
                   />
-                  <Stack.Screen name="PopularInYourArea" component={Screens.PopularInYourAreaScreen} />
+                  <Stack.Screen
+                    name="PopularInYourArea"
+                    component={Screens.PopularInYourAreaScreen}
+                  />
                   <Stack.Screen name="EditDetails" component={Screens.EditDetailsScreen} />
                   <Stack.Screen name="ViewBookings" component={Screens.ViewBookingsScreen} />
                   <Stack.Screen
@@ -225,26 +237,38 @@ const AppStack = observer(function AppStack() {
                 </>
               ) : (
                 <>
+                  <Stack.Screen name="OnboardingOtp" component={Screens.OtpScreen} />
                   <Stack.Screen name="EnableLocation" component={Screens.EnableLocationScreen} />
                   <Stack.Screen name="OnboardingAddAddress" component={Screens.AddAddressScreen} />
-                  <Stack.Screen name="EnableNotifications" component={Screens.NotificationsScreen} />
-                  <Stack.Screen name="OnboardingOtp" component={Screens.OtpScreen} />
-
+                  <Stack.Screen
+                    name="EnableNotifications"
+                    component={Screens.NotificationsScreen}
+                  />
                 </>
               )}
-
             </>
           ) : (
             <>
-
               {hasCompletedOnboarding ? (
                 <>
                   {/* Service Provider Screens */}
                   <Stack.Screen name="ServiceProvider" component={ServiceProviderNavigator} />
+
+                  <Stack.Screen
+                    name="ServiceProviderHome"
+                    component={Screens.ServiceProviderHomeScreen}
+                  />
+
                   <Stack.Screen name="AccountDetails" component={Screens.AccountDetailsScreen} />
-                  <Stack.Screen name="ServiceProviderHome" component={Screens.ServiceProviderHomeScreen} />
-                  <Stack.Screen name="ServiceProviderBookings" component={Screens.ServiceProviderBookingsScreen} />
-                  <Stack.Screen name="ViewPendingBookings" component={Screens.PendingBookingsScreen} />
+
+                  <Stack.Screen
+                    name="ServiceProviderBookings"
+                    component={Screens.ServiceProviderBookingsScreen}
+                  />
+                  <Stack.Screen
+                    name="ViewPendingBookings"
+                    component={Screens.PendingBookingsScreen}
+                  />
                   {/* <Stack.Screen name="PendingBookings" component={Screens.PendingBookingsScreen} /> */}
                   <Stack.Screen
                     name="ServiceProviderServices"
@@ -262,10 +286,10 @@ const AppStack = observer(function AppStack() {
                     component={Screens.AvailabilityCalendarScreen}
                   />
 
-                  <Stack.Screen
+                  {/* <Stack.Screen
                     name="ProviderSubscription"
                     component={Screens.ProviderSubscriptionScreen}
-                  />
+                  /> */}
 
                   <Stack.Screen name="ViewServices" component={Screens.ViewServicesScreen} />
                   <Stack.Screen name="BookView" component={Screens.BookViewScreen} />
@@ -274,19 +298,40 @@ const AppStack = observer(function AppStack() {
                   <Stack.Screen name="Reports" component={Screens.ReportsScreen} />
                   <Stack.Screen name="ProviderSupport" component={Screens.ProviderSupportScreen} />
 
-                  <Stack.Screen name="BankAccountDetails" component={Screens.BankAccountDetailsScreen} />
+                  {/* <Stack.Screen
+                    name="BankAccountDetails"
+                    component={Screens.BankAccountDetailsScreen}
+                  /> */}
                   <Stack.Screen name="PreviousWork" component={Screens.PreviousWorkScreen} />
-                  <Stack.Screen name="OfferServices" component={Screens.OfferServicesScreen} />
-                  <Stack.Screen name="MainDetail" component={Screens.MainDetailScreen} />
-                  <Stack.Screen name="MainProfile" component={Screens.MainProfileScreen} />
+
+                  {/* <Stack.Screen name="MainProfile" component={Screens.MainProfileScreen} /> */}
                 </>
               ) : (
                 <>
-                  <Stack.Screen name="EnableLocation" component={Screens.EnableLocationScreen} />
-                  <Stack.Screen name="OnboardingAddAddress" component={Screens.AddAddressScreen} />
-                  <Stack.Screen name="EnableNotifications" component={Screens.NotificationsScreen} />
                   <Stack.Screen name="OnboardingOtp" component={Screens.OtpScreen} />
-
+                  <Stack.Screen name="MainProfile" component={Screens.MainProfileScreen} />
+                  <Stack.Screen name="MainDetail" component={Screens.MainDetailScreen} />
+                  <Stack.Screen
+                    name="SubmitNotification"
+                    component={Screens.SubmitNotificationScreen}
+                  />
+                  <Stack.Screen name="OnboardingAddAddress" component={Screens.AddAddressScreen} />
+                  <Stack.Screen name="EnableLocation" component={Screens.EnableLocationScreen} />
+                  {/* <Stack.Screen name="AccountDetails" component={Screens.AccountDetailsScreen} /> */}
+                  <Stack.Screen
+                    name="BankAccountDetails"
+                    component={Screens.BankAccountDetailsScreen}
+                  />
+                  <Stack.Screen
+                    name="ProviderSubscription"
+                    component={Screens.ProviderSubscriptionScreen}
+                  />
+                  <Stack.Screen
+                    name="EnableNotifications"
+                    component={Screens.NotificationsScreen}
+                  />
+                  <Stack.Screen name="OfferServices" component={Screens.OfferServicesScreen} />
+                  {/* <Stack.Screen name="OnboardingOtp" component={Screens.OtpScreen} /> */}
                 </>
               )}
             </>
@@ -312,7 +357,7 @@ const AppStack = observer(function AppStack() {
               <Stack.Screen name="Signin" component={Screens.SigninScreen} />
               <Stack.Screen name="ResetPassword" component={Screens.ResetPasswordScreen} />
               <Stack.Screen name="SwitchUserType" component={Screens.SwitchUserTypeScreen} />
-        </>
+            </>
           ) : (
             <>
               <Stack.Screen name="SplashOne" component={Screens.SplashOneScreen} />
@@ -324,15 +369,23 @@ const AppStack = observer(function AppStack() {
         </>
       )}
 
-
       <Stack.Screen name="AllNotifications" component={Screens.AllNotificationsScreen} />
-      <Stack.Screen name="OfferedServicesCategory" component={Screens.OfferedServicesCategoryScreen} />
-      <Stack.Screen name="ConfirmPayment" component={Screens.ConfirmPaymentScreen}
-      //TODO: find a way to show modal over modal options={{ presentation: 'modal' }}
+      <Stack.Screen
+        name="OfferedServicesCategory"
+        component={Screens.OfferedServicesCategoryScreen}
       />
-      <Stack.Screen name="ActionStatus" component={Screens.ActionStatusScreen} options={{
-        presentation: 'modal'
-      }} />
+      <Stack.Screen
+        name="ConfirmPayment"
+        component={Screens.ConfirmPaymentScreen}
+        //TODO: find a way to show modal over modal options={{ presentation: 'modal' }}
+      />
+      <Stack.Screen
+        name="ActionStatus"
+        component={Screens.ActionStatusScreen}
+        options={{
+          presentation: "modal",
+        }}
+      />
       <Stack.Screen name="AddNewCard" component={Screens.AddNewCardScreen} />
       <Stack.Screen name="ForgotPassword" component={Screens.ResetPasswordScreen} />
       {/* <Stack.Screen name="OnboardingOtp" component={Screens.OtpScreen} /> */}
@@ -343,7 +396,7 @@ const AppStack = observer(function AppStack() {
 })
 
 export interface NavigationProps
-  extends Partial<React.ComponentProps<typeof NavigationContainer>> { }
+  extends Partial<React.ComponentProps<typeof NavigationContainer>> {}
 
 export const AppNavigator = observer(function AppNavigator(props: NavigationProps) {
   const colorScheme = useColorScheme()

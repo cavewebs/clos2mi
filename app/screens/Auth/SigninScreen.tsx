@@ -64,6 +64,10 @@ export const SigninScreen: FC<SigninScreenProps> = observer(function SigninScree
     },
   } = useStores()
 
+  const {
+    onboardingStore: { hasCompletedOnboarding, setHasCompletedOnboarding },
+  } = useStores()
+
   useEffect(() => {
     // Here is where you could fetch credentials from keychain or storage
     // and pre-fill the form fields.
@@ -99,11 +103,14 @@ export const SigninScreen: FC<SigninScreenProps> = observer(function SigninScree
 
     // We'll mock this with a fake token.
     setAuthToken(String(Date.now()))
-    userType === "su" ? (navigation.navigate("ServiceUser", { screen: "Home", params: {} }) ): (navigation.navigate("ServiceProvider", { screen: "Home", params: {} }))
+    setHasCompletedOnboarding(true)
+    userType === "su"
+      ? navigation.navigate("ServiceUser", { screen: "Home", params: {} })
+      : navigation.navigate("ServiceProvider", { screen: "Home", params: {} })
   }
 
-  const navigateTo = (url:string) => {
-    navigation.navigate(url);
+  const navigateTo = (url: string) => {
+    navigation.navigate(url)
   }
 
   const PasswordRightAccessory = useMemo(
@@ -123,11 +130,7 @@ export const SigninScreen: FC<SigninScreenProps> = observer(function SigninScree
   )
 
   return (
-    <Screen
-      preset="auto"
-      contentContainerStyle={styles.loginContainer}
-      safeAreaEdges={["bottom"]}
-    >
+    <Screen preset="auto" contentContainerStyle={styles.loginContainer} safeAreaEdges={["bottom"]}>
       <View style={styles.container}>
         <View style={styles.topView}>
           <View>
@@ -161,7 +164,7 @@ export const SigninScreen: FC<SigninScreenProps> = observer(function SigninScree
             autoCorrect={false}
             secureTextEntry={isAuthPasswordHidden}
             label="Password"
-            onSubmitEditing={()=>login()}
+            onSubmitEditing={() => login()}
             RightAccessory={PasswordRightAccessory}
           />
           <View style={styles.keepSignedIn}>
@@ -181,15 +184,19 @@ export const SigninScreen: FC<SigninScreenProps> = observer(function SigninScree
             />
           </View>
           <View style={styles.signInButton}>
-            <Button preset="primary" text="Sign in" onPress={()=>login()} />
+            <Button preset="primary" text="Sign in" onPress={() => login()} />
           </View>
           <View style={styles.forgotPasswordTexts}>
             <Text text="Forgot Password?" />
-            <Button style={styles.textButton} text="Reset" onPress={()=>navigateTo("ForgotPassword")} />
+            <Button
+              style={styles.textButton}
+              text="Reset"
+              onPress={() => navigateTo("ForgotPassword")}
+            />
           </View>
           <View style={styles.forgotPasswordTexts}>
             <Text text="Do not have an account?" />
-            <Button style={styles.textButton} text="Sign Up" onPress={()=>navigateTo("Signup")} />
+            <Button style={styles.textButton} text="Sign Up" onPress={() => navigateTo("Signup")} />
           </View>
           <View style={styles.switchUserType}>
             <Text
@@ -202,7 +209,7 @@ export const SigninScreen: FC<SigninScreenProps> = observer(function SigninScree
               style={styles.textButton}
               textStyle={{ fontSize: 14 }}
               text={userType === "sp" ? "Switch to Customer? " : "Switch to Service Provider"}
-              onPress={()=>navigateTo("SwitchUserType")}
+              onPress={() => navigateTo("SwitchUserType")}
             />
           </View>
         </View>

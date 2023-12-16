@@ -11,35 +11,38 @@ import { useStores } from "app/models"
 
 const NotificationImage = require("../../../assets/images/notification-bro.png")
 
-interface NotificationsScreenProps extends AppStackScreenProps<"Notifications"> { }
+interface NotificationsScreenProps extends AppStackScreenProps<"Notifications"> {}
 
 export const NotificationsScreen: FC<NotificationsScreenProps> = observer(
   function NotificationsScreen() {
     // Pull in one of our MST stores
     // const { someStore, anotherStore } = useStores()
     const {
-      authenticationStore: {
-        userType,
-      },
+      authenticationStore: { userType },
     } = useStores()
 
-    const { onboardingStore: { hasCompletedOnboarding, setHasCompletedOnboarding }, } = useStores()
+    const {
+      onboardingStore: { hasCompletedOnboarding, setHasCompletedOnboarding },
+    } = useStores()
 
     const [showModal, setShowModal] = React.useState(false)
 
     // Pull in navigation via hook
     const navigation = useNavigation()
     const decodeNextRoute = () => {
-      setShowModal(false)
+      // setShowModal(false)
+
+      console.log("has completed", hasCompletedOnboarding)
+      console.log(userType, "userType")
       setTimeout(function () {
         if (hasCompletedOnboarding) {
           navigation.goBack()
         } else {
-          setHasCompletedOnboarding(true)
-          userType == "sp" ? navigation.navigate("ServiceProvider") : navigation.navigate("ServiceUser")
+          userType == "sp"
+            ? navigation.navigate("OfferServices")
+            : navigation.navigate("ServiceUser")
         }
-      }, 1000);
-
+      }, 1000)
     }
     return (
       <Screen preset="fixed">
@@ -145,6 +148,4 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     textAlign: "center",
   },
-
-
 })

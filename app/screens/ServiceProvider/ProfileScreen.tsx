@@ -10,7 +10,7 @@ import { Icon, IconTypes } from "../../components/Icon"
 import { useNavigation } from "@react-navigation/native"
 import { useStores } from "app/models"
 
-interface ProfileScreenProps extends AppStackScreenProps<"ServiceProviderProfile"> { }
+interface ProfileScreenProps extends AppStackScreenProps<"ServiceProviderProfile"> {}
 
 interface Profile {
   icon: IconTypes
@@ -21,6 +21,7 @@ interface Profile {
 const operationsData: Profile[] = [
   { icon: "addService", title: "Add Services", url: "ViewServices" },
   { icon: "personSupport", title: "Availability", url: "Availability" },
+  { icon: "personSupport", title: "Availability 2", url: "AvailabilityCalendar" },
   { icon: "wallet", title: "Payment Information", url: "AccountDetails" },
   { icon: "History", title: "Booking History", url: "BookView" },
   { icon: "History", title: "Service Location", url: "ServiceDetail" },
@@ -44,11 +45,12 @@ export const ServiceProviderProfileScreen: FC<ProfileScreenProps> = observer(fun
 ) {
   // Pull in one of our MST stores
   const {
-    authenticationStore: {
-      logout,
-    },
+    authenticationStore: { logout },
   } = useStores()
-  const { onboardingStore: { setHasCompletedOnboarding }, } = useStores()
+  const {
+    onboardingStore: { setHasCompletedOnboarding },
+    walkthroughStore: { setSeenWalkthrough },
+  } = useStores()
 
   // Pull in navigation via hook
   const navigation = useNavigation()
@@ -57,8 +59,9 @@ export const ServiceProviderProfileScreen: FC<ProfileScreenProps> = observer(fun
     if (url) navigation.navigate(url)
   }
   const doLogout = () => {
-     //TODO: uncomment this if you want to test onboarding screens
-    // setHasCompletedOnboarding(false)  
+    //TODO: uncomment this if you want to test onboarding screens
+    setHasCompletedOnboarding(false)
+    setSeenWalkthrough(false)
     logout()
   }
   return (
@@ -69,12 +72,16 @@ export const ServiceProviderProfileScreen: FC<ProfileScreenProps> = observer(fun
           <View style={styles.mildSpacing}>
             <Button
               // onPress={() => Alert.alert("pressed")}
-              LeftAccessory={(props) => <Icon icon="bell" onPress={()=>navigation.navigate("AllNotifications")} />}
+              LeftAccessory={(props) => (
+                <Icon icon="bell" onPress={() => navigation.navigate("AllNotifications")} />
+              )}
             />
 
             <Button
               // onPress={() => Alert.alert("pressed")}
-              LeftAccessory={(props) => <Icon icon="Edit"  onPress={()=>navigation.navigate("MainProfile")} />}
+              LeftAccessory={(props) => (
+                <Icon icon="Edit" onPress={() => navigation.navigate("MainProfile")} />
+              )}
             />
           </View>
         </View>
@@ -123,7 +130,11 @@ export const ServiceProviderProfileScreen: FC<ProfileScreenProps> = observer(fun
         <FlatList
           data={settingsData}
           renderItem={({ item }) => (
-            <Pressable onPress={() => { item.title === "Sign Out" ? doLogout() : goTo(item.url) }}>
+            <Pressable
+              onPress={() => {
+                item.title === "Sign Out" ? doLogout() : goTo(item.url)
+              }}
+            >
               <View style={styles.itemWrapper}>
                 <View style={styles.mildSpacing}>
                   <Icon icon={item.icon} />
@@ -137,7 +148,7 @@ export const ServiceProviderProfileScreen: FC<ProfileScreenProps> = observer(fun
         />
         <Text preset="bold" size="xs" text="Subscription" style={styles.profileText} />
 
-      <Pressable onPress={() => goTo("ProviderSubscription")}>
+        <Pressable onPress={() => goTo("ProviderSubscription")}>
           <View style={styles.itemWrapper}>
             <Text preset="default" size="xs" text="Upgrade your plan" style={styles.menuText} />
             <Icon icon="caretRight" />

@@ -22,7 +22,7 @@ import { colors } from "app/theme"
 import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "app/models"
 
-interface SignupScreenProps extends AppStackScreenProps<"Signup"> { }
+interface SignupScreenProps extends AppStackScreenProps<"Signup"> {}
 
 export const SignupScreen: FC<SignupScreenProps> = observer(function SignupScreen() {
   const [isAuthPasswordHidden, setIsAuthPasswordHidden] = useState(true)
@@ -43,10 +43,12 @@ export const SignupScreen: FC<SignupScreenProps> = observer(function SignupScree
       validationError,
       userType,
       setUserType,
-      isAuthenticated
+      isAuthenticated,
     },
   } = useStores()
-  const { onboardingStore: { hasCompletedOnboarding, setHasCompletedOnboarding }, } = useStores()
+  const {
+    onboardingStore: { hasCompletedOnboarding, setHasCompletedOnboarding },
+  } = useStores()
 
   console.log("£Suduer", userType)
 
@@ -69,11 +71,11 @@ export const SignupScreen: FC<SignupScreenProps> = observer(function SignupScree
     [isAuthPasswordHidden],
   )
 
-  const handleDateChange = (event, selectedDate) => {
-    const currentDate = selectedDate || date
-    setShowDatePicker(Platform.OS === "ios") // Close the picker on iOS
-    setDate(currentDate)
-  }
+  // const handleDateChange = (event, selectedDate) => {
+  //   const currentDate = selectedDate || date
+  //   setShowDatePicker(Platform.OS === "ios") // Close the picker on iOS
+  //   setDate(currentDate)
+  // }
   const register = () => {
     setAuthToken(String(Date.now()))
     navigation.navigate("OnboardingOtp")
@@ -136,13 +138,25 @@ export const SignupScreen: FC<SignupScreenProps> = observer(function SignupScree
           format="YYYY-MM-DD"
           onDateChange={() => setDate(date)}
           style={styles.dateStyle}
+          customStyles={{
+            dateIcon: {
+              //display: 'none',
+              position: "absolute",
+              left: 0,
+              top: 4,
+              marginLeft: 0,
+            },
+            dateInput: {
+              borderRadius: 10,
+            },
+          }}
         /> */}
         <TextField
           value={date}
           onChangeText={(value) => setDate(value)}
           label="Date of Birth"
           keyboardType="numbers-and-punctuation"
-          RightAccessory={() => <Icon icon="Calendar" style={{alignSelf: "center", margin: 5}} />}
+          RightAccessory={() => <Icon icon="Calendar" style={{ alignSelf: "center", margin: 5 }} />}
         />
       </View>
 
@@ -181,7 +195,7 @@ export const SignupScreen: FC<SignupScreenProps> = observer(function SignupScree
         />
       </View>
 
-      <Button preset="primary" text="Proceed" style={styles.btn} onPress={()=>register()} />
+      <Button preset="primary" text="Proceed" style={styles.btn} onPress={register} />
 
       <View style={styles.checkboxContainer}>
         <Checkbox
@@ -197,11 +211,17 @@ export const SignupScreen: FC<SignupScreenProps> = observer(function SignupScree
       </View>
 
       <View style={styles.bottomTextContainer}>
-        <Text size="xs" text="Already have an account?" style={{ textAlign: "center" }} onPress={() => navigation.navigate("Signin")} />
+        <Text
+          size="xs"
+          text="Already have an account?"
+          style={{ textAlign: "center" }}
+          onPress={() => navigation.navigate("Signin")}
+        />
         <Text
           size="xs"
           text="Sign In"
-          style={{ fontWeight: "400", color: colors.palette.primary600, textAlign: "center" }} onPress={() => navigation.navigate("Signin")}
+          style={{ fontWeight: "400", color: colors.palette.primary600, textAlign: "center" }}
+          onPress={() => navigation.navigate("Signin")}
         />
       </View>
     </Screen>
@@ -235,7 +255,7 @@ const styles = StyleSheet.create({
     gap: 4,
     alignItems: "center",
     justifyContent: "center",
-    marginVertical: 20
+    marginVertical: 20,
   },
 
   inputGap: {
@@ -247,7 +267,7 @@ const styles = StyleSheet.create({
   },
 
   dateStyle: {
-    width: 335,
+    width: 328.5,
     borderRadius: 16,
   },
 })

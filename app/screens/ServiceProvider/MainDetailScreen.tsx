@@ -2,7 +2,16 @@ import React, { FC, useState } from "react"
 import { observer } from "mobx-react-lite"
 import { View, StyleSheet } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
-import { Header, Screen, Text, TextField, Icon, ImageUploader, Button, HeaderWithBackButton } from "app/components"
+import {
+  Header,
+  Screen,
+  Text,
+  TextField,
+  Icon,
+  ImageUploader,
+  Button,
+  HeaderWithBackButton,
+} from "app/components"
 import { screenContentContainer } from "app/styles/mainStyles"
 import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "app/models"
@@ -112,8 +121,18 @@ export const MainDetailScreen: FC<MainDetailScreenProps> = observer(function Mai
       <View style={styles.divider} />
 
       <View style={styles.buttonWrapper}>
-        <Button preset="default" text="Cancel" style={{ flex: 1 }} onPress={()=>navigation.goBack()}/>
-        <Button preset="primary" text="Save" style={{ flex: 1 }} onPress={()=>navigation.goBack()} />
+        <Button
+          preset="default"
+          text="Cancel"
+          style={{ flex: 1 }}
+          onPress={() => navigation.goBack()}
+        />
+        <Button
+          preset="primary"
+          text="Save"
+          style={{ flex: 1 }}
+          onPress={() => navigation.navigate("SubmitNotification")}
+        />
       </View>
     </Screen>
   )
