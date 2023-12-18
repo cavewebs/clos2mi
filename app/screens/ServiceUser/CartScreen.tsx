@@ -22,10 +22,13 @@ export const ServiceUserCartScreen: FC<CartScreenProps> = observer(function Cart
   // Pull in navigation via hook
   // console.log("CART", params)
   const navigation = useNavigation()
+  const onNotificationPress = () => {
+    navigation.navigate("AllNotifications")
+  }
   const [showPayment, setShowPayment] = useState(false)
   return (
     <Screen style={$root} preset="auto" contentContainerStyle={screenContentContainer} >
-      <Header title="Cart" rightIcon="notification" />
+      <Header title="Cart" rightIcon="notification" onRightPress={onNotificationPress} />
       <ServiceProviderCard
         views="5123"
         rating="4.5"

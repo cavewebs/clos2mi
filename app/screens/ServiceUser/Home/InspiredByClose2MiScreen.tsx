@@ -20,14 +20,16 @@ export const InspiredByClose2MiScreen: FC<InspiredByClose2MiScreenProps> = obser
   function InspiredByClose2MiScreen() {
     // Pull in one of our MST stores
     // const { someStore, anotherStore } = useStores()
+    const [activeTab, setActiveTab] = React.useState(0)
 
+    
     // Pull in navigation via hook
     const navigation = useNavigation()
     return (
       <Screen preset="scroll" safeAreaEdges={["bottom"]} contentContainerStyle={screenContentContainer}>
         <HeaderWithBackButton title="Inspired by Close2mi" />
         <Search />
-        <HorizontalTabs tabs={inspiredTabs} />
+        <HorizontalTabs tabs={inspiredTabs} setActiveTab={setActiveTab} activeTab={activeTab} />
         <View style={styles.serviceContainer}>
           {services.map((service) => (
             <Services key={service.serviceName} icon={service.icon} text={service.serviceName} onPress={() => { navigation.navigate("Services", { params: service }) }} />
@@ -50,8 +52,9 @@ export const InspiredByClose2MiScreen: FC<InspiredByClose2MiScreenProps> = obser
                 bottomTextLeft={results.bottomTextLeft}
                 bottomIconRight={results.bottomIconRight}
                 bottomTextRight={results.bottomTextRight}
-                navigate={()=>navigation.navigate()}
+                navigate={()=>navigation.navigate("ViewBookings", results)}
               />
+              
             ))}
           </View>
         </View>

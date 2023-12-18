@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import * as React from "react"
 import { Pressable, StyleProp, StyleSheet, TextStyle, View, ViewStyle } from "react-native"
 import { observer } from "mobx-react-lite"
@@ -17,49 +18,75 @@ export interface CreditCardProps {
   style?: StyleProp<ViewStyle>
   onCardClicked?: () => void
   isActive?: boolean
+  dontShowText? : boolean
 }
 
 /**
  * Describe your component here
  */
 export const CreditCard = observer(function CreditCard(props: CreditCardProps) {
-  const { style, isActive, onCardClicked } = props
+  const { style, isActive, onCardClicked, dontShowText } = props
   const navigation = useNavigation()
-  const [activeCard, setActiveCard] = useState(false);
-  const [activeCardId, setActiveCardId] = useState(0);
+  const [activeCard, setActiveCard] = useState(false)
+  const [activeCardId, setActiveCardId] = useState(0)
 
   const setCardActive = (id) => {
     setActiveCardId(id)
     if (activeCardId === id) {
       setActiveCard(!activeCard)
-    } else { setActiveCard(true) }
+    } else {
+      setActiveCard(true)
+    }
   }
   return (
     <View style={[style, styles.wrapper]}>
-      <Text text="Home Service" />
-      <View style={styles.addressBox}>
-        <Icon icon="pin" size={16} />
-        <Text text="24 Montegro road, HR1 43X, Hereford" size="xs" style={styles.address} />
-      </View>
-      <Button text="Add new card  + " textStyle={{ fontSize: 18, fontWeight: "600" }} style={{ backgroundColor: colors.background, width: "auto", paddingHorizontal: 10, justifyContent: "flex-start", marginVertical: 20 }} onPress={() => navigation.navigate("AddNewCard")} />
+      {!dontShowText && (
+        <>
+          <Text text="Home Service" />
+          <View style={styles.addressBox}>
+            <Icon icon="pin" size={16} />
+            <Text text="24 Montegro road, HR1 43X, Hereford" size="xs" style={styles.address} />
+          </View>
+        </>
+      )}
+      <Button
+        text="Add new card  + "
+        textStyle={{ fontSize: 18, fontWeight: "600" }}
+        style={{
+          backgroundColor: colors.background,
+          width: "auto",
+          paddingHorizontal: 10,
+          justifyContent: "flex-start",
+          marginVertical: 20,
+        }}
+        onPress={() => navigation.navigate("AddNewCard")}
+      />
       <Pressable onPress={() => setCardActive(0)}>
-
         <View style={styles.cardWrapper}>
           <View style={styles.cardSelector}>
             <View style={styles.cardType}>
               <Icon icon="visa" size={56} />
               <Text text="Debit Card" style={styles.cardCo} />
             </View>
-            <CustomCheckBox value={activeCard && activeCardId === 0} onChange={() => onCardClicked} />
+            <CustomCheckBox
+              value={activeCard && activeCardId === 0}
+              onChange={() => onCardClicked}
+            />
           </View>
           <Text text="XXXX XXXX XXXX 9876" size="xs" style={styles.cardNo} />
           {activeCard && activeCardId === 0 && (
             <View style={styles.cvvWrapper}>
               <Text text="Enter CVV" size="lg" style={styles.cardNo} />
               <View style={styles.cvvText}>
-                <TextField placeholder="cvv" returnKeyType="done" enablesReturnKeyAutomatically inputMode="numeric" />
+                <TextField
+                  placeholder="cvv"
+                  returnKeyType="done"
+                  enablesReturnKeyAutomatically
+                  inputMode="numeric"
+                />
               </View>
-            </View>)}
+            </View>
+          )}
         </View>
       </Pressable>
       <Pressable onPress={() => setCardActive(1)}>
@@ -69,14 +96,22 @@ export const CreditCard = observer(function CreditCard(props: CreditCardProps) {
               <Icon icon="mastercard" size={56} />
               <Text text="Credit Card" style={styles.cardCo} />
             </View>
-            <CustomCheckBox value={activeCard && activeCardId === 1} onChange={() => onCardClicked} />
+            <CustomCheckBox
+              value={activeCard && activeCardId === 1}
+              onChange={() => onCardClicked}
+            />
           </View>
           <Text text="XXXX XXXX XXXX 2233" size="xs" style={styles.cardNo} />
           {activeCard && activeCardId === 1 && (
             <View style={styles.cvvWrapper}>
               <Text text="Enter CVV" size="lg" style={styles.cardNo} />
               <View style={styles.cvvText}>
-                <TextField placeholder="cvv" returnKeyType="done" enablesReturnKeyAutomatically inputMode="numeric" />
+                <TextField
+                  placeholder="cvv"
+                  returnKeyType="done"
+                  enablesReturnKeyAutomatically
+                  inputMode="numeric"
+                />
               </View>
             </View>
           )}
@@ -91,19 +126,19 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    padding: 10
+    padding: 10,
   },
   cvvWrapper: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     paddingVertical: 15,
-    marginRight: 10
+    marginRight: 10,
   },
   cardNo: {
     paddingHorizontal: 10,
     marginTop: -15,
-    marginBottom: 16
+    marginBottom: 16,
   },
   cardCo: {
     paddingHorizontal: 10,
@@ -116,7 +151,7 @@ const styles = StyleSheet.create({
   },
   cardType: {
     flexDirection: "row",
-    alignItems: "center"
+    alignItems: "center",
   },
   wrapper: {
     justifyContent: "center",
@@ -127,13 +162,13 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     borderWidth: 1,
     borderColor: colors.palette.neutral200,
-    marginVertical: 10
+    marginVertical: 10,
   },
   addressBox: {
     flexDirection: "row",
     backgroundColor: colors.transparent,
     justifyContent: "flex-start",
-    alignItems: "center"
+    alignItems: "center",
   },
   address: { margin: 5 },
   container: {

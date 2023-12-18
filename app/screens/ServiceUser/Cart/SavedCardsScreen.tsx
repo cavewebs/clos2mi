@@ -1,10 +1,11 @@
-import React, { FC } from "react"
+import React, { FC, useState } from "react"
 import { observer } from "mobx-react-lite"
-import { ViewStyle } from "react-native"
+import { StyleSheet, View, ViewStyle } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
-import { Screen, Text } from "app/components"
-import { screenContentContainer } from "app/styles/mainStyles"
-// import { useNavigation } from "@react-navigation/native"
+import { BaseModal, Button, CreditCard, Header, Icon, Screen, Text } from "app/components"
+import { useNavigation } from "@react-navigation/native"
+import { colors, spacing } from "app/theme"
+import { CheckCircleIcon } from "@gluestack-ui/themed"
 // import { useStores } from "app/models"
 
 interface SavedCardsScreenProps extends AppStackScreenProps<"SavedCards"> {}
@@ -14,19 +15,57 @@ export const SavedCardsScreen: FC<SavedCardsScreenProps> = observer(function Sav
   // const { someStore, anotherStore } = useStores()
 
   // Pull in navigation via hook
-  // const navigation = useNavigation()
+  const navigation = useNavigation()
+  const [activeCard, setActiveCard] = useState(false)
+  const [activeCardId, setActiveCardId] = useState(0)
+
+  const setCardActive = () => {
+    setActiveCardId(0)
+    setActiveCard(true)
+  }
+
   return (
-    <Screen
-      style={$root}
-      preset="scroll"
-      contentContainerStyle={screenContentContainer}
-      safeAreaEdges={["top", "bottom"]}
-    >
-      <Text preset="heading" text="savedCards" />
-    </Screen>
+    <>
+      <Screen preset="auto" style={styles.screen} contentContainerStyle={styles.container}>
+        <Header title="Saved Cards" rightIcon="close" onRightPress={() => navigation.goBack()} />
+        <View style={styles.pageWrapper}>
+          <View style={styles.cardsWrapper}>
+            <CreditCard onCardClicked={setCardActive} isActive={activeCard} dontShowText />
+          </View>
+          <View style={styles.buttonWrapper}>
+            <Button
+              preset="primary"
+              text="Save"
+              style={styles.saveButton}
+              onPressIn={() => navigation.goBack()}
+            />
+          </View>
+        </View>
+      </Screen>
+    </>
   )
 })
 
-const $root: ViewStyle = {
-  flex: 1,
-}
+const styles = StyleSheet.create({
+  buttonWrapper: {
+    marginBottom: 20,
+  },
+  cardsWrapper: {
+    flex: 1,
+  },
+  container: {
+    flex: 1,
+    margin: spacing.md,
+  },
+  pageWrapper: {
+    flex: 1,
+    height: "100%",
+  },
+  saveButton: {
+    marginBottom: 16,
+    marginTop: 24,
+  },
+  screen: {
+    backgroundColor: colors.transparent,
+  },
+})

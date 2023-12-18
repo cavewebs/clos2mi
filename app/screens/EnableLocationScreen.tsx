@@ -31,11 +31,11 @@ export const EnableLocationScreen: FC<EnableLocationScreenProps> = observer(
     const decodeNextRoute = () => {
       // setAuthToken(String(Date.now()))
       setTimeout(function () {
-        setHasCompletedOnboarding(true)
+        // setHasCompletedOnboarding(true)
         if (hasCompletedOnboarding) {
           navigation.goBack()
         } else {
-          navigation.navigate("BankAccountDetails")
+          navigation.navigate("AddAddress")
         }
       }, 1000)
     }

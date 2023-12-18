@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 /* eslint-disable react-native/sort-styles */
 /* eslint-disable react-native/no-color-literals */
 import React, { FC } from "react"
@@ -16,6 +17,8 @@ import { useNavigation } from "@react-navigation/native"
 interface BookServiceScreenProps extends AppStackScreenProps<"BookService"> { }
 
 export const BookServiceScreen: FC<BookServiceScreenProps> = observer(function BookServiceScreen(props) {
+  const [selectType, setSelectType] = React.useState(null)
+
   // Pull in one of our MST stores
   // const { someStore, anotherStore } = useStores()
   const { params } = props.route.params || {}; // Perform null-checking
@@ -31,10 +34,10 @@ export const BookServiceScreen: FC<BookServiceScreenProps> = observer(function B
       safeAreaEdges={["bottom"]}
     >
       <HeaderWithBackButton title="Book Service" />
-      <SectionHeader leftText="Previous Work" rightText="View All" onLeftTextPress={() => navigation.navigate("PreviousWork")} />
+      <SectionHeader leftText="Previous Work" rightText="View All" onRightTextPress={() => navigation.navigate("PreviousWork")} />
       <View style={styles.worksContainer}>
         {works.map((work, index) => (
-          <Image key={index} source={work} />
+          <Image key={index} source={work} style={{ width: "30%", height: 100, gap: 10, borderRadius: 4, }}  />
         ))}
       </View>
 
@@ -81,7 +84,11 @@ export const BookServiceScreen: FC<BookServiceScreenProps> = observer(function B
         {addressType.map((type) => (
           <View key={type.id} style={styles.selectWrapper}>
             <Text text={type.type} />
-            <CustomCheckBox />
+            <Checkbox value={selectType === type.type}
+                  onValueChange={() => {
+                    setSelectType(type.type);
+                  }}
+                  color={selectType === type.type ? colors.tint : undefined}/>
           </View>
         ))}
       </View>

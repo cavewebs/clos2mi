@@ -7,7 +7,7 @@ import { HeaderWithBackButton, Icon, OtherHeader, PopularSearches, Screen, Searc
 import { popularSearch, recentSearchCache, serviceProvider } from "app/components/serviceUser/DummyData/HomeScreenData"
 import { spacing } from "app/theme"
 import { screenContentContainer } from "app/styles/mainStyles"
-// import { useNavigation } from "@react-navigation/native"
+import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "app/models"
 
 interface SearchScreenProps extends AppStackScreenProps<"Search"> { }
@@ -17,7 +17,7 @@ export const SearchScreen: FC<SearchScreenProps> = observer(function SearchScree
   // const { someStore, anotherStore } = useStores()
 
   // Pull in navigation via hook
-  // const navigation = useNavigation()
+  const navigation = useNavigation()
   return (
     <Screen
       style={$root}
@@ -41,7 +41,7 @@ export const SearchScreen: FC<SearchScreenProps> = observer(function SearchScree
         <View style={styles.popularSearchContainer}>
           {
             popularSearch.map((popular, index) => (
-              <PopularSearches text={popular.text} key={index} />
+              <PopularSearches text={popular.text} key={index} textFontWeight={"light"}/>
             ))
           }
         </View>
@@ -57,6 +57,7 @@ export const SearchScreen: FC<SearchScreenProps> = observer(function SearchScree
             views={providers.views}
             rating={providers.rating}
             name={providers.name}
+            navigate={() => navigation.navigate("ServiceProviderDetails", providers)}
           />
         ))}
       </View>

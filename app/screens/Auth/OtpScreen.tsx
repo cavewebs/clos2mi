@@ -58,9 +58,9 @@ export const OtpScreen: FC<OtpScreenProps> = observer(function OtpScreen() {
     console.log("isAuthenticated", isAuthenticated)
     console.log("userType", userType)
     if (hasCompletedOnboarding) {
-      userType == "sp" ? navigation.navigate("ServiceProvider") : navigation.navigate("ServiceUser")
+      userType === "sp" ? navigation.navigate("ServiceProvider") : navigation.navigate("ServiceUser")
     } else {
-      userType == "sp" ? navigation.navigate("MainProfile") : navigation.navigate("MainProfile")
+      userType === "sp" ? navigation.navigate("MainProfile") : navigation.navigate("EnableLocation")
     }
   }
 

@@ -16,13 +16,15 @@ export const PopularInYourAreaScreen: FC<PopularInYourAreaScreenProps> = observe
   // Pull in one of our MST stores
   // const { someStore, anotherStore } = useStores()
 
+  const [activeTab, setActiveTab] = React.useState(0)
+
   // Pull in navigation via hook
   // const navigation = useNavigation()
   return (
     <Screen preset="auto" contentContainerStyle={screenContentContainer} >
        <HeaderWithBackButton title="Popular in your area" />
       <Search />
-      <HorizontalTabs tabs={inspiredTabs} />
+      <HorizontalTabs tabs={inspiredTabs} setActiveTab={setActiveTab} activeTab={activeTab} />
 
       <View style={styles.popularSearchContainer}>
         {

@@ -6,6 +6,7 @@ import { AppStackScreenProps } from "app/navigators"
 import {
   Button,
   HeaderWithBackButton,
+  ImageUploader,
   OptionPicker,
   OtherHeader,
   Screen,
@@ -53,6 +54,7 @@ export const ReportScreen: FC<ReportScreenProps> = observer(function ReportScree
 
       <SectionHeader leftText="Images" />
       <Text text="Add Service Images" style={styles.textFieldMessage} weight="medium" />
+      <ImageUploader dontShowText/>
 
       <Button
         text="Submit"

@@ -198,7 +198,7 @@ const AppStack = observer(function AppStack() {
         <>
           {userType === "su" ? (
             <>
-              {!!hasCompletedOnboarding ? (
+              {hasCompletedOnboarding === true ? (
                 <>
                   {/* ServiceUser Screens  */}
                   {/* <Stack.Screen name="Report" component={Screens.ReportScreen} /> */}
@@ -234,6 +234,7 @@ const AppStack = observer(function AppStack() {
                   <Stack.Screen name="SavedCards" component={Screens.SavedCardsScreen} />
                   <Stack.Screen name="Report" component={Screens.ReportScreen} />
                   <Stack.Screen name="MapSearch" component={Screens.MapSearchScreen} />
+                  <Stack.Screen name="PreviousWork" component={Screens.PreviousWorkScreen} />
                 </>
               ) : (
                 <>

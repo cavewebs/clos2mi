@@ -9,12 +9,14 @@ export interface ImageUploaderProps {
   /**
    * An optional style override useful for padding & margin.
    */
+  dontShowText?: boolean
 }
 
 /**
  * Describe your component here
  */
 export const ImageUploader = observer(function ImageUploader(props: ImageUploaderProps) {
+  const { dontShowText } = props;
   const [image, setImage] = useState(null)
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
@@ -33,16 +35,20 @@ export const ImageUploader = observer(function ImageUploader(props: ImageUploade
   }
   return (
     <View>
-      <Text
-        preset="label"
-        text="Upload Images"
-        style={{ fontWeight: "500", color: "#344054", marginBottom: 8 }}
-      />
-      <Text
-        size="xs"
-        text="Add service images"
-        style={{ fontWeight: "400", color: "#667085", marginBottom: 8 }}
-      />
+      {!dontShowText && (
+        <>
+          <Text
+            preset="label"
+            text="Upload Images"
+            style={{ fontWeight: "500", color: "#344054", marginBottom: 8 }}
+          />
+          <Text
+            size="xs"
+            text="Add service images"
+            style={{ fontWeight: "400", color: "#667085", marginBottom: 8 }}
+          />
+        </>
+      )}
 
       <View style={styles.uploadBox}>
         <View style={styles.iconContainer}>

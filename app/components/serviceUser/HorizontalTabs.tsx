@@ -10,15 +10,16 @@ export interface HorizontalTabsProps {
    */
   style?: StyleProp<ViewStyle>
   tabs: Array<string>
+  setActiveTab: React.Dispatch<React.SetStateAction<number>>
+  activeTab: number
 }
 
 /**
  * Describe your component here
  */
 export const HorizontalTabs = observer(function HorizontalTabs(props: HorizontalTabsProps) {
-const [activeTab, setActiveTab] = React.useState(0)
 
-  const { style, tabs } = props
+  const { style, tabs, setActiveTab, activeTab } = props
   const $styles = [$container, style]
 
   return (

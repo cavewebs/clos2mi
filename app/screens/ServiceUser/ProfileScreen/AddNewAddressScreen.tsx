@@ -18,6 +18,8 @@ interface AddNewAddressScreenProps extends AppStackScreenProps<"AddNewAddress"> 
 
 export const AddNewAddressScreen: FC<AddNewAddressScreenProps> = observer(function AddNewAddressScreen() {
   const [isChecked, setChecked] = useState(false);
+  const [selectType, setSelectType] = useState(null)
+
 
   const handleCheckboxChange = (newValue: boolean) => {
     setChecked(newValue);
@@ -51,7 +53,13 @@ export const AddNewAddressScreen: FC<AddNewAddressScreenProps> = observer(functi
             {addressType.map((type) => (
               <View key={type.id} style={styles.selectWrapper}>
                 <Text text={type.type} />
-                <Checkbox />
+                <Checkbox
+                  value={selectType === type.type}
+                  onValueChange={() => {
+                    setSelectType(type.type);
+                  }}
+                  color={selectType === type.type ? colors.tint : undefined}
+                />
               </View>
             ))}
           </View>

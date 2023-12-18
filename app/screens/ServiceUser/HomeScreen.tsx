@@ -1,6 +1,6 @@
 import React, { FC } from "react"
 import { observer } from "mobx-react-lite"
-import { View, ViewStyle, StyleSheet, ScrollView } from "react-native"
+import { View, ViewStyle, StyleSheet, ScrollView, Pressable, TouchableOpacity } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
 import {
   BookingCard,
@@ -29,10 +29,13 @@ export const ServiceUserHomeScreen: FC<HomeScreenProps> = observer(function Home
     navigation.navigate("SavedAddress")
   }
   const showMap = () => {
-    navigation.navigate("Search")
+    navigation.navigate("MapSearch")
   }
   const showNotifications = () => {
     navigation.navigate("AllNotifications")
+  }
+  const showSearch = () => {
+    navigation.navigate("Search")
   }
   return (
     <Screen style={$root} preset="scroll" safeAreaEdges={["top"]} >
@@ -45,7 +48,10 @@ export const ServiceUserHomeScreen: FC<HomeScreenProps> = observer(function Home
         onNotificationPress={showNotifications}
         onMapPress={showMap}
       />
+      <TouchableOpacity onPress={showSearch}>
       <Search />
+      </TouchableOpacity>
+
       <View>
         <SectionHeader leftText="Based on your recent search" />
         <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{width: "100%"}}>
@@ -80,7 +86,7 @@ export const ServiceUserHomeScreen: FC<HomeScreenProps> = observer(function Home
         ))}
       </View>
       <View>
-        <SectionHeader leftText="Inspired by Close2mi" rightText="See All" onLeftTextPress={() => navigation.navigate("InspiredByClose2Mi")} />
+        <SectionHeader leftText="Inspired by Close2mi" rightText="See All" onRightTextPress={() => navigation.navigate("InspiredByClose2Mi")} />
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           <View style={styles.serviceContainer}>
             {services.map((service) => (
@@ -90,7 +96,7 @@ export const ServiceUserHomeScreen: FC<HomeScreenProps> = observer(function Home
         </ScrollView>
       </View>
       <View style={styles.serviceProvider}>
-        <SectionHeader leftText="Popular in your Area" rightText="See All" onLeftTextPress={() => navigation.navigate("PopularInYourArea")} />
+        <SectionHeader leftText="Popular in your Area" rightText="See All" onRightTextPress={() => navigation.navigate("PopularInYourArea")} />
         {serviceProvider.map((providers, index) => (
           <ServiceProviderCard
             key={index}

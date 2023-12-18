@@ -66,7 +66,7 @@ export const AllNotificationsScreen: FC<AllNotificationsScreenProps> = observer(
       return (
         <>
           {notificationsList.map((notification, index) => (
-            <View style={styles.notificationsWrapper}>
+            <View style={styles.notificationsWrapper} key={index}>
               <Icon icon="bell" color={colors.tint} style={styles.img} />
               <View style={styles.notificationInfo}>
                 <View style={styles.notificationRow}>
@@ -133,7 +133,7 @@ export const AllNotificationsScreen: FC<AllNotificationsScreenProps> = observer(
         <HeaderWithBackButton title="Notifications" />
         <>
           {notificationsList.map((notification, index) => (
-            <View style={styles.notificationsWrapper}>
+            <View style={styles.notificationsWrapper} key={index}>
               <View style={styles.imgWrapper}>
                 <Icon icon="bell" color={colors.tint} style={[styles.img]} />
               </View>

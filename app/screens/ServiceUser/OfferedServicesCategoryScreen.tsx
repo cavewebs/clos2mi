@@ -14,6 +14,8 @@ export const OfferedServicesCategoryScreen: FC<OfferedServicesCategoryScreenProp
   // Pull in one of our MST stores
   // const { someStore, anotherStore } = useStores()
 
+  const [activeTab, setActiveTab] = React.useState(0)
+
   // Pull in navigation via hook
   const navigation = useNavigation()
 
@@ -23,7 +25,7 @@ export const OfferedServicesCategoryScreen: FC<OfferedServicesCategoryScreenProp
       {/* <Text preset="heading" text="notifications" /> */}
       <HeaderWithBackButton title="Offered Services" />
       <Search />
-        <HorizontalTabs tabs={inspiredTabs} />
+        <HorizontalTabs tabs={inspiredTabs} setActiveTab={setActiveTab} activeTab={activeTab}/>
         <View style={styles.serviceContainer}>
           {services.map((service) => (
             <Services key={service.serviceName} icon={service.icon} text={service.serviceName} onPress={()=>{navigation.navigate("Services", {params: service})}} />

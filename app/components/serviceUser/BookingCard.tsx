@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-color-literals */
 import * as React from "react"
 import {
   StyleProp,
@@ -67,7 +68,9 @@ export const BookingCard = observer(function BookingCard(props: BookingCardProps
         <View style={styles.containerRight}>
           <View style={styles.containerStyle}>
             <Text text={textTopLeft} weight="medium" size="sm" />
-            <Text text={textTopRight} weight="medium" size="sm" />
+            {textTopRight &&  <View style={[styles.itemContainer, textTopRight === 'Completed' ? styles.completed : textTopRight === 'Cancelled' ? styles.cancelled : styles.onHold]}>
+           <Text text={textTopRight} weight="sm" size="xxs" style={textTopRight === 'Completed' ? styles.completeText : textTopRight === 'Cancelled' ? styles.cancelledText : styles.onHold} />
+            </View>}
           </View>
           <View style={styles.containerStyle}>
             <View style={styles.rating}>
@@ -100,7 +103,7 @@ const $container: ViewStyle = {
   display: "flex",
   flexDirection: "row",
   gap: 10,
-  width: "100%",
+  // width: "100%",
   borderWidth: 0.5,
   borderRadius: 16,
   padding: 8,
@@ -118,6 +121,18 @@ const $container: ViewStyle = {
 const styles = StyleSheet.create({
   bottomTextColor: {
     color: colors.palette.primary600,
+  },
+  cancelled: {
+    backgroundColor: "#FEF2F2",
+  },
+  cancelledText:{
+    color: "#EF4444"
+  },
+  completeText:{
+    color: "#22C55E"
+  },
+  completed: {
+    backgroundColor: "#F0FDF4",
   },
   containerRight: {
     display: "flex",
@@ -137,8 +152,20 @@ const styles = StyleSheet.create({
     height: 82,
     width: 80,
   },
+  itemContainer: {
+    alignItems: "center",
+    borderRadius: 16,
+    display: "flex",
+    flexDirection: "row",
+    gap:  5,
+    paddingHorizontal: 8,
+    paddingVertical: 2,
+  },
   name: {
     marginBottom: 5,
+  },
+  onHold: {
+    backgroundColor: "#F3F4F6",
   },
   rating: {
     alignItems: "center",

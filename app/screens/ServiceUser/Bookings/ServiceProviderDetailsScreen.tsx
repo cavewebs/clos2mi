@@ -32,6 +32,8 @@ export const ServiceProviderDetailsScreen: FC<ServiceProviderDetailsScreenProps>
       Linking.openURL(`tel:${phoneNumber}`);
     };
     const navigation = useNavigation()
+    const [activeTab, setActiveTab] = React.useState(0)
+
     return (
       <Screen
         preset="scroll"
@@ -53,9 +55,9 @@ export const ServiceProviderDetailsScreen: FC<ServiceProviderDetailsScreenProps>
           </View>
         </View>
         <Text text="The best saloon to get a professional haircut with the best prices and facilities in Camden" style={styles.providerDescription} />
-        <HorizontalTabs tabs={inspiredTabs} />
+        <HorizontalTabs tabs={inspiredTabs} setActiveTab={setActiveTab} activeTab={activeTab} />
         <View>
-          <SectionHeader leftText="Services Offered" leftTextStyle={{ fontSize: 20 }} rightText="See All" onLeftTextPress={() => navigation.navigate("OfferedServicesCategory")} />
+          <SectionHeader leftText="Services Offered" leftTextStyle={{ fontSize: 20 }} rightText="See All" onRightTextPress={() => navigation.navigate("OfferedServicesCategory")} />
           <View style={styles.serviceContainer}>
             {services.map((service) => (
               <Services key={service.serviceName} icon={service.icon} text={service.serviceName} onPress={() => { navigation.navigate("Services", { params: service }) }} />
@@ -77,7 +79,7 @@ export const ServiceProviderDetailsScreen: FC<ServiceProviderDetailsScreenProps>
           </View>
         </View>
         <View>
-          <SectionHeader leftText="Previous Work" rightText="See All" onLeftTextPress={() => navigation.navigate("PreviousWork")} />
+          <SectionHeader leftText="Previous Work" rightText="See All" onRightTextPress={() => navigation.navigate("PreviousWork")} />
           <View style={styles.previousWorkContainer}>
             {works.map((work, index) => (
               <Image key={index} source={work} style={{ width: "30%", height: 100, }} />

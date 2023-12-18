@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, { FC, useState } from "react"
 import { observer } from "mobx-react-lite"
 import { ViewStyle, View, Image, StyleSheet, Pressable } from "react-native"
@@ -35,8 +36,8 @@ export const PreviousWorkScreen: FC<PreviousWorkScreenProps> = observer(
           <SectionHeader leftText="Beards" />
           <View style={styles.worksContainer}>
             {works.map((work, index) => (
-              <Pressable onPress={() => loadImg(work)} >
-                <Image key={index} source={work} />
+              <Pressable  key={index} onPress={() => loadImg(work)} style={styles.imageContainer} >
+                <Image source={work} style={styles.image} />
               </Pressable>
             ))}
           </View>
@@ -45,8 +46,8 @@ export const PreviousWorkScreen: FC<PreviousWorkScreenProps> = observer(
           <SectionHeader leftText="Haircut" />
           <View style={styles.worksContainer}>
             {works.map((work, index) => (
-              <Pressable onPress={() => loadImg(work)} >
-                <Image key={index} source={work} />
+              <Pressable  key={index} onPress={() => loadImg(work)} style={styles.imageContainer} >
+                <Image source={work}  style={styles.image}/>
               </Pressable>
             ))}
           </View>
@@ -55,8 +56,8 @@ export const PreviousWorkScreen: FC<PreviousWorkScreenProps> = observer(
           <SectionHeader leftText="Makeup" />
           <View style={styles.worksContainer}>
             {works.map((work, index) => (
-              <Pressable onPress={() => loadImg(work)} >
-                <Image key={index} source={work} />
+              <Pressable  key={index} onPress={() => loadImg(work)} style={styles.imageContainer} >
+                <Image source={work} style={styles.image} />
               </Pressable>
             ))}
           </View>
@@ -76,16 +77,26 @@ const $root: ViewStyle = {
 }
 
 const styles = StyleSheet.create({
-  img: {
+  image: {
+    borderRadius: 4,
     width: "100%",
+  },
+  imageContainer: {
+    gap: 10,
+    height: 100,
+    width: "30%"
+  },
+  img: {
+    borderRadius: 10,
     height: 300,
     padding: 10,
-    borderRadius: 10,
+    width: "100%",
   },
   worksContainer: {
     display: "flex",
     flexDirection: "row",
     flexWrap: "wrap",
-    gap: 10,
-  },
+    gap: 15,
+    width: "100%"
+  }
 })

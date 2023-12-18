@@ -31,18 +31,19 @@ export const NotificationsScreen: FC<NotificationsScreenProps> = observer(
     const navigation = useNavigation()
     const decodeNextRoute = () => {
       // setShowModal(false)
-
       console.log("has completed", hasCompletedOnboarding)
       console.log(userType, "userType")
       setTimeout(function () {
         if (hasCompletedOnboarding) {
           navigation.goBack()
         } else {
-          userType == "sp"
+          userType === "sp"
             ? navigation.navigate("OfferServices")
             : navigation.navigate("ServiceUser")
         }
-      }, 1000)
+      }, 10)
+      setHasCompletedOnboarding(true)
+
     }
     return (
       <Screen preset="fixed">

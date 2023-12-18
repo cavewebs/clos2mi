@@ -41,12 +41,13 @@ export const AddAddressScreen: FC<AddAddressScreenProps> = observer(function Add
   const decodeNextRoute = () => {
     console.log("PRAMS", params)
     if (hasCompletedOnboarding) {
-      userType == "sp" ? navigation.navigate("EnableLocation") : navigation.navigate("ServiceUser")
+      userType === "sp" ? navigation.navigate("EnableLocation") : navigation.navigate("ServiceUser")
     } else {
       navigation.navigate("EnableNotifications", { params: { nextPage: "Home" } })
       // logout()
     }
     console.log("referringRouteName", params)
+    console.log("status", hasCompletedOnboarding)
     // navigation.navigate("ServiceProvider")
   }
   return (
