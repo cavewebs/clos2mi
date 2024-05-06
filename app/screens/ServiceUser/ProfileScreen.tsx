@@ -27,10 +27,8 @@ export const ServiceUserProfileScreen: FC<ProfileScreenProps> = observer(functio
   const {
     onboardingStore: { setHasCompletedOnboarding },
     walkthroughStore: { setSeenWalkthrough },
-    authenticationStore
+    authenticationStore,
   } = useStores()
-
-
 
   const onNotificationPress = () => {
     navigation.navigate("AllNotifications")
@@ -95,7 +93,7 @@ export const ServiceUserProfileScreen: FC<ProfileScreenProps> = observer(functio
       <View>
         <SectionHeader leftText="Support" />
         <ProfileContent
-          leftText="Close2mi Support"
+          leftText="Booksee Support"
           rightIcon="chevronRight"
           onPress={() => {
             navigation.navigate("Support")

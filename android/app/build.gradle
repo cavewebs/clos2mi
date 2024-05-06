@@ -113,9 +113,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace 'com.close2mi.app'
+    namespace 'com.booksee.app'
     defaultConfig {
-        applicationId 'com.close2mi.app'
+        applicationId 'com.booksee.app'
         minSdkVersion rootProject.ext.minSdkVersion
          multiDexEnabled true
         targetSdkVersion rootProject.ext.targetSdkVersion

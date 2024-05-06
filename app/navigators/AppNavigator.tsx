@@ -89,7 +89,7 @@ export type AppStackParamList = {
   Notifications: NavigatorScreenParams<OnboardingParamList>
   Search: undefined
   SearchResult: undefined
-  InspiredByClose2Mi: undefined
+  InspiredByBooksee: undefined
   PopularInYourArea: undefined
   EditDetails: undefined
   SavedAddress: undefined
@@ -216,8 +216,8 @@ const AppStack = observer(function AppStack() {
                   <Stack.Screen name="Search" component={Screens.SearchScreen} />
                   <Stack.Screen name="SearchResult" component={Screens.SearchResultScreen} />
                   <Stack.Screen
-                    name="InspiredByClose2Mi"
-                    component={Screens.InspiredByClose2MiScreen}
+                    name="InspiredByBooksee"
+                    component={Screens.InspiredByBookseeScreen}
                   />
                   <Stack.Screen
                     name="PopularInYourArea"

@@ -1,4 +1,4 @@
-package com.close2mi.app;
+package com.booksee.app;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -19,7 +19,7 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "close2mi";
+    return "booksee";
   }
 
   /**

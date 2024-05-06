@@ -14,10 +14,15 @@ import {
 } from "app/components"
 // import { screenContentContainer } from "app/styles/mainStyles"
 import { colors, spacing } from "app/theme"
-import { bookingData, recentSearch, serviceProvider, services } from "app/components/serviceUser/DummyData/HomeScreenData"
+import {
+  bookingData,
+  recentSearch,
+  serviceProvider,
+  services,
+} from "app/components/serviceUser/DummyData/HomeScreenData"
 import { useNavigation } from "@react-navigation/native"
 
-interface HomeScreenProps extends AppStackScreenProps<"ServiceUserHome"> { }
+interface HomeScreenProps extends AppStackScreenProps<"ServiceUserHome"> {}
 
 export const ServiceUserHomeScreen: FC<HomeScreenProps> = observer(function HomeScreen() {
   // Pull in one of our MST stores
@@ -38,7 +43,7 @@ export const ServiceUserHomeScreen: FC<HomeScreenProps> = observer(function Home
     navigation.navigate("Search")
   }
   return (
-    <Screen style={$root} preset="scroll" safeAreaEdges={["top"]} >
+    <Screen style={$root} preset="scroll" safeAreaEdges={["top"]}>
       <MainHeader
         pageTitle="7 Montegomery road, UK"
         icon1="arrowDown"
@@ -49,12 +54,12 @@ export const ServiceUserHomeScreen: FC<HomeScreenProps> = observer(function Home
         onMapPress={showMap}
       />
       <TouchableOpacity onPress={showSearch}>
-      <Search />
+        <Search />
       </TouchableOpacity>
 
       <View>
         <SectionHeader leftText="Based on your recent search" />
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{width: "100%"}}>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={{ width: "100%" }}>
           <View style={styles.serviceContainer}>
             {recentSearch.map((recentSearch, index) => (
               <RecentSearchCard
@@ -86,17 +91,34 @@ export const ServiceUserHomeScreen: FC<HomeScreenProps> = observer(function Home
         ))}
       </View>
       <View>
-        <SectionHeader leftText="Inspired by Close2mi" rightText="See All" onRightTextPress={() => navigation.navigate("InspiredByClose2Mi")} />
+        <SectionHeader
+          leftText="Inspired by Booksee"
+          rightText="See All"
+          onRightTextPress={() => navigation.navigate("InspiredByBooksee")}
+        />
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           <View style={styles.serviceContainer}>
             {services.map((service) => (
-              <Services key={service.serviceName} style={{minWidth: 90}} icon={service.icon} text={service.serviceName} onLeftTextPress={() => navigation.navigate("Services")} onPress={() => { navigation.navigate("Services", { params: service }) }} />
+              <Services
+                key={service.serviceName}
+                style={{ minWidth: 90 }}
+                icon={service.icon}
+                text={service.serviceName}
+                onLeftTextPress={() => navigation.navigate("Services")}
+                onPress={() => {
+                  navigation.navigate("Services", { params: service })
+                }}
+              />
             ))}
           </View>
         </ScrollView>
       </View>
       <View style={styles.serviceProvider}>
-        <SectionHeader leftText="Popular in your Area" rightText="See All" onRightTextPress={() => navigation.navigate("PopularInYourArea")} />
+        <SectionHeader
+          leftText="Popular in your Area"
+          rightText="See All"
+          onRightTextPress={() => navigation.navigate("PopularInYourArea")}
+        />
         {serviceProvider.map((providers, index) => (
           <ServiceProviderCard
             key={index}
@@ -116,7 +138,7 @@ export const ServiceUserHomeScreen: FC<HomeScreenProps> = observer(function Home
 const $root: ViewStyle = {
   paddingHorizontal: spacing.lg,
   flex: 1,
-  marginTop: 10
+  marginTop: 10,
 }
 
 const styles = StyleSheet.create({
@@ -166,7 +188,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     gap: 8,
     overflow: "scroll",
-    width: "100%"
+    width: "100%",
   },
   serviceProvider: {
     marginBottom: 40,

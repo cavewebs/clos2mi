@@ -8,7 +8,7 @@ import { colors } from "app/theme"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "app/models"
 
-interface TermsAndConditionsScreenProps extends AppStackScreenProps<"TermsAndConditions"> { }
+interface TermsAndConditionsScreenProps extends AppStackScreenProps<"TermsAndConditions"> {}
 
 export const TermsAndConditionsScreen: FC<TermsAndConditionsScreenProps> = observer(
   function TermsAndConditionsScreen() {
@@ -29,24 +29,24 @@ export const TermsAndConditionsScreen: FC<TermsAndConditionsScreenProps> = obser
           <Text
             preset="default"
             size="xs"
-            text="Close2mi has been giving services to its clients by If you are facing financial challenges, you may be eligible for a discounted therapy costIf you are facing financial challenges, you may be eligible for a discounted therapy cost."
+            text="Booksee has been giving services to its clients by If you are facing financial challenges, you may be eligible for a discounted therapy costIf you are facing financial challenges, you may be eligible for a discounted therapy cost."
             style={styles.policyText}
           />
           <Text
             size="xs"
-            text="What informaton does Close2mi care capture about visitors to its website?"
+            text="What informaton does Booksee care capture about visitors to its website?"
             style={styles.policySubHeader}
           />
           <Text
             preset="default"
             size="xs"
-            text="Close2mi web server uses an extended log file format which captures date and time of visit, referring address (location from which visitor comes to Close2mi.com), type of internet browser and visitor’s IP address. The log file does not capture a visitor’s email address"
+            text="Booksee web server uses an extended log file format which captures date and time of visit, referring address (location from which visitor comes to Booksee.com), type of internet browser and visitor’s IP address. The log file does not capture a visitor’s email address"
             style={styles.policyText}
           />
 
           <Text
             size="xs"
-            text="How does Close2mi care use the information?"
+            text="How does Booksee care use the information?"
             style={styles.policySubHeader}
           />
           <Text
@@ -56,7 +56,7 @@ export const TermsAndConditionsScreen: FC<TermsAndConditionsScreenProps> = obser
             style={styles.policyText}
           />
         </View>
-      </Screen >
+      </Screen>
     )
   },
 )

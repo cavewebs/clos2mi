@@ -205,7 +205,7 @@ export const SignupScreen: FC<SignupScreenProps> = observer(function SignupScree
         />
         <Text
           size="xs"
-          text="I accept the Close2mi terms and conditions"
+          text="I accept the Booksee terms and conditions"
           style={styles.checkboxText}
         />
       </View>

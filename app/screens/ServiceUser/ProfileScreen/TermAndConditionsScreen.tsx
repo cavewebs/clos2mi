@@ -9,36 +9,42 @@ import { screenContentContainer } from "app/styles/mainStyles"
 
 interface TermAndConditionsScreenProps extends AppStackScreenProps<"TermAndConditions"> {}
 
-export const TermAndConditionsScreen: FC<TermAndConditionsScreenProps> = observer(function TermAndConditionsScreen() {
-  // Pull in one of our MST stores
-  // const { someStore, anotherStore } = useStores()
+export const TermAndConditionsScreen: FC<TermAndConditionsScreenProps> = observer(
+  function TermAndConditionsScreen() {
+    // Pull in one of our MST stores
+    // const { someStore, anotherStore } = useStores()
 
-  // Pull in navigation via hook
-  // const navigation = useNavigation()
-  return (
-    <Screen style={$root} preset="scroll" contentContainerStyle={screenContentContainer} safeAreaEdges={["bottom"]} >
-       <HeaderWithBackButton title="Terms and Conditions" />
-      <Text
-          text="Close2mi has been giving services to its clients by If you are facing financial challenges, you may be eligible for a discounted therapy costIf you are facing financial challenges, you may be eligible for a discounted therapy cost."
+    // Pull in navigation via hook
+    // const navigation = useNavigation()
+    return (
+      <Screen
+        style={$root}
+        preset="scroll"
+        contentContainerStyle={screenContentContainer}
+        safeAreaEdges={["bottom"]}
+      >
+        <HeaderWithBackButton title="Terms and Conditions" />
+        <Text
+          text="Booksee has been giving services to its clients by If you are facing financial challenges, you may be eligible for a discounted therapy costIf you are facing financial challenges, you may be eligible for a discounted therapy cost."
           size="sm"
           weight="light"
         />
         <View>
           <Text
-            text="What informaton does Close2mi care capture about visitors to its website?"
+            text="What informaton does Booksee care capture about visitors to its website?"
             size="sm"
             weight="semiBold"
             style={styles.headerText}
           />
           <Text
-            text="Close2mi web server uses an extended log file format which captures date and time of visit, referring address (location from which visitor comes to blueroom.com), type of internet browser and visitor’s IP address. The log file does not capture a visitor’s email address"
+            text="Booksee web server uses an extended log file format which captures date and time of visit, referring address (location from which visitor comes to blueroom.com), type of internet browser and visitor’s IP address. The log file does not capture a visitor’s email address"
             size="sm"
             weight="light"
           />
         </View>
         <View>
           <Text
-            text="How does Close2mi care use the information?"
+            text="How does Booksee care use the information?"
             size="sm"
             weight="semiBold"
             style={styles.headerText}
@@ -49,9 +55,10 @@ export const TermAndConditionsScreen: FC<TermAndConditionsScreenProps> = observe
             weight="light"
           />
         </View>
-    </Screen>
-  )
-})
+      </Screen>
+    )
+  },
+)
 
 const $root: ViewStyle = {
   flex: 1,

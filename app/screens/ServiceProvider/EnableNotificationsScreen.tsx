@@ -9,7 +9,7 @@ import enableNotification from "assets/images/notbro.png"
 import { colors } from "app/theme"
 // import { useStores } from "app/models"
 
-interface EnableNotificationsScreenProps extends AppStackScreenProps<"EnableNotifications"> { }
+interface EnableNotificationsScreenProps extends AppStackScreenProps<"EnableNotifications"> {}
 
 export const EnableNotificationsScreen: FC<EnableNotificationsScreenProps> = observer(
   function EnableNotificationsScreen() {
@@ -34,12 +34,12 @@ export const EnableNotificationsScreen: FC<EnableNotificationsScreenProps> = obs
           preset="default"
           size="xs"
           weight="normal"
-          text="Close2mi would like to send you Notifications to keep you up to date on your bookings"
+          text="Booksee would like to send you Notifications to keep you up to date on your bookings"
           style={styles.notificatinInfo}
         />
 
         <Button preset="primary" text="Turn on Notifications" />
-      </Screen >
+      </Screen>
     )
   },
 )

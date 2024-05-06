@@ -45,7 +45,7 @@ export const SplashTwoScreen: FC<SplashTwoScreenProps> = observer(function Splas
                 style={{ color: colors.tint }}
                 text="Grow your business"
               />
-              <Text text="Boost your salon business with Close2mi seller app. Manage bookings, expand your reach" />
+              <Text text="Boost your salon business with Booksee seller app. Manage bookings, expand your reach" />
             </View>
             <View style={styles.button}>
               <Button onPress={next} text="Next" preset="primary" />
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
   background: {
     flex: 1,
     resizeMode: "cover",
-    paddingHorizontal: spacing.md
+    paddingHorizontal: spacing.md,
   },
   bottomView: {
     marginBottom: 10,

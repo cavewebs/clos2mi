@@ -1,9 +1,8 @@
 import { BookingDataProps } from "app/components"
 import { Image } from 'react-native';
-const DummyImg = require("../../assets/images/accept-mark.png")
+const DummyImg = require("../../assets/images/anita-joseph.png")
 
-// const Anita = Image.resolveAssetSource(DummyImg).uri;
-const Anita= "https://dev-c2m.close2mi.com/images/home/female.png"
+const Anita = Image.resolveAssetSource(DummyImg).uri;
 
 export const bookingsData: BookingDataProps[] = [
     {

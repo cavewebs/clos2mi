@@ -51,8 +51,8 @@ export const EnableLocationScreen: FC<EnableLocationScreenProps> = observer(
           <View>
             <Text style={styles.title}>Enable Location</Text>
             <Text style={styles.notificationBodyText}>
-              Close2mi would like to get your location to ensure you see businesses that are close
-              to your location
+              Booksee would like to get your location to ensure you see businesses that are close to
+              your location
             </Text>
           </View>
           <View>
@@ -70,7 +70,7 @@ export const EnableLocationScreen: FC<EnableLocationScreenProps> = observer(
             setShowModal={setShowModal}
             modalTitle={"Enable Location"}
             modalBody={
-              "Close2mi would like to get your location to ensure you see businesses that are close to your location"
+              "Booksee would like to get your location to ensure you see businesses that are close to your location"
             }
             navigate={() => decodeNextRoute()}
             modalCancelButtonText={"Don't Allow"}

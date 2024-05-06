@@ -10,7 +10,7 @@ import { colors, spacing } from "app/theme"
 // import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "app/models"
 
-interface SplashOneScreenProps extends AppStackScreenProps<"SplashOne"> { }
+interface SplashOneScreenProps extends AppStackScreenProps<"SplashOne"> {}
 
 export const SplashOneScreen: FC<SplashOneScreenProps> = observer(function SplashOneScreen(_props) {
   const { navigation } = _props
@@ -28,7 +28,7 @@ export const SplashOneScreen: FC<SplashOneScreenProps> = observer(function Splas
   return (
     <Screen preset="fixed" contentContainerStyle={styles.splashContainer}>
       <ImageBackground source={SplashBackground} style={styles.background}>
-        <View style={styles.container}  >
+        <View style={styles.container}>
           <View style={styles.topView}>
             <AutoImage source={Logo} style={styles.logo} />
             <View style={styles.skip}>
@@ -46,7 +46,7 @@ export const SplashOneScreen: FC<SplashOneScreenProps> = observer(function Splas
                 style={{ color: colors.tint }}
                 text="Find your nearest saloon"
               />
-              <Text text="Download Close2mi to locate nearby salons and book appointments easily" />
+              <Text text="Download Booksee to locate nearby salons and book appointments easily" />
             </View>
             <View style={styles.button}>
               <Button onPress={next} text="Next" preset="primary" />
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
   background: {
     flex: 1,
     resizeMode: "cover",
-    paddingHorizontal: spacing.md
+    paddingHorizontal: spacing.md,
   },
   bottomView: {
     marginBottom: 10,

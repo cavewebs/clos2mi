@@ -10,7 +10,7 @@ import { FlatList } from "react-native-gesture-handler"
 import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "app/models"
 
-interface ProviderSubscriptionScreenProps extends AppStackScreenProps<"ProviderSubscription"> { }
+interface ProviderSubscriptionScreenProps extends AppStackScreenProps<"ProviderSubscription"> {}
 const premiumData: string[] = [
   "Access to Therapy",
   "Chat Therapy Sessions (Not real-time)",
@@ -40,7 +40,7 @@ export const ProviderSubscriptionScreen: FC<ProviderSubscriptionScreenProps> = o
           <Text
             preset="default"
             size="xs"
-            text="Purchase subscription to unlock the added benefits of close2mi"
+            text="Purchase subscription to unlock the added benefits of booksee"
             style={{
               textAlign: "center",
               fontWeight: "400",
@@ -91,7 +91,7 @@ export const ProviderSubscriptionScreen: FC<ProviderSubscriptionScreenProps> = o
                 />
               }
 
-              <Button preset="default" text="Try Now" onPress={()=>navigation.goBack()}/>
+              <Button preset="default" text="Try Now" onPress={() => navigation.goBack()} />
             </View>
           </View>
 
@@ -138,12 +138,12 @@ export const ProviderSubscriptionScreen: FC<ProviderSubscriptionScreenProps> = o
                   ))
                 }
 
-                <Button preset="default" text="Try Now" onPress={()=>navigation.goBack()}/>
+                <Button preset="default" text="Try Now" onPress={() => navigation.goBack()} />
               </View>
             </View>
           </View>
         </View>
-      </Screen >
+      </Screen>
     )
   },
 )

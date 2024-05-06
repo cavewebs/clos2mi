@@ -23,28 +23,28 @@ export const PrivacyPolicyScreen: FC<PrivacyPolicyScreenProps> = observer(
         contentContainerStyle={screenContentContainer}
         safeAreaEdges={["bottom"]}
       >
-         <HeaderWithBackButton title="Privacy Policy" />
+        <HeaderWithBackButton title="Privacy Policy" />
         <Text
-          text="Close2mi understands the importance of protecting the privacy of its users. The information collected is used to market and improve the services we and our subsidiaries offer, to improve the Close2mi website and to contact you with updates to the website or for other marketing purposes."
+          text="Booksee understands the importance of protecting the privacy of its users. The information collected is used to market and improve the services we and our subsidiaries offer, to improve the Booksee website and to contact you with updates to the website or for other marketing purposes."
           size="sm"
           weight="light"
         />
         <View>
           <Text
-            text="What informaton does Close2mi care capture about visitors to its website?"
+            text="What informaton does Booksee care capture about visitors to its website?"
             size="sm"
             weight="semiBold"
             style={styles.headerText}
           />
           <Text
-            text="Close2mi web server uses an extended log file format which captures date and time of visit, referring address (location from which visitor comes to Close2mi.com), type of internet browser and visitor’s IP address. The log file does not capture a visitor’s email address"
+            text="Booksee web server uses an extended log file format which captures date and time of visit, referring address (location from which visitor comes to Booksee.com), type of internet browser and visitor’s IP address. The log file does not capture a visitor’s email address"
             size="sm"
             weight="light"
           />
         </View>
         <View>
           <Text
-            text="How does Close2mi care use the information?"
+            text="How does Booksee care use the information?"
             size="sm"
             weight="semiBold"
             style={styles.headerText}

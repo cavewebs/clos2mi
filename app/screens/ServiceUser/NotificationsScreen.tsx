@@ -43,7 +43,6 @@ export const NotificationsScreen: FC<NotificationsScreenProps> = observer(
         }
       }, 10)
       setHasCompletedOnboarding(true)
-
     }
     return (
       <Screen preset="fixed">
@@ -57,7 +56,7 @@ export const NotificationsScreen: FC<NotificationsScreenProps> = observer(
           <View>
             <Text style={styles.title}>Enable Notifications</Text>
             <Text style={styles.notificationBodyText}>
-              Close2mi would like to send you Notifications to keep you up to date on your bookings
+              Booksee would like to send you Notifications to keep you up to date on your bookings
             </Text>
           </View>
           <View>
@@ -75,7 +74,7 @@ export const NotificationsScreen: FC<NotificationsScreenProps> = observer(
             setShowModal={setShowModal}
             modalTitle={"Notifications"}
             modalBody={
-              "Close2mi would like to send you notifications to keep you up to date on your bookings"
+              "Booksee would like to send you notifications to keep you up to date on your bookings"
             }
             navigate={() => decodeNextRoute()}
             modalCancelButtonText={"Don't Allow"}
