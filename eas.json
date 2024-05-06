@@ -3,9 +3,21 @@
       "development": {
         "developmentClient": true,
         "distribution": "internal",
+         "android": {
+        "image": "latest"
+      },
+      "ios": {
+        "image": "latest"
+      }
       },
       "preview": {
         "distribution": "internal",
+         "android": {
+        "image": "latest"
+      },
+      "ios": {
+        "image": "latest"
+      }
       },
       "production": {
         "android": {
