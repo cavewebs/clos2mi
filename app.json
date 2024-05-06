@@ -57,8 +57,9 @@
     ],
     "extra": {
       "eas": {
-        "projectId": "4a589c37-3bda-4126-9a8f-b783146b38c6"
+        "projectId": "8a12b749-67c0-4b53-8b52-bca2440eed5b"
       }
-    }
+    },
+    "owner": "timchosen"
   }
 }
