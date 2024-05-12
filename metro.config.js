@@ -9,6 +9,10 @@ config.transformer.getTransformOptions = async () => ({
     experimentalImportSupport: false,
     inlineRequires: true,
   },
+  // overrides: {
+  //   "metro": "0.76.4",
+  //   "metro-resolver": "0.76.4"
+  // }
 });
 
 module.exports = config;
