@@ -64,7 +64,7 @@ export const ServiceUserCartScreen: FC<CartScreenProps> = observer(function Cart
         <Button preset="primary" text="Continue" onPress={() => navigation.navigate("ConfirmPayment")} />
       </View>
 
-      <BaseModal isOpen={showPayment} content={"hello guys"} />
+      <BaseModal modalVisible={showPayment} modalBody={"hello guys"} />
 
     </Screen>
   )

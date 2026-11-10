@@ -8,12 +8,12 @@ import * as SplashScreen from "expo-splash-screen"
 
 SplashScreen.preventAutoHideAsync()
 
-function IgniteApp() {
+function Close2miApp() {
   return <App hideSplashScreen={SplashScreen.hideAsync} />
 }
 
 if (Platform.OS !== "web") {
-  registerRootComponent(IgniteApp)
+  registerRootComponent(Close2miApp)
 }
 
-export default IgniteApp
+export default Close2miApp

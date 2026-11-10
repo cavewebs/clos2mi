@@ -96,7 +96,7 @@ export const BankAccountDetailsScreen: FC<BankAccountDetailsScreenProps> = obser
             <TextField
               value={holderName}
               onChangeText={(value) => setHolderName(value)}
-              placeholder="Ayominde Gbenga"
+              placeholder="Jordan Example"
             />
           </View>
 

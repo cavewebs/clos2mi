@@ -12,14 +12,14 @@ export interface PopularSearchesProps {
   style?: StyleProp<ViewStyle>
   textStyle?: StyleProp<TextStyle>
   text: string
-  textFontWeight: "bold" | "normal" | "light" | "semiBold" | "medium"
+  textFontWeight?: "bold" | "normal" | "light" | "semiBold" | "medium"
 }
 
 /**
  * Describe your component here
  */
 export const PopularSearches = observer(function PopularSearches(props: PopularSearchesProps) {
-  const { style, textFontWeight, textStyle, text } = props
+  const { style, textFontWeight = "medium", textStyle, text } = props
   const $styles = [$container, style]
 
   return (

@@ -8,7 +8,7 @@ import { useNavigation } from "@react-navigation/native"
 import { bookingsData } from "app/DummyData/BookingsData"
 // import { useStores } from "app/models"
 
-interface PendingBookingsScreenProps extends AppStackScreenProps<"PendingBookings"> {}
+interface PendingBookingsScreenProps extends AppStackScreenProps<"ViewPendingBookings"> {}
 
 export const PendingBookingsScreen: FC<PendingBookingsScreenProps> = observer(
   function PendingBookingsScreen() {

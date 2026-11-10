@@ -4,7 +4,7 @@ export const addressType = [
     {id: 3, type: "Others" }
 ]
 
-export const TextFieldData = [
+export const TextFieldData: { id: number; placeholder: string; type: "default" }[] = [
     {id: 1, placeholder: "Address line 1", type:"default"},
     {id: 2, placeholder: "Address line 2", type:"default"},
     {id: 3, placeholder: "Apt/Suite/Others", type:"default"},

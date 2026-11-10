@@ -92,7 +92,7 @@ export const ServiceProviderProfileScreen: FC<ProfileScreenProps> = observer(fun
             <Text
               preset="default"
               size="xs"
-              text="anitajoseph@gmail.com"
+              text="anita@example.com"
               style={{ fontWeight: "400", color: colors.text }}
             />
           </View>

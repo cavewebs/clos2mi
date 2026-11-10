@@ -16,7 +16,7 @@ interface IconProps extends TouchableOpacityProps {
   /**
    * The name of the icon
    */
-  icon: IconTypes
+  icon: IconTypes | string
 
   /**
    * An optional tint color for the icon
@@ -78,7 +78,7 @@ export function Icon(props: IconProps) {
           size && { width: size, height: size },
           $imageStyleOverride,
         ]}
-        source={iconRegistry[icon]}
+        source={iconRegistry[icon as IconTypes]}
       />
     </Wrapper>
   )
@@ -91,21 +91,13 @@ export const iconRegistry = {
   caretRight: require("../../assets/icons/caretRight.png"),
   caretDown: require("../../assets/icons/caretDown.png"),
   check: require("../../assets/icons/check.png"),
-  clap: require("../../assets/icons/clap.png"),
-  community: require("../../assets/icons/community.png"),
-  components: require("../../assets/icons/components.png"),
-  debug: require("../../assets/icons/debug.png"),
-  github: require("../../assets/icons/github.png"),
-  heart: require("../../assets/icons/heart.png"),
   hidden: require("../../assets/icons/hidden.png"),
   ladybug: require("../../assets/icons/ladybug.png"),
   lock: require("../../assets/icons/lock.png"),
   menu: require("../../assets/icons/menu.png"),
   more: require("../../assets/icons/more.png"),
   pin: require("../../assets/icons/pin.png"),
-  podcast: require("../../assets/icons/podcast.png"),
   settings: require("../../assets/icons/settings.png"),
-  slack: require("../../assets/icons/slack.png"),
   view: require("../../assets/icons/view.png"),
   x: require("../../assets/icons/x.png"),
   briefcase: require("../../assets/icons/Briefcase.png"),

@@ -117,4 +117,7 @@ const styles = StyleSheet.create({
     flexShrink: 1,
     gap: 2,
   },
+  bottomTextColor: {
+    color: colors.palette.primary600,
+  },
 })

@@ -13,7 +13,10 @@ interface ViewBookingsScreenProps extends AppStackScreenProps<"ViewBookings"> {}
 
 export const ViewBookingsScreen: FC<ViewBookingsScreenProps> = observer(
   function ViewBookingsScreen({ route }) {
-    const { textTopLeft, image,  } = route.params
+    const { textTopLeft, image } = (route.params ?? {}) as {
+      textTopLeft?: string
+      image?: number
+    }
     // Pull in one of our MST stores
     // const { someStore, anotherStore } = useStores()
 
