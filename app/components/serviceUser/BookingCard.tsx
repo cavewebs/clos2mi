@@ -23,14 +23,14 @@ export interface BookingCardProps {
   image?: ImageSourcePropType
   textTopLeft?: string
   textTopRight?: string
-  midIconLeft?: IconTypes
+  midIconLeft?: IconTypes | string
   midTextLeft?: string
-  midIconRight?: IconTypes
+  midIconRight?: IconTypes | string
   midTextRight?: string
   rating?: string
-  bottomIconLeft?: IconTypes
+  bottomIconLeft?: IconTypes | string
   bottomTextLeft?: string
-  bottomIconRight: IconTypes
+  bottomIconRight?: IconTypes | string
   bottomTextRight?: string
   navigate?: () => void
 }
@@ -69,7 +69,7 @@ export const BookingCard = observer(function BookingCard(props: BookingCardProps
           <View style={styles.containerStyle}>
             <Text text={textTopLeft} weight="medium" size="sm" />
             {textTopRight &&  <View style={[styles.itemContainer, textTopRight === 'Completed' ? styles.completed : textTopRight === 'Cancelled' ? styles.cancelled : styles.onHold]}>
-           <Text text={textTopRight} weight="sm" size="xxs" style={textTopRight === 'Completed' ? styles.completeText : textTopRight === 'Cancelled' ? styles.cancelledText : styles.onHold} />
+           <Text text={textTopRight} weight="medium" size="xxs" style={textTopRight === 'Completed' ? styles.completeText : textTopRight === 'Cancelled' ? styles.cancelledText : styles.onHold} />
             </View>}
           </View>
           <View style={styles.containerStyle}>

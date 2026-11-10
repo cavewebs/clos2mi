@@ -1,15 +1,13 @@
-import { WalkthroughStoreModel } from './WalkthroughStore';
+import { WalkthroughStoreModel } from "./WalkthroughStore"
 import { Instance, SnapshotOut, types } from "mobx-state-tree"
-import { AuthenticationStoreModel } from "./AuthenticationStore" // @demo remove-current-line
-import { EpisodeStoreModel } from "./EpisodeStore" // @demo remove-current-line
-import { OnboardingStoreModel } from './OnboardingStore';
+import { AuthenticationStoreModel } from "./AuthenticationStore"
+import { OnboardingStoreModel } from "./OnboardingStore"
 
 /**
  * A RootStore model.
  */
 export const RootStoreModel = types.model("RootStore").props({
-  authenticationStore: types.optional(AuthenticationStoreModel, {}), // @demo remove-current-line
-  episodeStore: types.optional(EpisodeStoreModel, {}), // @demo remove-current-line
+  authenticationStore: types.optional(AuthenticationStoreModel, {}),
   walkthroughStore: types.optional(WalkthroughStoreModel, {}),
   onboardingStore: types.optional(OnboardingStoreModel, {}),
 })
@@ -19,6 +17,6 @@ export const RootStoreModel = types.model("RootStore").props({
  */
 export interface RootStore extends Instance<typeof RootStoreModel> {}
 /**
- * The data of a RootStore.
+ * The data of the RootStore.
  */
 export interface RootStoreSnapshot extends SnapshotOut<typeof RootStoreModel> {}

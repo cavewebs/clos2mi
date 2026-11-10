@@ -1,164 +1,117 @@
-# Welcome to your new ignited app!
+# Close2mi
 
-[![CircleCI](https://circleci.com/gh/infinitered/ignite.svg?style=svg)](https://circleci.com/gh/infinitered/ignite)
+Close2mi is a React Native app for booking nearby personal services (hair, nails, beard, makeup).
 
-## The latest and greatest boilerplate for Infinite Red opinions
+On first launch you pick a role:
 
-This is the boilerplate that [Infinite Red](https://infinite.red) uses as a way to test bleeding-edge changes to our React Native stack.
+- **Service user** - search providers, book a time, pay with saved cards, and manage addresses, bookings, and profile settings.
+- **Service provider** - set up a business profile, offer services, manage availability and bookings, and review earnings.
 
-Currently includes:
+Sign-in is local and mocked: `SigninScreen` / `SignupScreen` store a token in `AuthenticationStore` (`setAuthToken(String(Date.now()))`). Most lists and details come from in-app dummy data under `app/DummyData` and `app/components/serviceUser/DummyData`. `Api` is an apisauce client pointed at `Config.API_URL`; no Close2mi REST endpoints are implemented yet.
 
-- React Native
-- React Navigation
-- MobX State Tree
-- TypeScript
-- And more!`  `
+This repo was generated from the Infinite Red Ignite boilerplate (MIT). Attribution is in `NOTICE`.
 
-## Quick Start
+## Stack
 
-The Ignite boilerplate project's structure will look similar to this:
+| Piece | Version in this repo |
+| --- | --- |
+| Expo | 49 |
+| React Native | 0.72.10 |
+| React | 18.2.0 |
+| TypeScript | 5.2 |
+| React Navigation | 6 (native stack + bottom tabs) |
+| MobX State Tree | 5.1 |
+| Gluestack UI | 1.0 |
+| i18n-js | 3.9 (`en`, `fr`, `ar`, `ko`) |
+| Jest | 29 with `jest-expo` |
+| EAS | `eas.json` (development / preview / production profiles) |
 
-```
-ignite-project
-├── app
-│   ├── components
-│   ├── config
-│   ├── i18n
-│   ├── models
-│   ├── navigators
-│   ├── screens
-│   ├── services
-│   ├── theme
-│   ├── utils
-│   └── app.tsx
-├── assets
-│   ├── icons
-│   └── images
-├── test
-│   ├── __snapshots__
-│   ├── mockFile.ts
-│   └── setup.ts
-├── README.md
-├── android
-│   ├── app
-│   ├── build.gradle
-│   ├── gradle
-│   ├── gradle.properties
-│   ├── gradlew
-│   ├── gradlew.bat
-│   ├── keystores
-│   └── settings.gradle
-├── ignite
-│   └── templates
-|       |── app-icon
-│       ├── component
-│       ├── model
-│       ├── navigator
-│       └── screen
-├── index.js
-├── ios
-│   ├── IgniteProject
-│   ├── IgniteProject-tvOS
-│   ├── IgniteProject-tvOSTests
-│   ├── IgniteProject.xcodeproj
-│   └── IgniteProjectTests
-├── .env
-└── package.json
+Package manager is Yarn Classic (`yarn.lock`). Node 18 or newer (`package.json` `engines`).
 
+## Local setup
+
+```sh
+git clone https://github.com/cavewebs/clos2mi.git
+cd clos2mi
+yarn install
+cp .env.example .env
 ```
 
-### ./app directory
+`yarn install` runs `bin/postInstall`, which calls `patch-package` and `npx pod-install`. `pod-install` needs macOS, Xcode, and CocoaPods. On Linux or Windows, if that step fails, install JS deps with `yarn install --ignore-scripts` and skip iOS pods.
 
-Included in an Ignite boilerplate project is the `app` directory. This is a directory you would normally have to create when using vanilla React Native.
+`.env.example` lists every env var and config key the code reads. Expo inlines `EXPO_PUBLIC_API_URL` from `.env` into `app/config/config.dev.ts` and `config.prod.ts`. Other flags (`persistNavigation`, `catchErrors`, `exitRoutes`) live in `app/config/config.base.ts`, not in dotenv. Put no secrets in client config; they ship in the JS bundle.
 
-The inside of the `app` directory looks similar to the following:
+Android debug builds use the public `android/app/debug.keystore` (password `android`). Release signing still points at that debug config in `android/app/build.gradle`; do not ship a Play Store build that way.
 
-```
-app
-├── components
-├── config
-├── i18n
-├── models
-├── navigators
-├── screens
-├── services
-├── theme
-├── utils
-└── app.tsx
+### Run
+
+```sh
+yarn compile          # tsc --noEmit
+yarn lint             # ESLint --fix on index.js, App.js, app, test, then Prettier
+yarn test             # Jest
+yarn start            # expo start --dev-client
 ```
 
-**components**
-This is where your reusable components live which help you build your screens.
+`yarn compile` and `yarn test` should pass. `yarn lint` currently flags older screens (style sort order, unused imports, inline styles).
 
-**i18n**
-This is where your translations will live if you are using `react-native-i18n`.
+Native (needs the platform SDK):
 
-**models**
-This is where your app's models will live. Each model has a directory which will contain the `mobx-state-tree` model file, test file, and any other supporting files like actions, types, etc.
-
-**navigators**
-This is where your `react-navigation` navigators will live.
-
-**screens**
-This is where your screen components will live. A screen is a React component which will take up the entire screen and be part of the navigation hierarchy. Each screen will have a directory containing the `.tsx` file, along with any assets or other helper files.
-
-**services**
-Any services that interface with the outside world will live here (think REST APIs, Push Notifications, etc.).
-
-**theme**
-Here lives the theme for your application, including spacing, colors, and typography.
-
-**utils**
-This is a great place to put miscellaneous helpers and utilities. Things like date helpers, formatters, etc. are often found here. However, it should only be used for things that are truly shared across your application. If a helper or utility is only used by a specific component or model, consider co-locating your helper with that component or model.
-
-**app.tsx** This is the entry point to your app. This is where you will find the main App component which renders the rest of the application.
-
-### ./assets directory
-
-This directory is designed to organize and store various assets, making it easy for you to manage and use them in your application. The assets are further categorized into subdirectories, including `icons` and `images`:
-
-```
-assets
-├── icons
-└── images
+```sh
+yarn ios
+yarn android          # react-native run-android --active-arch-only
 ```
 
-**icons**
-This is where your icon assets will live. These icons can be used for buttons, navigation elements, or any other UI components. The recommended format for icons is PNG, but other formats can be used as well.
+Web:
 
-Ignite comes with a built-in `Icon` component. You can find detailed usage instructions in the [docs](https://github.com/infinitered/ignite/blob/master/docs/Components-Icon.md).
-
-**images**
-This is where your images will live, such as background images, logos, or any other graphics. You can use various formats such as PNG, JPEG, or GIF for your images.
-
-Another valuable built-in component within Ignite is the `AutoImage` component. You can find detailed usage instructions in the [docs](https://github.com/infinitered/ignite/blob/master/docs/Components-AutoImage.md).
-
-How to use your `icon` or `image` assets:
-
-```
-import { Image } from 'react-native';
-
-const MyComponent = () => {
-  return (
-    <Image source={require('../assets/images/my_image.png')} />
-  );
-};
+```sh
+yarn expo:web
 ```
 
-### ./ignite directory
+`yarn adb` forwards Metro / Reactotron ports for a USB Android device.
 
-The `ignite` directory stores all things Ignite, including CLI and boilerplate items. Here you will find templates you can customize to help you get started with React Native.
+## Project structure
 
-### ./test directory
+```
+app/
+  app.tsx                 Root component, fonts, ErrorBoundary, navigation persistence
+  config/                 Config.API_URL, persistNavigation, catchErrors, exitRoutes
+  components/             Shared UI (Ignite primitives + Close2mi widgets)
+  screens/
+    Auth/                 Sign in, sign up, OTP, role selection
+    Splash/               First-run walkthrough
+    ServiceUser/          User tabs and booking / cart / profile stacks
+    ServiceProvider/      Provider tabs and onboarding / operations stacks
+    Common/               Shared notification screens
+    ErrorScreen/          Production error boundary UI
+  navigators/             AppNavigator, ServiceUserNavigator, ServiceProviderNavigator
+  models/                 MST stores (auth, walkthrough, onboarding, service details)
+  services/api/           apisauce client
+  i18n/                   Translations
+  theme/                  Colors, spacing, typography
+  DummyData/              Fixture bookings
+  utils/                  Storage, crash reporting stubs
+assets/icons|images/      App icons, splash, service imagery
+android/ ios/             Native projects (package / bundle id com.close2mi.app)
+ignite/templates/         Ignite generator templates (not used at runtime)
+test/                     Jest setup
+```
 
-This directory will hold your Jest configs and mocks.
+Entry: `index.js` (native) and `App.js` (Expo). Both load `app/app.tsx`.
 
-## Running Maestro end-to-end tests
+Navigation starts at `SplashOne` until walkthrough is marked seen, then `LoginSignin`. After a mock token, `userType` `"su"` or `"sp"` selects the matching tab navigator. Android back-button exit routes are `SplashOne` and `LoginSignin`.
 
-Follow our [Maestro Setup](https://ignitecookbook.com/docs/recipes/MaestroSetup) recipe from the [Ignite Cookbook](https://ignitecookbook.com/)!
+## Contributing
 
-## Previous Boilerplates
+1. Open an issue or pick an existing one before a large change.
+2. Branch from `upgrade-expo` (current default).
+3. Keep dummy fixture data obviously fake (`@example.com`, placeholder numbers).
+4. Run `yarn compile` and `yarn test` before you open a pull request. Fix lint on files you touch.
+5. Do not commit `.env`, keystores other than the public Android debug keystore, `google-services` files, or API keys.
 
-- [2018 aka Bowser](https://github.com/infinitered/ignite-bowser)
-- [2017 aka Andross](https://github.com/infinitered/ignite-andross)
-- [2016 aka Ignite 1.0](https://github.com/infinitered/ignite-ir-boilerplate-2016)
+UI copy in this project is plain and specific. Avoid filler words in new strings.
+
+## License
+
+MIT. Copyright 2026 Timchosen Uzua. See `LICENSE`.
+
+Ignite boilerplate notice: `NOTICE`.

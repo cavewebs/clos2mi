@@ -71,8 +71,6 @@ export const SigninScreen: FC<SigninScreenProps> = observer(function SigninScree
   useEffect(() => {
     // Here is where you could fetch credentials from keychain or storage
     // and pre-fill the form fields.
-    setAuthPhone("07324412345")
-    setAuthPassword("TestPswd@123")
     console.log(userType)
     userType === "su" ? setUserType("su") : setUserType("sp")
     console.log(userType)

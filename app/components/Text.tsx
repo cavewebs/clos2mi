@@ -37,7 +37,7 @@ export interface TextProps extends RNTextProps {
   /**
    * Text size modifier.
    */
-  size?: Sizes
+  size?: Sizes | number
   /**
    * Children components.
    */
@@ -61,7 +61,7 @@ export function Text(props: TextProps) {
     $rtlStyle,
     $presets[preset],
     $fontWeightStyles[weight],
-    $sizeStyles[size],
+    typeof size === "number" ? { fontSize: size } : $sizeStyles[size],
     $styleOverride,
   ]
 

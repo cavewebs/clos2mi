@@ -1,6 +1,6 @@
 import React, { FC, useState } from "react"
 import { observer } from "mobx-react-lite"
-import { View, StyleSheet, Pressable } from "react-native"
+import { View, StyleSheet, Pressable, ImageStyle } from "react-native"
 import { AppStackScreenProps } from "app/navigators"
 import {
   Screen,
@@ -68,7 +68,7 @@ export const ServiceProviderHomeScreen: FC<HomeScreenProps> = observer(function 
       </View>
       <Pressable onPress={() => navigation.navigate("Earnings")}>
         <View style={{ display: "flex", alignItems: "center", marginTop: 30 }}>
-          <AutoImage source={HomeBanner} style={styles.bannerImg} />
+          <AutoImage source={HomeBanner} style={styles.bannerImg as ImageStyle} />
         </View>
       </Pressable>
       <View
@@ -162,8 +162,10 @@ const styles = StyleSheet.create({
   },
 
   bookingStyle: {
-    padding: "16px 8px",
-    border: `1px solid ${colors.palette.primary100}`,
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    borderWidth: 1,
+    borderColor: colors.palette.primary100,
   },
   bookingIconText: {
     flexDirection: "row",

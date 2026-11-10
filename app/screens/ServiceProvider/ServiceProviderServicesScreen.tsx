@@ -17,7 +17,7 @@ import { useNavigation } from "@react-navigation/native"
 // import { useStores } from "app/models"
 
 interface ServiceProviderServicesScreenProps
-  extends AppStackScreenProps<"ServicePoviderServices"> { }
+  extends AppStackScreenProps<"ServiceProviderServices"> { }
 
 interface Beards {
   beard: ImageRequireSource

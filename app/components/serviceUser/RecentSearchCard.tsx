@@ -28,7 +28,7 @@ export const RecentSearchCard = observer(function RecentSearchCard(props: Recent
 
 
   return (
-    <Pressable onPress={() => navigation.navigate("ServiceProviderDetails", id)} >
+    <Pressable onPress={() => navigation.navigate("ServiceProviderDetails", { id })} >
       <View style={$styles}>
         <Image source={image} style={styles.image} />
         <Text text={name} size="sm" style={styles.name} />

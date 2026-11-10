@@ -489,7 +489,7 @@ function SwitchAccessibilityLabel(props: ToggleInputProps & { role: "on" | "off"
   })()
 
   return (
-    <View style={$switchAccessibilityStyle}>
+    <View style={$switchAccessibilityStyle as StyleProp<ViewStyle>}>
       {switchAccessibilityMode === "text" && shouldLabelBeVisible && (
         <View
           style={[

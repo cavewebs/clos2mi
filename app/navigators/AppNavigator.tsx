@@ -8,7 +8,7 @@ import {
   DarkTheme,
   DefaultTheme,
   NavigationContainer,
-  NavigatorScreenParams, // @demo remove-current-line
+  NavigatorScreenParams,
 } from "@react-navigation/native"
 import { createNativeStackNavigator, NativeStackScreenProps } from "@react-navigation/native-stack"
 import { observer } from "mobx-react-lite"
@@ -16,7 +16,7 @@ import React from "react"
 import { useColorScheme } from "react-native"
 import * as Screens from "app/screens"
 import Config from "../config"
-import { useStores } from "../models" // @demo remove-current-line
+import { useStores } from "../models"
 import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
 import { colors } from "app/theme"
 import { ServiceProviderNavigator, ServiceProviderTabParamList } from "./ServiceProviderNavigator"
@@ -94,8 +94,8 @@ export type AppStackParamList = {
   EditDetails: undefined
   SavedAddress: undefined
   AddNewAddress: undefined
-  ViewBookings: undefined
-  ServiceProviderDetails: undefined
+  ViewBookings: object | undefined
+  ServiceProviderDetails: object | undefined
   Services: NavigatorScreenParams<ServiceDetailsParamList>
   BookService: NavigatorScreenParams<ServiceDetailsParamList>
   SavedCards: undefined
@@ -175,7 +175,6 @@ export type AppStackScreenProps<T extends keyof AppStackParamList> = NativeStack
 const Stack = createNativeStackNavigator<AppStackParamList>()
 
 const AppStack = observer(function AppStack() {
-  // @demo remove-block-start
   const {
     authenticationStore: { isAuthenticated, userType },
   } = useStores()
@@ -187,13 +186,11 @@ const AppStack = observer(function AppStack() {
     onboardingStore: { hasCompletedOnboarding },
   } = useStores()
 
-  // @demo remove-block-end
   return (
     <Stack.Navigator
       screenOptions={{ headerShown: false, navigationBarColor: colors.background }}
-      initialRouteName={hasSeenWalkthrough ? "LoginSignin" : "SplashOne"} // @demo remove-current-line
+      initialRouteName={hasSeenWalkthrough ? "LoginSignin" : "SplashOne"}
     >
-      {/* @demo remove-block-start */}
       {isAuthenticated ? (
         <>
           {userType === "su" ? (

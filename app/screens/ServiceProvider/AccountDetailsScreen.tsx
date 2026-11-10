@@ -39,7 +39,7 @@ export const AccountDetailsScreen: FC<AccountDetailsScreenProps> = observer(
 
           <View style={styles.bottomGap}>
             <Text size="xs" weight="medium" text="Account Holder Name" style={styles.firstText} />
-            <Text size="sm" weight="normal" text="Ayominde Gbenga" style={styles.secondText} />
+            <Text size="sm" weight="normal" text="Jordan Example" style={styles.secondText} />
           </View>
 
           <View style={styles.bottomGap}>

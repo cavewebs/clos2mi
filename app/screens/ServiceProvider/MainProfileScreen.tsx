@@ -98,7 +98,7 @@ export const MainProfileScreen: FC<MainProfileScreenProps> = observer(function M
           text="Official Email Address"
           style={styles.labelText}
         />
-        <TextField value={email} onChangeText={setEmail} placeholder="theplace@gmail.com" />
+        <TextField value={email} onChangeText={setEmail} placeholder="you@example.com" />
       </View>
 
       <View style={styles.bottomSpace}>

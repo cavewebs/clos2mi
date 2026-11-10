@@ -22,5 +22,3 @@ export const WalkthroughStoreModel = types
 
 export interface WalkthroughStoreStore extends Instance<typeof WalkthroughStoreModel> { }
 export interface WalkthroughStoreSnapshot extends SnapshotOut<typeof WalkthroughStoreModel> { }
-
-// @demo remove-file

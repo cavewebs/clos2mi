@@ -90,7 +90,7 @@ export const ServiceUserHomeScreen: FC<HomeScreenProps> = observer(function Home
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           <View style={styles.serviceContainer}>
             {services.map((service) => (
-              <Services key={service.serviceName} style={{minWidth: 90}} icon={service.icon} text={service.serviceName} onLeftTextPress={() => navigation.navigate("Services")} onPress={() => { navigation.navigate("Services", { params: service }) }} />
+              <Services key={service.serviceName} style={{minWidth: 90}} icon={service.icon} text={service.serviceName} onPress={() => { navigation.navigate("Services", { params: service }) }} />
             ))}
           </View>
         </ScrollView>
